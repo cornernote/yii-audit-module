@@ -36,7 +36,9 @@ Tracks the following information:
 
 ### Model Field Tracking
 
-- Track data changes to your model data and relate those changes to an AuditRequest.
+- Tracks the old and new values each time your model is saved.
+- Behavior can easily be attached to any model you want to track field changes.
+- Each field change is related to an AuditRequest so you can see the entire state of the visitors action.
 - Performs multiple inserts in a single query with `CDbCommandBuilder::createMultipleInsertCommand()`.
 - Provides views that can be rendered into your application to show changed fields for your model.
 
@@ -46,6 +48,7 @@ Tracks the following information:
 - Full error stack dump is saved, even in live mode.
 - Catches all errors, including fatal errors.
 - View all the collected data from the module interface.
+- Each error is related to an AuditRequest so you can see the entire state of the visitors action.
 
 
 ## Screenshots
