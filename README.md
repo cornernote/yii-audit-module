@@ -10,6 +10,7 @@ Yii's built-in error handling is amazing... when you are in debug mode. However 
 [Features](#features)  
 [Installation](#installation)  
 [Configuration](#configuration)  
+[Usage](#usage)  
 [License](#license)  
 [Links](#links)  
 
@@ -113,7 +114,12 @@ class Post extends CActiveRecord
 }
 ```
 
-Add information to your footer (optional):
+
+## Usage
+
+There are several partial views that you can render into your application.  These are all optional.
+
+Add information to your footer:
 ```php
 $this->renderPartial('audit.views.request.__footer');
 ```
@@ -133,7 +139,6 @@ $this->renderPartial('audit.views.field.__field', array('model' => $post, 'field
 // or by using the model_name and model_id
 // $this->renderPartial('audit.views.field.__field', array('model_name' => 'Post', 'model_id' => 123, 'field' => 'status'));
 ```
-
 
 
 ## License
