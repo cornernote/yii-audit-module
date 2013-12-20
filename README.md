@@ -12,6 +12,7 @@ Yii's built-in error handling is amazing... when you are in debug mode. However 
 [Installation](#installation)  
 [Configuration](#configuration)  
 [Usage](#usage)  
+[Todo](#todo)  
 [License](#license)  
 [Links](#links)  
 
@@ -192,12 +193,17 @@ $this->renderPartial('audit.views.field.__field', array('model' => $post, 'field
 ```
 
 
+## Todo
+
+- Create crud based around `CDbLogRoute` and update documentation to explain how to perform and track logging.
+
+
 ## License
 
 - Author: Brett O'Donnell <cornernote@gmail.com>
 - Author: Zain Ul abidin <zainengineer@gmail.com>
 - Source Code: https://github.com/cornernote/yii-audit-module
-- Copyright © 2013 Mr PHP <info@mrphp.com.au>
+- Copyright ï¿½ 2013 Mr PHP <info@mrphp.com.au>
 - License: BSD-3-Clause https://raw.github.com/cornernote/yii-audit-module/master/LICENSE
 
 
