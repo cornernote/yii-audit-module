@@ -26,7 +26,7 @@ class AuditErrorHandler extends CErrorHandler
     /**
      * @var bool Set to false to only track error requests.  Defaults to true.
      */
-    public $trackAllRequests = true;
+    public $trackAllRequests = false;
 
     /**
      * @var bool Set to true to track fatal errors.  Defaults to true.
@@ -71,7 +71,7 @@ class AuditErrorHandler extends CErrorHandler
         if ($e !== null && in_array($e['type'], $this->fatalErrorTypes)) {
             $event = new CErrorEvent($this, 500, 'Fatal error: ' . $e['message'], $e['file'], $e['line']);
             $this->handle($event);
-            Yii::app()->end(1); // end with abnormal ending
+            //Yii::app()->end(1); // end with abnormal ending
         }
     }
 

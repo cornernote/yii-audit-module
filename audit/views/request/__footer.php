@@ -14,7 +14,9 @@
 
 $output = array();
 $app = Yii::app();
-if ($auditRequest = $app->getErrorHandler()->getAuditRequest()) {
+/** @var AuditErrorHandler $errorHandler */
+$errorHandler = $app->getErrorHandler();
+if ($errorHandler->trackAllRequests && $auditRequest = $errorHandler->getAuditRequest()) {
     /** @var AuditModule $audit */
     $audit = $app->getModule('audit');
     if (in_array($app->getUser()->name, $audit->adminUsers))

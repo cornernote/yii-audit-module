@@ -14,13 +14,9 @@
 
 $columns = array();
 $columns[] = array(
-    'class' => 'zii.widgets.grid.CButtonColumn',
-    'template' => '{view}',
-    'headerHtmlOptions' => array('style' => 'width:auto;'),
-    'htmlOptions' => array('style' => 'width:auto;'),
-);
-$columns[] = array(
     'name' => 'id',
+    'value' => 'CHtml::link($data->id, array("error/view", "id" => $data->id))',
+    'type' => 'raw',
 );
 $columns[] = array(
     'name' => 'link',
@@ -48,7 +44,7 @@ $columns[] = array(
 );
 $columns[] = array(
     'name' => 'user_id',
-    'value' => 'Yii::app()->getModule("audit")->userViewLink($data->auditRequest->user_id)',
+    'value' => 'Yii::app()->getModule("audit")->userViewLink($data->user_id)',
     'type' => 'raw',
 );
 $columns[] = array(

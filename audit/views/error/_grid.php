@@ -14,13 +14,9 @@
 
 $columns = array();
 $columns[] = array(
-    'class' => 'zii.widgets.grid.CButtonColumn',
-    'template' => '{view}',
-    'headerHtmlOptions' => array('style' => 'width:auto;'),
-    'htmlOptions' => array('style' => 'width:auto;'),
-);
-$columns[] = array(
     'name' => 'id',
+    'value' => 'CHtml::link($data->id, array("error/view", "id" => $data->id))',
+    'type' => 'raw',
 );
 if ($this->id != 'request') {
     $columns[] = array(

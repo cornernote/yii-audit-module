@@ -241,13 +241,14 @@ class AuditModule extends CWebModule
 
     /**
      * @param $user_id
+     * @param null $labelPrefix
      * @return int|string
      */
-    public function userViewLink($user_id)
+    public function userViewLink($user_id, $labelPrefix = null)
     {
         if (!$this->userViewUrl)
             return $user_id;
-        return str_replace('--user_id--', $user_id, CHtml::link('--user_id--', $this->userViewUrl));
+        return str_replace('--user_id--', $user_id, CHtml::link($labelPrefix . '--user_id--', $this->userViewUrl));
     }
 
 }
