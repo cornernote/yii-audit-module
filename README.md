@@ -28,25 +28,25 @@ Yii's built-in error handling is amazing... when you are in debug mode. However 
 ## Screenshots
 
 Yii Audit Module Homepage:
-![home](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/home.png)
+![home](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/home.png)
 
 Request List
-![Requests](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/requests.png)
+![Requests](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/requests.png)
 
 Request View
-![Request](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/request.png)
+![Request](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/request.png)
 
 Field List
-![Fields](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/fields.png)
+![Fields](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/fields.png)
 
 Field View
-![Field](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/field.png)
+![Field](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/field.png)
 
 Error List
-![Errors](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/errors.png)
+![Errors](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/errors.png)
 
 Error View
-![Error](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/error.png)
+![Error](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/error.png)
 
 
 ## Installation
