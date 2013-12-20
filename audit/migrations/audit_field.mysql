@@ -1,0 +1,19 @@
+CREATE TABLE `audit_field` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`audit_request_id` int(11),
+`user_id` int(11),
+`old_value` text,
+`new_value` text,
+`action` varchar(20),
+`model_name` varchar(255),
+`model_id` varchar(64),
+`field` varchar(64),
+`created` int(11),
+PRIMARY KEY (`id`),
+KEY `user_id` (`user_id`),
+KEY `model_name` (`model_name`),
+KEY `model_id` (`model_id`),
+KEY `field` (`field`),
+KEY `action` (`action`),
+KEY `audit_request_id` (`audit_request_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;

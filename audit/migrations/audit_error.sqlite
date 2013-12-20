@@ -1,0 +1,20 @@
+CREATE TABLE "audit_error" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"audit_request_id"  INTEGER,
+"code"  INTEGER,
+"type"  TEXT,
+"error_code"  TEXT,
+"message"  TEXT,
+"file"  TEXT,
+"line"  TEXT,
+"trace"  TEXT,
+"traces"  TEXT,
+"source_code"  TEXT,
+"stack_trace"  TEXT,
+"created"  INTEGER
+);
+CREATE INDEX "audit_error_created" ON "audit_error" ("created");
+CREATE INDEX "audit_error_audit_request_id" ON "audit_error" ("audit_request_id");
+CREATE INDEX "audit_error_code" ON "audit_error" ("code");
+CREATE INDEX "audit_error_type" ON "audit_error" ("type");
+CREATE INDEX "audit_error_error_code" ON "audit_error" ("error_code");

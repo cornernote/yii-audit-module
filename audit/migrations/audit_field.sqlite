@@ -1,0 +1,18 @@
+CREATE TABLE "audit_field" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"audit_request_id"  INTEGER,
+"user_id"  INTEGER,
+"old_value"  TEXT,
+"new_value"  TEXT,
+"action"  TEXT,
+"model_name"  TEXT,
+"model_id"  TEXT,
+"field"  TEXT,
+"created"  INTEGER
+);
+CREATE INDEX "audit_field_user_id" ON "audit_field" ("user_id");
+CREATE INDEX "audit_field_model_name" ON "audit_field" ("model_name");
+CREATE INDEX "audit_field_model_id" ON "audit_field" ("model_id");
+CREATE INDEX "audit_field_field" ON "audit_field" ("field");
+CREATE INDEX "audit_field_action" ON "audit_field" ("action");
+CREATE INDEX "audit_field_audit_request_id" ON "audit_field" ("audit_request_id");

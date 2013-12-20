@@ -1,0 +1,32 @@
+CREATE TABLE "audit_request" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"link"  TEXT,
+"user_id"  INTEGER,
+"ip"  TEXT,
+"post"  TEXT,
+"get"  TEXT,
+"files"  TEXT,
+"session"  TEXT,
+"server"  TEXT,
+"cookie"  TEXT,
+"referrer"  TEXT,
+"redirect"  TEXT,
+"audit_field_count"  INTEGER,
+"start_time"  REAL,
+"end_time"  REAL,
+"total_time"  REAL,
+"memory_usage"  INTEGER,
+"memory_peak"  INTEGER,
+"created"  INTEGER
+);
+CREATE INDEX "audit_request_created" ON "audit_request" ("created");
+CREATE INDEX "audit_request_user_id" ON "audit_request" ("user_id");
+CREATE INDEX "audit_request_link" ON "audit_request" ("link");
+CREATE INDEX "audit_request_audit_field_count" ON "audit_request" ("audit_field_count");
+CREATE INDEX "audit_request_redirect" ON "audit_request" ("redirect");
+CREATE INDEX "audit_request_referrer" ON "audit_request" ("referrer");
+CREATE INDEX "audit_request_start_time" ON "audit_request" ("start_time");
+CREATE INDEX "audit_request_end_time" ON "audit_request" ("end_time");
+CREATE INDEX "audit_request_total_time" ON "audit_request" ("total_time");
+CREATE INDEX "audit_request_memory_usage" ON "audit_request" ("memory_usage");
+CREATE INDEX "audit_request_memory_peak" ON "audit_request" ("memory_peak");

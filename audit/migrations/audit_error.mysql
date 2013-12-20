@@ -1,0 +1,21 @@
+CREATE TABLE `audit_error` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`audit_request_id`  int(11),
+`code`  int(11),
+`type`  varchar(64),
+`error_code`  varchar(64),
+`message`  varchar(255),
+`file`  varchar(255),
+`line`  varchar(16),
+`trace`  text,
+`traces`  text,
+`source_code` text,
+`stack_trace` text,
+`created`  int(11),
+PRIMARY KEY (`id`),
+KEY `created` (`created`),
+KEY `audit_request_id` (`audit_request_id`),
+KEY `code` (`code`),
+KEY `type` (`type`),
+KEY `error_code` (`error_code`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
