@@ -1,9 +1,9 @@
 {
-    "name": "mrphp/yii-audit-manager",
+    "name": "mrphp/yii-audit-module",
     "description": "Track and store usage information including page requests, database field changes and system errors.",
     "type": "library",
     "license": "BSD-3-Clause",
-    "keywords": ["yii", "audit", "logging", "error handler", "mrphp"],
+    "keywords": ["yii", "audit", "logging", "request logging", "model logging", "error handler", "mrphp"],
     "authors": [
         {
             "name": "Brett O'Donnell",
