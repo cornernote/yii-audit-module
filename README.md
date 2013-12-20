@@ -18,8 +18,31 @@ Yii's built-in error handling is amazing... when you are in debug mode. However 
 
 ## Features
 
+
+### Visitor Request Tracking
+
 - Track site activity including everything you need to know about the request.
+- The error handler will automatically create an AuditRequest record for each visitor hit.
+- When the application ends it will update the AuditRequest with memory and time information.
+
+Tracks the following information:
+
+- Links - Requested URL, referring URL, redirecting to URL (read from the headers at the end of the application)
+- User - Visitors IP Address and logged in user's ID
+- Superglobals - ($_GET/$_POST/$_SESSION/$_FILES/$_COOKIE), the arrays are serialized then compressed using gzip
+- Timers - Start and end times of the application
+- Memory - Memory usage and peak memory usage
+
+
+### Model Field Tracking
+
 - Track data changes to your model data and relate those changes to an AuditRequest.
+- Performs multiple inserts in a single query with `CDbCommandBuilder::createMultipleInsertCommand()`.
+- Provides views that can be rendered into your application to show changed fields for your model.
+
+
+### Error Tracking
+
 - Full error stack dump is saved, even in live mode.
 - Catches all errors, including fatal errors.
 - View all the collected data from the module interface.
