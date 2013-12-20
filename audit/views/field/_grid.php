@@ -16,7 +16,7 @@ $columns = array();
 
 $columns[] = array(
     'name' => 'id',
-    'value' => 'CHtml::link($data->id, array("error/view", "id" => $data->id))',
+    'value' => 'CHtml::link($data->id, array("field/view", "id" => $data->id))',
     'type' => 'raw',
 );
 if ($this->id != 'request') {

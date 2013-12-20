@@ -25,7 +25,7 @@ $attributes[] = array(
 );
 $attributes[] = array(
     'name' => 'user_id',
-    'value' => $this->module->userViewLink($auditRequest->user_id),
+    'value' => $this->module->userViewLink($auditField->user_id),
     'type' => 'raw',
 );
 $attributes[] = array(

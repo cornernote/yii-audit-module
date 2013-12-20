@@ -8,6 +8,7 @@ Yii's built-in error handling is amazing... when you are in debug mode. However 
 ### Contents
 
 [Features](#features)  
+[Screenshots](#screenshots)  
 [Installation](#installation)  
 [Configuration](#configuration)  
 [Usage](#usage)  
@@ -22,6 +23,30 @@ Yii's built-in error handling is amazing... when you are in debug mode. However 
 - Full error stack dump is saved, even in live mode.
 - Catches all errors, including fatal errors.
 - View all the collected data from the module interface.
+
+
+## Screenshots
+
+Yii Audit Module Homepage:
+![home](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/home.png)
+
+Request List
+![Requests](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/requests.png)
+
+Request View
+![Request](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/request.png)
+
+Field List
+![Fields](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/fields.png)
+
+Field View
+![Field](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/field.png)
+
+Error List
+![Errors](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/errors.png)
+
+Error View
+![Error](https://raw.github.com/cornernote/gii-modeldoc-generator/master/screenshot/error.png)
 
 
 ## Installation
