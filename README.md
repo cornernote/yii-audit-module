@@ -118,7 +118,22 @@ Add information to your footer (optional):
 $this->renderPartial('audit.views.request.__footer');
 ```
 
-included partials for your app ... docs coming soon...
+Show changes for a model:
+```php
+$post = Post::model()->findByPk(123);
+$this->renderPartial('audit.views.field.__fields', array('model' => $post));
+// or by using the model_name and model_id
+// $this->renderPartial('audit.views.field.__fields', array('model_name' => 'Post', 'model_id' => 123));
+```
+
+Show changes for a single field in a model:
+```php
+$post = Post::model()->findByPk(123);
+$this->renderPartial('audit.views.field.__field', array('model' => $post, 'field' => 'status'));
+// or by using the model_name and model_id
+// $this->renderPartial('audit.views.field.__field', array('model_name' => 'Post', 'model_id' => 123, 'field' => 'status'));
+```
+
 
 
 ## License
