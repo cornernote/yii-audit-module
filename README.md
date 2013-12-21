@@ -249,7 +249,7 @@ $this->renderPartial('audit.views.field.__field', array('model' => $post, 'field
 - Author: Brett O'Donnell <cornernote@gmail.com>
 - Author: Zain Ul abidin <zainengineer@gmail.com>
 - Source Code: https://github.com/cornernote/yii-audit-module
-- Copyright � 2013 Mr PHP <info@mrphp.com.au>
+- Copyright © 2013 Mr PHP <info@mrphp.com.au>
 - License: BSD-3-Clause https://raw.github.com/cornernote/yii-audit-module/master/LICENSE
 
 
