@@ -121,10 +121,6 @@ class AuditModule extends CWebModule
 
         // setup components
         Yii::app()->setComponents(array(
-            'errorHandler' => array(
-                'class' => 'audit.components.AuditErrorHandler',
-                'errorAction' => $this->getId() . '/audit/error',
-            ),
             'widgetFactory' => array(
                 'class' => 'system.web.CWidgetFactory',
                 'widgets' => array(
