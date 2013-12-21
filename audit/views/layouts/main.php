@@ -1,60 +1,80 @@
 <?php
 /**
- * @var $this AuditWebController
+ * @var $this EmailWebController
  * @var $content string
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
  * @copyright 2013 Mr PHP
- * @link https://github.com/cornernote/yii-audit-module
- * @license BSD-3-Clause https://raw.github.com/cornernote/yii-audit-module/master/LICENSE
+ * @link https://github.com/cornernote/yii-email-module
+ * @license BSD-3-Clause https://raw.github.com/cornernote/yii-email-module/master/LICENSE
  *
- * @package yii-audit-module
+ * @package yii-email-module
  */
 $cs = Yii::app()->clientScript;
 $cs->coreScriptPosition = CClientScript::POS_HEAD;
 $cs->scriptMap = array();
 $baseUrl = $this->module->assetsUrl;
 $cs->registerCoreScript('jquery');
-$cs->registerCssFile($baseUrl . '/css/screen.css', 'screen, projection');
-$cs->registerCssFile($baseUrl . '/css/print.css', 'print');
+$cs->registerScriptFile($baseUrl . '/js/bootstrap.min.js');
+$cs->registerCssFile($baseUrl . '/css/bootstrap.min.css');
 $cs->registerCssFile($baseUrl . '/css/main.css');
-
-$this->widget('system.web.widgets.CTextHighlighter');
-
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="language" content="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
-
 <body>
 
-<div class="container" id="page">
-    <div id="header">
-        <div class="top-menus">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only"><?php echo Yii::t('email', 'Toggle navigation'); ?></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <?php echo CHtml::link($this->module->getName(), array('/' . $this->module->id), array('class' => 'navbar-brand')); ?>
+        </div>
+        <div class="navbar-collapse collapse">
             <?php
             $items = array();
-            $user = Yii::app()->getUser();
-            foreach (array_keys($this->module->controllerMap) as $controllerName)
-                $links[Yii::t('email', ucfirst($controllerName))] = $user->getState('index.email' . ucfirst($controllerName), array($controllerName . '/index'));
-            $this->widget('zii.widgets.CBreadcrumbs', array('links' => $links, 'separator' => ' | '));
+            foreach (array_keys($this->module->controllerMap) as $controllerName) {
+                $items[] = array(
+                    'label' => Yii::t('email', ucfirst($controllerName)),
+                    'url' => Yii::app()->getUser()->getState('index.email' . ucfirst($controllerName), array($controllerName . '/index')),
+                    'active' => $this->id == $controllerName,
+                );
+            }
+            $this->widget('zii.widgets.CMenu', array(
+                'htmlOptions' => array('class' => 'nav navbar-nav'),
+                'items' => $items,
+            ));
+            $this->widget('zii.widgets.CMenu', array(
+                'htmlOptions' => array('class' => 'nav navbar-nav navbar-right'),
+                'items' => array(
+                    array(
+                        'label' => Yii::t('email', 'Home'),
+                        'url' => Yii::app()->getHomeUrl(),
+                    ),
+                ),
+            ));
             ?>
         </div>
-        <div id="logo"><?php echo CHtml::link(CHtml::image($baseUrl . '/images/logo.png'), array('/audit')); ?></div>
     </div>
-
-    <?php echo $content; ?>
-
 </div>
 
-<div id="footer">
-    <?php $this->renderPartial('audit.views.request.__footer'); ?>
+<?php echo $content; ?>
+
+<div id="footer" class="container small text-center">
+    <?php if (Yii::app()->hasModule('audit')) $this->renderPartial('audit.views.request.__footer'); ?>
     <br/><?php echo Yii::powered(); ?>
-    <br/><?php echo AuditModule::powered(); ?>
+    <br/><?php echo EmailModule::powered(); ?>
     <br/>A product of <a href="http://mrphp.com.au">Mr PHP</a>.
 </div>
 

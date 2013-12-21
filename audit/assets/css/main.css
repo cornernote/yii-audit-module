@@ -1,93 +1,13 @@
 body {
-    margin: 0;
-    padding: 0;
-    color: #555;
-    font: normal 10pt Arial, Helvetica, Verdana, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif;
-    background: #EFEFEF;
-}
-
-h1 {
-    font-size: 1.6em;
-    color: #666;
-}
-
-h2 {
-    font-size: 1.4em;
-    color: #666;
-}
-
-h3 {
-    font-size: 1.2em;
-    color: #666;
-}
-
-pre {
-    overflow: auto;
-    padding: 10px;
-    margin: 0;
-}
-
-#page {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background: white;
-    border: 1px solid #C9E0ED;
-}
-
-#header {
-    padding: 0px;
-    margin: 0px 20px;
-    border-bottom: 1px solid #C9E0ED;
-}
-
-#content {
-    padding: 20px;
-    min-height: 400px;
-}
-
-#sidebar {
-    padding: 20px 0 20px 20px;
+    padding-top: 70px;
 }
 
 #footer {
-    margin: 0 auto;
-    width: 950px;
-    font-size: 0.8em;
-    text-align: center;
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
 }
 
-#logo {
-    padding: 5px 0px;
-}
-
-#logo a {
-    text-decoration: none;
-}
-
-#header .top-menus {
-    margin: 20px 0px;
-    float: right;
-}
-
-div.view {
-    padding: 10px;
-    margin: 0 0 10px 0;
-    border: 1px solid #C9E0ED;
-}
-
-div.breadcrumbs {
-    font-size: 0.9em;
-    padding: 10px 0;
-}
-
-div.breadcrumbs span {
-    font-weight: bold;
-}
-
-div.grid-view {
-    padding: 0;
-}
-
-table.detail-view {
-    margin-bottom: 1.4em;
+#footer a, #footer {
+    color: #bbb;
 }

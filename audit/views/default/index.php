@@ -11,9 +11,24 @@
  * @package yii-audit-module
  */
 
-$this->pageTitle = Yii::t('audit', 'Welcome to the Yii Audit Module!');
+$this->pageTitle = false;
+?>
 
-$items = array();
-foreach (array_keys($this->module->controllerMap) as $controllerName)
-    $items[] = array('label' => Yii::t('email', ucfirst($controllerName)), 'url' => array($controllerName . '/index'));
-$this->widget('zii.widgets.CMenu', array('items' => $items));
+<div class="jumbotron">
+    <?php
+    echo CHtml::tag('h1', array(), Yii::t('audit', 'Welcome to the Yii Audit Module!'));
+    echo CHtml::tag('p', array(), Yii::t('audit', 'You may use the following tools to help manage audit within your Yii application.'));
+
+    $items = array();
+    foreach (array_keys($this->module->controllerMap) as $controllerName)
+        $items[] = array(
+            'label' => Yii::t('audit', ucfirst($controllerName)),
+            'url' => array($controllerName . '/index'),
+            'linkOptions' => array('class' => 'btn btn-lg btn-primary'),
+        );
+    $this->widget('zii.widgets.CMenu', array(
+        'items' => $items,
+        'htmlOptions' => array('class' => 'list-inline'),
+    ));
+    ?>
+</div>

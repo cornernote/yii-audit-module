@@ -15,12 +15,16 @@
 Yii::app()->user->setState('index.auditLog', Yii::app()->request->requestUri);
 $this->pageTitle = Yii::t('audit', 'Logs');
 
-echo '<div>';
-echo CHtml::link(Yii::t('audit', 'Search'), '#', array('class' => 'auditLog-grid-search'));
-if (Yii::app()->user->getState('index.auditLog') != $this->createUrl('index')) {
-    echo ' ' . CHtml::link(Yii::t('audit', 'Reset Filters'), array('index'));
-}
-echo '</div>';
+// links
+$items = array();
+$items[] = array('label' => Yii::t('audit', 'Search'), 'url' => '#', 'linkOptions' => array('class' => 'auditField-grid-search btn btn-default'));
+if (Yii::app()->user->getState('index.auditField') != $this->createUrl('index'))
+    $items[] = array('label' => Yii::t('audit', 'Reset Filters'), 'url' => array('index'), 'linkOptions' => array('class' => 'btn btn-default'));
+$this->pageTitle .= $this->widget('zii.widgets.CMenu', array(
+    'items' => $items,
+    'htmlOptions' => array('class' => 'list-inline pull-right'),
+), true);
+
 
 // search
 $this->renderPartial('_search', array(

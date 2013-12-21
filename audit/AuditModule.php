@@ -92,6 +92,14 @@ class AuditModule extends CWebModule
     }
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'Audit Module';
+    }
+
+    /**
      * Initializes the audit module.
      */
     public function init()
@@ -119,7 +127,16 @@ class AuditModule extends CWebModule
             ),
             'widgetFactory' => array(
                 'class' => 'system.web.CWidgetFactory',
-                'widgets' => array()
+                'widgets' => array(
+                    'CGridView' => array(
+                        'itemsCssClass' => 'table table-condensed table-striped',
+                    ),
+                    'CDetailView' => array(
+                        'htmlOptions' => array(
+                            'class' => 'table table-condensed table-striped',
+                        ),
+                    ),
+                )
             ),
         ), false);
     }
