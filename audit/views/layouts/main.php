@@ -1,15 +1,15 @@
 <?php
 /**
- * @var $this EmailWebController
+ * @var $this AuditWebController
  * @var $content string
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
  * @copyright 2013 Mr PHP
- * @link https://github.com/cornernote/yii-email-module
- * @license BSD-3-Clause https://raw.github.com/cornernote/yii-email-module/master/LICENSE
+ * @link https://github.com/cornernote/yii-audit-module
+ * @license BSD-3-Clause https://raw.github.com/cornernote/yii-audit-module/master/LICENSE
  *
- * @package yii-email-module
+ * @package yii-audit-module
  */
 $cs = Yii::app()->clientScript;
 $cs->coreScriptPosition = CClientScript::POS_HEAD;
@@ -18,6 +18,7 @@ $baseUrl = $this->module->assetsUrl;
 $cs->registerCoreScript('jquery');
 $cs->registerScriptFile($baseUrl . '/js/bootstrap.min.js');
 $cs->registerCssFile($baseUrl . '/css/bootstrap.min.css');
+$cs->registerCssFile($baseUrl . '/css/font-awesome.min.css');
 $cs->registerCssFile($baseUrl . '/css/main.css');
 ?>
 <!DOCTYPE html>
@@ -34,7 +35,7 @@ $cs->registerCssFile($baseUrl . '/css/main.css');
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only"><?php echo Yii::t('email', 'Toggle navigation'); ?></span>
+                <span class="sr-only"><?php echo Yii::t('audit', 'Toggle navigation'); ?></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -46,8 +47,8 @@ $cs->registerCssFile($baseUrl . '/css/main.css');
             $items = array();
             foreach (array_keys($this->module->controllerMap) as $controllerName) {
                 $items[] = array(
-                    'label' => Yii::t('email', ucfirst($controllerName)),
-                    'url' => Yii::app()->getUser()->getState('index.email' . ucfirst($controllerName), array($controllerName . '/index')),
+                    'label' => Yii::t('audit', ucfirst($controllerName)),
+                    'url' => Yii::app()->getUser()->getState('index.audit' . ucfirst($controllerName), array($controllerName . '/index')),
                     'active' => $this->id == $controllerName,
                 );
             }
@@ -59,7 +60,7 @@ $cs->registerCssFile($baseUrl . '/css/main.css');
                 'htmlOptions' => array('class' => 'nav navbar-nav navbar-right'),
                 'items' => array(
                     array(
-                        'label' => Yii::t('email', 'Home'),
+                        'label' => Yii::t('audit', 'Home'),
                         'url' => Yii::app()->getHomeUrl(),
                     ),
                 ),
@@ -74,7 +75,7 @@ $cs->registerCssFile($baseUrl . '/css/main.css');
 <div id="footer" class="container small text-center">
     <?php if (Yii::app()->hasModule('audit')) $this->renderPartial('audit.views.request.__footer'); ?>
     <br/><?php echo Yii::powered(); ?>
-    <br/><?php echo EmailModule::powered(); ?>
+    <br/><?php echo AuditModule::powered(); ?>
     <br/>A product of <a href="http://mrphp.com.au">Mr PHP</a>.
 </div>
 

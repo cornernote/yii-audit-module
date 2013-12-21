@@ -52,7 +52,7 @@ class AuditActiveForm extends CActiveForm
     public function getSubmitButton($label = null, $options = array())
     {
         if (!$label)
-            $label = Yii::t('email', 'Submit');
+            $label = Yii::t('audit', 'Submit');
         $defaultOptions = array(
             'value' => $label,
             'type' => 'submit',
@@ -130,5 +130,5 @@ class AuditActiveForm extends CActiveForm
             'class' => 'form-group',
         ), $label . CHtml::tag('div', array('class' => 'col-sm-10'), $input));
     }
-    
+
 }

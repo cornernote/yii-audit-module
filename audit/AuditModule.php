@@ -126,10 +126,22 @@ class AuditModule extends CWebModule
                 'widgets' => array(
                     'CGridView' => array(
                         'itemsCssClass' => 'table table-condensed table-striped',
+                        'pagerCssClass' => 'pagination-wrap',
                     ),
                     'CDetailView' => array(
                         'htmlOptions' => array(
                             'class' => 'table table-condensed table-striped',
+                        ),
+                    ),
+                    'CLinkPager' => array(
+                        'header' => false,
+                        'hiddenPageCssClass' => 'disabled',
+                        'firstPageLabel' => '<i class="fa fa-fast-backward"></i>',
+                        'lastPageLabel' => '<i class="fa fa-fast-forward"></i>',
+                        'nextPageLabel' => '<i class="fa fa-forward"></i>',
+                        'prevPageLabel' => '<i class="fa fa-backward"></i>',
+                        'htmlOptions' => array(
+                            'class' => 'pagination',
                         ),
                     ),
                 )
