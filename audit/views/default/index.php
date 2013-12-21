@@ -16,8 +16,8 @@ $this->pageTitle = false;
 
 <div class="jumbotron">
     <?php
-    echo CHtml::tag('h1', array(), Yii::t('audit', 'Welcome to the Yii Audit Module!'));
-    echo CHtml::tag('p', array(), Yii::t('audit', 'You may use the following tools to help audit your Yii application.'));
+    echo CHtml::tag('h1', array(), $this->module->getName());
+    echo CHtml::tag('p', array(), Yii::t('audit', 'You may use the following tools to help audit your application.'));
 
     $items = array();
     foreach (array_keys($this->module->controllerMap) as $controllerName)

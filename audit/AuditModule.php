@@ -96,7 +96,7 @@ class AuditModule extends CWebModule
      */
     public function getName()
     {
-        return 'Audit Module';
+        return 'Audit';
     }
 
     /**
