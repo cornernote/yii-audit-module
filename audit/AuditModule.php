@@ -141,7 +141,7 @@ class AuditModule extends CWebModule
             return false;
         $route = $controller->id . '/' . $action->id;
         if (!in_array(Yii::app()->user->getName(), $this->adminUsers) && $route !== 'default/error')
-            throw new CHttpException(403, "You are not allowed to access this page.");
+            throw new CHttpException(403, 'You are not allowed to access this page.');
         return true;
     }
 

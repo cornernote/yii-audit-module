@@ -15,18 +15,6 @@ class AuditController extends AuditWebController
 {
 
     /**
-     * @param string $view the view to be rendered
-     * @return bool
-     */
-    public function beforeRender($view)
-    {
-        if ($view != 'index')
-            $this->addBreadcrumb(Yii::t('audit', 'Audit'), array('index'));
-
-        return parent::beforeRender($view);
-    }
-
-    /**
      *
      */
     public function actionIndex()
