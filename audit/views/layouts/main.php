@@ -44,7 +44,7 @@ $this->widget('system.web.widgets.CTextHighlighter');
             $this->widget('zii.widgets.CBreadcrumbs', array('links' => $links, 'separator' => ' | '));
             ?>
         </div>
-        <div id="logo"><?php echo CHtml::link(CHtml::image($baseUrl . '/images/logo.png'), array('audit/index')); ?></div>
+        <div id="logo"><?php echo CHtml::link(CHtml::image($baseUrl . '/images/logo.png'), array('/audit')); ?></div>
     </div>
 
     <?php echo $content; ?>

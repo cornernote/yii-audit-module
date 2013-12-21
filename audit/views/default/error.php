@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $this AuditController
+ * @var $this DefaultController
  * @var $message string
  * @var $code string
  *

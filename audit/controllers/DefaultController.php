@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class AuditController
+ * Class DefaultController
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
@@ -11,7 +11,7 @@
  *
  * @package yii-audit-module
  */
-class AuditController extends AuditWebController
+class DefaultController extends AuditWebController
 {
 
     /**

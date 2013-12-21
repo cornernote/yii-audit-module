@@ -27,11 +27,6 @@ class AuditModule extends CWebModule
     public $autoCreateTables = true;
 
     /**
-     * @var string the ID of the default controller for this module.
-     */
-    public $defaultController = 'audit';
-
-    /**
      * @var string
      */
     public $layout = 'column1';
