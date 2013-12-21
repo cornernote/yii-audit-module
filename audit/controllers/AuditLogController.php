@@ -1,9 +1,9 @@
 <?php
 
 /**
- * AuditRequestController
+ * AuditLogController
  *
- * @method AuditRequest loadModel() loadModel($id, $model = null)
+ * @method AuditLog loadModel() loadModel($id, $model = null)
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
@@ -13,9 +13,8 @@
  *
  * @package yii-audit-module
  */
-class AuditRequestController extends AuditWebController
+class AuditLogController extends AuditWebController
 {
-
     /**
      * @param string $view the view to be rendered
      * @return bool
@@ -23,7 +22,7 @@ class AuditRequestController extends AuditWebController
     public function beforeRender($view)
     {
         if ($view != 'index')
-            $this->addBreadcrumb(Yii::t('audit', 'Requests'), Yii::app()->user->getState('index.auditRequest', array('request/index')));
+            $this->addBreadcrumb(Yii::t('audit', 'Logs'), Yii::app()->user->getState('index.auditLog', array('log/index')));
 
         return parent::beforeRender($view);
     }
@@ -33,14 +32,12 @@ class AuditRequestController extends AuditWebController
      */
     public function actionIndex()
     {
-        $auditRequest = new AuditRequest('search');
-        if (!empty($_GET['AuditRequest']))
-            $auditRequest->attributes = $_GET['AuditRequest'];
-
-        Yii::app()->getUrlManager()->setUrlFormat('get');
+        $auditLog = new AuditLog('search');
+        if (!empty($_GET['AuditLog']))
+            $auditLog->attributes = $_GET['AuditLog'];
 
         $this->render('index', array(
-            'auditRequest' => $auditRequest,
+            'auditLog' => $auditLog,
         ));
     }
 
@@ -50,10 +47,10 @@ class AuditRequestController extends AuditWebController
      */
     public function actionView($id)
     {
-        $auditRequest = $this->loadModel($id);
+        $auditLog = $this->loadModel($id);
 
         $this->render('view', array(
-            'auditRequest' => $auditRequest,
+            'auditLog' => $auditLog,
         ));
     }
 

@@ -102,7 +102,7 @@ class AuditErrorHandler extends CErrorHandler
         $auditError->message = $event->message;
         $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $event->file);
         $auditError->line = $event->line;
-        $auditError->source_code = $this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines);
+        $auditError->source_code = AuditDataPacker::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
 
         // get the trace info and stack_dump
         $trace = debug_backtrace();
@@ -129,7 +129,7 @@ class AuditErrorHandler extends CErrorHandler
             unset($trace[$i]['object']);
         }
         $auditError->traces = json_encode($trace);
-        $auditError->stack_trace = $this->renderStackTrace($trace);
+        $auditError->stack_trace = AuditDataPacker::pack($this->renderStackTrace($trace));
 
         // get the type info
         switch ($event->code) {
@@ -189,7 +189,7 @@ class AuditErrorHandler extends CErrorHandler
             $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $trace['file']);
             $auditError->line = $trace['line'];
         }
-        $auditError->source_code = $this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines);
+        $auditError->source_code = AuditDataPacker::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
 
         // get traces
         foreach ($trace as $i => $t) {
@@ -207,7 +207,7 @@ class AuditErrorHandler extends CErrorHandler
                 unset($trace[$i]['object']);
         }
         $auditError->traces = json_encode($trace);
-        $auditError->stack_trace = $this->renderStackTrace($trace);
+        $auditError->stack_trace = AuditDataPacker::pack($this->renderStackTrace($trace));
 
         // get the AuditRequest
         $auditRequest = $this->getAuditRequest();
@@ -260,6 +260,15 @@ class AuditErrorHandler extends CErrorHandler
     }
 
     /**
+     * Checks if an AuditRequest has been set.
+     * @return bool
+     */
+    public function hasAuditRequest()
+    {
+        return self::$_auditRequest ? true : false;
+    }
+
+    /**
      * Gets the AuditRequest, if one is not set then it records a new one.
      * @return AuditRequest
      */
@@ -269,11 +278,7 @@ class AuditErrorHandler extends CErrorHandler
         if (self::$_auditRequest)
             return self::$_auditRequest;
 
-        // add an event callback to update the audit at the end
-        self::$_auditRequest = $this->recordAuditRequest();
-        if (self::$_auditRequest)
-            Yii::app()->onEndRequest = array($this, 'endAuditRequest');
-        return self::$_auditRequest;
+        return self::$_auditRequest = $this->recordAuditRequest();
     }
 
     /**
@@ -308,15 +313,32 @@ class AuditErrorHandler extends CErrorHandler
             $auditRequest->link = null;
 
         // pack all
-        $auditRequest->post = $auditRequest->pack('post');
-        $auditRequest->get = $auditRequest->pack('get');
-        $auditRequest->cookie = $auditRequest->pack('cookie');
-        $auditRequest->server = $auditRequest->pack('server');
-        $auditRequest->session = $auditRequest->pack('session');
-        $auditRequest->files = $auditRequest->pack('files');
+        $auditRequest->post = AuditDataPacker::pack($auditRequest->post);
+        $auditRequest->get = AuditDataPacker::pack($auditRequest->get);
+        $auditRequest->cookie = AuditDataPacker::pack($auditRequest->cookie);
+        $auditRequest->server = AuditDataPacker::pack($auditRequest->server);
+        $auditRequest->session = AuditDataPacker::pack($auditRequest->session);
+        $auditRequest->files = AuditDataPacker::pack($auditRequest->files);
+
+        // set the closing data incase we are already in an endRequest
+        $headers = headers_list();
+        foreach ($headers as $header) {
+            if (strpos(strtolower($header), 'location:') === 0) {
+                $auditRequest->redirect = trim(substr($header, 9));
+            }
+        }
+        $auditRequest->memory_usage = memory_get_usage();
+        $auditRequest->memory_peak = memory_get_peak_usage();
+        $auditRequest->audit_field_count = $auditRequest->auditFieldCount;
+        $auditRequest->end_time = microtime(true);
+        $auditRequest->total_time = $auditRequest->end_time - $auditRequest->start_time;
 
         // save
         $auditRequest->save(false);
+
+        // add an event callback to update the audit at the end
+        Yii::app()->onEndRequest = array($this, 'endAuditRequest');
+
         return $auditRequest;
     }
 
@@ -335,8 +357,8 @@ class AuditErrorHandler extends CErrorHandler
         }
         $auditRequest->memory_usage = memory_get_usage();
         $auditRequest->memory_peak = memory_get_peak_usage();
-        $auditRequest->end_time = microtime(true);
         $auditRequest->audit_field_count = $auditRequest->auditFieldCount;
+        $auditRequest->end_time = microtime(true);
         $auditRequest->total_time = $auditRequest->end_time - $auditRequest->start_time;
         $auditRequest->save(false);
     }

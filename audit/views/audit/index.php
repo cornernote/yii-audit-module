@@ -18,6 +18,7 @@ $this->widget('zii.widgets.CMenu', array(
     'items' => array(
         array('label' => Yii::t('audit', 'Errors'), 'url' => array('error/index')),
         array('label' => Yii::t('audit', 'Fields'), 'url' => array('field/index')),
+        array('label' => Yii::t('audit', 'Logs'), 'url' => array('log/index')),
         array('label' => Yii::t('audit', 'Requests'), 'url' => array('request/index')),
     ),
 ));

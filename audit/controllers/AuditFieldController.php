@@ -3,6 +3,8 @@
 /**
  * AuditFieldController
  *
+ * @method AuditField loadModel() loadModel($id, $model = null)
+ *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
  * @copyright 2013 Mr PHP

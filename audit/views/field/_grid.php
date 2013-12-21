@@ -25,12 +25,12 @@ if ($this->id != 'request') {
         'value' => 'CHtml::link($data->audit_request_id, array("request/view", "id" => $data->audit_request_id))',
         'type' => 'raw',
     );
+    $columns[] = array(
+        'name' => 'user_id',
+        'value' => 'Yii::app()->getModule("audit")->userViewLink($data->user_id)',
+        'type' => 'raw',
+    );
 }
-$columns[] = array(
-    'name' => 'user_id',
-    'value' => 'Yii::app()->getModule("audit")->userViewLink($data->auditRequest->user_id)',
-    'type' => 'raw',
-);
 $columns[] = array(
     'name' => 'old_value',
 );
@@ -51,10 +51,12 @@ if (in_array($this->id, array('field', 'request'))) {
 $columns[] = array(
     'name' => 'field',
 );
-$columns[] = array(
-    'name' => 'created',
-    'value' => 'date("Y-m-d H:i:s", $data->created)',
-);
+if ($this->id != 'request') {
+    $columns[] = array(
+        'name' => 'created',
+        'value' => 'date("Y-m-d H:i:s", $data->created)',
+    );
+}
 
 // grid
 $this->widget('zii.widgets.grid.CGridView', array(

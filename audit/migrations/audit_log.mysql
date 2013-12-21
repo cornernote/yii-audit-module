@@ -1,0 +1,16 @@
+CREATE TABLE `audit_log` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`audit_request_id` int(11),
+`user_id` int(11),
+`level` varchar(128),
+`category` varchar(128),
+`message` text,
+`file` varchar(255),
+`created` int(11),
+PRIMARY KEY (`id`),
+KEY `audit_request_id` (`audit_request_id`),
+KEY `user_id` (`user_id`),
+KEY `level` (`level`),
+KEY `category` (`category`),
+KEY `created` (`created`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;

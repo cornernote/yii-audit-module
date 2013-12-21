@@ -63,16 +63,6 @@ $this->widget('zii.widgets.CDetailView', array(
 ));
 
 
-echo '<h2>' . Yii::t('audit', 'Fields') . '</h2>';
-$auditField = new AuditField('search');
-if (isset($_GET['AuditField'])) {
-    $auditField->attributes = $_GET['AuditField'];
-}
-$auditField->audit_request_id = $auditRequest->id;
-$this->renderPartial('/field/_grid', array(
-    'auditField' => $auditField,
-));
-
 echo '<h2>' . Yii::t('audit', 'Errors') . '</h2>';
 $auditError = new AuditError('search');
 if (isset($_GET['AuditError'])) {
@@ -83,23 +73,43 @@ $this->renderPartial('/error/_grid', array(
     'auditError' => $auditError,
 ));
 
+echo '<h2>' . Yii::t('audit', 'Fields') . '</h2>';
+$auditField = new AuditField('search');
+if (isset($_GET['AuditField'])) {
+    $auditField->attributes = $_GET['AuditField'];
+}
+$auditField->audit_request_id = $auditRequest->id;
+$this->renderPartial('/field/_grid', array(
+    'auditField' => $auditField,
+));
+
+echo '<h2>' . Yii::t('audit', 'Logs') . '</h2>';
+$auditLog = new AuditLog('search');
+if (isset($_GET['AuditLog'])) {
+    $auditLog->attributes = $_GET['AuditLog'];
+}
+$auditLog->audit_request_id = $auditRequest->id;
+$this->renderPartial('/log/_grid', array(
+    'auditLog' => $auditLog,
+));
+
 echo '<h2>' . Yii::t('audit', 'Page Variables') . '</h2>';
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $auditRequest,
     'attributes' => array(
         array(
             'label' => '$_GET',
-            'value' => '<pre>' . print_r($auditRequest->unpack('get'), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->get), true) . '</pre>',
             'type' => 'raw',
         ),
         array(
             'label' => '$_POST',
-            'value' => '<pre>' . print_r($auditRequest->unpack('post'), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->post), true) . '</pre>',
             'type' => 'raw',
         ),
         array(
             'label' => '$_FILES',
-            'value' => '<pre>' . print_r($auditRequest->unpack('files'), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->files), true) . '</pre>',
             'type' => 'raw',
         ),
     ),
@@ -113,12 +123,12 @@ $this->widget('zii.widgets.CDetailView', array(
     'attributes' => array(
         array(
             'label' => '$_SESSION',
-            'value' => '<pre>' . print_r($auditRequest->unpack('session'), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->session), true) . '</pre>',
             'type' => 'raw',
         ),
         array(
             'label' => '$_COOKIE',
-            'value' => '<pre>' . print_r($auditRequest->unpack('cookie'), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->cookie), true) . '</pre>',
             'type' => 'raw',
         ),
     ),
@@ -133,7 +143,7 @@ $this->widget('zii.widgets.CDetailView', array(
     'attributes' => array(
         array(
             'label' => '$_SERVER',
-            'value' => '<pre>' . print_r($auditRequest->unpack('server'), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->server), true) . '</pre>',
             'type' => 'raw',
         ),
     ),

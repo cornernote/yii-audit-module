@@ -16,10 +16,11 @@
  * @property string $line
  * @property string $trace
  * @property string $traces
+ * @property string $source_code
+ * @property string $stack_trace
  * @property integer $created
  *
  * Relations
- * @property User $user
  * @property AuditRequest $auditRequest
  *
  * @see CActiveRecord

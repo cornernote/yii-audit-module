@@ -42,6 +42,7 @@ class AuditModule extends CWebModule
     public $controllerMap = array(
         'error' => 'audit.controllers.AuditErrorController',
         'field' => 'audit.controllers.AuditFieldController',
+        'log' => 'audit.controllers.AuditLogController',
         'request' => 'audit.controllers.AuditRequestController',
     );
 

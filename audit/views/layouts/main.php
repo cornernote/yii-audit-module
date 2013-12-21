@@ -1,5 +1,7 @@
 <?php
 /**
+ * @var $this AuditWebController
+ * @var $content string
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
@@ -14,10 +16,12 @@ $cs->coreScriptPosition = CClientScript::POS_HEAD;
 $cs->scriptMap = array();
 $baseUrl = $this->module->assetsUrl;
 $cs->registerCoreScript('jquery');
-
 $cs->registerCssFile($baseUrl . '/css/screen.css', 'screen, projection');
 $cs->registerCssFile($baseUrl . '/css/print.css', 'print');
 $cs->registerCssFile($baseUrl . '/css/main.css');
+
+$this->widget('system.web.widgets.CTextHighlighter');
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -37,6 +41,7 @@ $cs->registerCssFile($baseUrl . '/css/main.css');
                 'links' => array(
                     Yii::t('audit', 'Errors') => Yii::app()->user->getState('index.auditError', array('error/index')),
                     Yii::t('audit', 'Fields') => Yii::app()->user->getState('index.auditField', array('field/index')),
+                    Yii::t('audit', 'Logs') => Yii::app()->user->getState('index.auditLog', array('log/index')),
                     Yii::t('audit', 'Requests') => Yii::app()->user->getState('index.auditRequest', array('request/index')),
                 ),
                 'separator' => ' | ',

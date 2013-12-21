@@ -27,7 +27,6 @@
  * @property integer $created
  *
  * Relations
- * @property User $user
  * @property AuditError[] $auditErrors
  * @property AuditField[] $auditFields
  * @property integer $auditFieldCount
@@ -178,50 +177,6 @@ class AuditRequest extends AuditActiveRecord
     public function getRedirectString()
     {
         return $this->redirect ? $this->getLinkString($this->redirect) : '';
-    }
-
-    /**
-     * @param $attribute
-     * @return string
-     */
-    public function pack($attribute)
-    {
-        $value = $this->$attribute;
-        //already packed
-        if (@is_array(unserialize(gzuncompress(base64_decode($value)))))
-            return;
-
-        $value = serialize($value);
-        $value = gzcompress($value);
-        $value = base64_encode($value);
-        return $value;
-    }
-
-    /**
-     * @param $attribute
-     * @return mixed
-     */
-    public function unpack($attribute)
-    {
-        @$value = unserialize($this->$attribute);
-        if ($value !== false) {
-            $this->$attribute = $value;
-            return false;
-        }
-        $value = base64_decode($this->$attribute);
-        if (!$value) {
-            return false;
-        }
-        @$value = gzuncompress($value);
-        if ($value === false) {
-            $this->$attribute = "could not uncompress [" . var_dump($value) . "]";
-            return false;
-        }
-        @$value = unserialize($value);
-        if ($value === false) {
-            $this->$attribute = "could not unserialize [" . var_dump($value) . "]";
-        }
-        return $value;
     }
 
 }

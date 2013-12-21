@@ -18,7 +18,6 @@
  * @property integer $created
  *
  * Relations
- * @property User $user
  * @property AuditRequest $auditRequest
  *
  * @see CActiveRecord

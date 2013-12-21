@@ -1,7 +1,7 @@
 <?php
 /**
- * @var $this AuditErrorController
- * @var $auditError AuditError
+ * @var $this AuditLogController
+ * @var $auditLog AuditLog
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
@@ -15,7 +15,7 @@
 $columns = array();
 $columns[] = array(
     'name' => 'id',
-    'value' => 'CHtml::link($data->id, array("error/view", "id" => $data->id))',
+    'value' => 'CHtml::link($data->id, array("log/view", "id" => $data->id))',
     'type' => 'raw',
 );
 if ($this->id != 'request') {
@@ -26,28 +26,23 @@ if ($this->id != 'request') {
     );
     $columns[] = array(
         'name' => 'user_id',
-        'value' => 'Yii::app()->getModule("audit")->userViewLink($data->auditRequest->user_id)',
+        'value' => 'Yii::app()->getModule("audit")->userViewLink($data->user_id)',
         'type' => 'raw',
     );
 }
 $columns[] = array(
-    'name' => 'code',
+    'name' => 'level',
 );
 $columns[] = array(
-    'name' => 'type',
-);
-$columns[] = array(
-    'name' => 'error_code',
+    'name' => 'category',
 );
 $columns[] = array(
     'name' => 'message',
+    'value' => '$data->formatMessage()',
 );
 $columns[] = array(
     'name' => 'file',
     'value' => '$data->getFileAlias()',
-);
-$columns[] = array(
-    'name' => 'line',
 );
 if ($this->id != 'request') {
     $columns[] = array(
@@ -58,8 +53,8 @@ if ($this->id != 'request') {
 
 // grid
 $this->widget('zii.widgets.grid.CGridView', array(
-    'id' => 'auditError-grid',
-    'dataProvider' => $auditError->search(),
-    'filter' => $auditError,
+    'id' => 'auditLog-grid',
+    'dataProvider' => $auditLog->search(),
+    'filter' => $auditLog,
     'columns' => $columns,
 ));

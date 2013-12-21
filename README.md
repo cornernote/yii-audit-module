@@ -12,7 +12,6 @@ Yii's built-in error handling is amazing... when you are in debug mode. However 
 [Installation](#installation)  
 [Configuration](#configuration)  
 [Usage](#usage)  
-[Todo](#todo)  
 [License](#license)  
 [Links](#links)  
 
@@ -52,6 +51,12 @@ Tracks the following information:
 - Each error is related to an AuditRequest so you can see the entire state of the visitors action.
 
 
+### Log Tracking
+
+- Save logs to your database for easy real-time debugging or for checking on historical logs.
+- Each log is related to an AuditRequest so you can see the entire state of the visitors action.
+
+
 ## Screenshots
 
 Yii Audit Module Homepage:
@@ -74,6 +79,12 @@ Error List
 
 Error View
 ![Error](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/error.png)
+
+Log List
+![Logs](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/logs.png)
+
+Log View
+![Log](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/log.png)
 
 
 ## Installation
@@ -121,11 +132,10 @@ return array(
 );
 ```
 
-Use `AuditErrorHandler` as your application error handler by updating the `components` section in your yii configuration:
+Use `AuditErrorHandler` as your applications error handler by updating the `components` section in your yii configuration:
 
 ```php
 return array(
-	'preload' => array('log', 'errorHandler'), // preload to handle fatal errors
 	'components' => array(
 		'errorHandler' => array(
 			// path to the AuditErrorHandler class
@@ -152,6 +162,41 @@ return array(
 );
 ```
 
+To track logs we need to add a logroute to `AuditLogRoute` to your yii configuration:
+```php
+return array(
+	'components' => array(
+		'db' => array(
+			// standard setup
+			'connectionString' => 'mysql:host=localhost;dbname=test',
+			'username' => 'root',
+			'password' => '',
+
+			// set to true to enable database query logging
+			// don't forget to put `profile` in the log route `levels` below
+			'enableProfiling' => true,
+
+			// set to true to replace the params with the literal values
+			'enableParamLogging' => true,
+		),
+		'log' => array(
+			'class' => 'CLogRouter',
+			'routes' => array(
+				// add a new log route
+				array(
+					// path to the AuditLogRoute class
+					'class' => 'audit.components.AuditLogRoute',
+
+					// can be: trace, warning, error, info, profile
+					// can also be anything else you want to pass as a level to `Yii::log()`
+					'levels' => 'error, warning, profile, audit',
+				),
+			),
+		),
+	),
+);
+```
+
 To track field changes add `AuditFieldBehavior` to your CActiveRecord `behaviors()` functions.
 
 ```php
@@ -168,6 +213,12 @@ class Post extends CActiveRecord
 
 
 ## Usage
+
+Logging is as simple as calling `Yii::log()`.  The second argument needs to be one of the `AuditLogRoute::levels` you specified above (error, warning or audit).
+```php
+Yii::log('Hello World!', 'audit');
+Yii::log('something really bad just happened', 'error');
+```
 
 There are several partial views that you can render into your application.  These are all optional.
 
@@ -191,11 +242,6 @@ $this->renderPartial('audit.views.field.__field', array('model' => $post, 'field
 // or by using the model_name and model_id
 // $this->renderPartial('audit.views.field.__field', array('model_name' => 'Post', 'model_id' => 123, 'field' => 'status'));
 ```
-
-
-## Todo
-
-- Create crud based around `CDbLogRoute` and update documentation to explain how to perform and track logging.
 
 
 ## License

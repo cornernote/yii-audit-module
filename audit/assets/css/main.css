@@ -21,6 +21,12 @@ h3 {
     color: #666;
 }
 
+pre {
+    overflow: auto;
+    padding: 10px;
+    margin: 0;
+}
+
 #page {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -65,7 +71,7 @@ h3 {
 
 div.view {
     padding: 10px;
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     border: 1px solid #C9E0ED;
 }
 

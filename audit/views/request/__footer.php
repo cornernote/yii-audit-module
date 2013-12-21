@@ -16,9 +16,10 @@ $output = array();
 $app = Yii::app();
 /** @var AuditErrorHandler $errorHandler */
 $errorHandler = $app->getErrorHandler();
-if ($errorHandler->trackAllRequests && $auditRequest = $errorHandler->getAuditRequest()) {
+if ($errorHandler->hasAuditRequest()) {
     /** @var AuditModule $audit */
     $audit = $app->getModule('audit');
+    $auditRequest = $errorHandler->getAuditRequest();
     if (in_array($app->getUser()->name, $audit->adminUsers))
         $output[] = CHtml::link($auditRequest->id, array('/' . $audit->id . '/request/view', 'id' => $auditRequest->id));
     else
