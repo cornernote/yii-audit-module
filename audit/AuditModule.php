@@ -93,7 +93,7 @@ class AuditModule extends CWebModule
      */
     public function getVersion()
     {
-        return '1.0.0';
+        return file_get_contents(dirname(__FILE__) . '/version.txt');
     }
 
     /**
