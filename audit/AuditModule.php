@@ -124,6 +124,9 @@ class AuditModule extends CWebModule
             'widgetFactory' => array(
                 'class' => 'system.web.CWidgetFactory',
                 'widgets' => array(
+                    'CListView' => array(
+                        'pagerCssClass' => 'pagination-wrap',
+                    ),
                     'CGridView' => array(
                         'itemsCssClass' => 'table table-condensed table-striped',
                         'pagerCssClass' => 'pagination-wrap',
