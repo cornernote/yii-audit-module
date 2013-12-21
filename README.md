@@ -29,7 +29,7 @@ Tracks the following information:
 
 - Links - Requested URL, referring URL, redirecting to URL (read from the headers at the end of the application)
 - User - Visitors IP Address and logged in user's ID
-- Superglobals - ($_GET/$_POST/$_SESSION/$_FILES/$_COOKIE), the arrays are serialized then compressed using gzip
+- Superglobals - (`$_GET`/`$_POST`/`$_SESSION`/`$_FILES`/`$_COOKIE`), the arrays are serialized then compressed using gzip
 - Timers - Start and end times of the application
 - Memory - Memory usage and peak memory usage
 
