@@ -37,15 +37,11 @@ $this->widget('system.web.widgets.CTextHighlighter');
     <div id="header">
         <div class="top-menus">
             <?php
-            $this->widget('zii.widgets.CBreadcrumbs', array(
-                'links' => array(
-                    Yii::t('audit', 'Errors') => Yii::app()->user->getState('index.auditError', array('error/index')),
-                    Yii::t('audit', 'Fields') => Yii::app()->user->getState('index.auditField', array('field/index')),
-                    Yii::t('audit', 'Logs') => Yii::app()->user->getState('index.auditLog', array('log/index')),
-                    Yii::t('audit', 'Requests') => Yii::app()->user->getState('index.auditRequest', array('request/index')),
-                ),
-                'separator' => ' | ',
-            ));
+            $items = array();
+            $user = Yii::app()->getUser();
+            foreach (array_keys($this->module->controllerMap) as $controllerName)
+                $links[Yii::t('email', ucfirst($controllerName))] = $user->getState('index.email' . ucfirst($controllerName), array($controllerName . '/index'));
+            $this->widget('zii.widgets.CBreadcrumbs', array('links' => $links, 'separator' => ' | '));
             ?>
         </div>
         <div id="logo"><?php echo CHtml::link(CHtml::image($baseUrl . '/images/logo.png'), array('audit/index')); ?></div>

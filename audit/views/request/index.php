@@ -16,7 +16,7 @@ Yii::app()->user->setState('index.auditRequest', Yii::app()->request->requestUri
 $this->pageTitle = Yii::t('audit', 'Requests');
 
 echo '<div>';
-echo CHtml::link(Yii::t('audit', 'search'), '#', array('class' => 'auditRequest-grid-search'));
+echo CHtml::link(Yii::t('audit', 'Search'), '#', array('class' => 'auditRequest-grid-search'));
 if (Yii::app()->user->getState('index.auditRequest') != $this->createUrl('index')) {
     echo ' ' . CHtml::link(Yii::t('audit', 'Reset Filters'), array('index'));
 }

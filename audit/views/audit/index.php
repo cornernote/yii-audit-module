@@ -13,12 +13,7 @@
 
 $this->pageTitle = Yii::t('audit', 'Welcome to the Yii Audit Module!');
 
-echo CHtml::tag('p', array(), Yii::t('audit', 'You may use the following auditing tools to help manage your Yii application.'));
-$this->widget('zii.widgets.CMenu', array(
-    'items' => array(
-        array('label' => Yii::t('audit', 'Errors'), 'url' => array('error/index')),
-        array('label' => Yii::t('audit', 'Fields'), 'url' => array('field/index')),
-        array('label' => Yii::t('audit', 'Logs'), 'url' => array('log/index')),
-        array('label' => Yii::t('audit', 'Requests'), 'url' => array('request/index')),
-    ),
-));
+$items = array();
+foreach (array_keys($this->module->controllerMap) as $controllerName)
+    $items[] = array('label' => Yii::t('email', ucfirst($controllerName)), 'url' => array($controllerName . '/index'));
+$this->widget('zii.widgets.CMenu', array('items' => $items));
