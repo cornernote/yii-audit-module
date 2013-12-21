@@ -15,18 +15,10 @@
 Yii::app()->user->setState('index.auditField', Yii::app()->request->requestUri);
 $this->pageTitle = Yii::t('audit', 'Fields');
 
-echo '<div class="spacer">';
-$this->widget('bootstrap.widgets.TbButton', array(
-    'label' => Yii::t('audit', 'Search'),
-    'htmlOptions' => array('class' => 'auditField-grid-search'),
-    'toggle' => true,
-));
+echo '<div>';
+echo CHtml::link(Yii::t('audit', 'search'), '#', array('class' => 'auditField-grid-search'));
 if (Yii::app()->user->getState('index.auditField') != $this->createUrl('index')) {
-    echo ' ';
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'label' => Yii::t('audit', 'Reset Filters'),
-        'url' => array('index'),
-    ));
+    echo ' ' . CHtml::link(Yii::t('audit', 'Reset Filters'), array('index'));
 }
 echo '</div>';
 

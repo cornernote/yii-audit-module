@@ -1,5 +1,4 @@
 <?php
-Yii::import('bootstrap.widgets.TbActiveForm');
 
 /**
  * AuditActiveForm
@@ -41,17 +40,12 @@ class AuditActiveForm extends CActiveForm
     public function getSubmitButton($label = null, $options = array())
     {
         if (!$label)
-            $label = Yii::t('audit', 'Submit');
+            $label = Yii::t('email', 'Submit');
         $defaultOptions = array(
-            'buttonType' => 'submit',
-            'type' => 'primary',
-            //'icon' => 'ok white',
-            'label' => $label,
+            'value' => $label,
         );
         $options = CMap::mergeArray($defaultOptions, $options);
-        ob_start();
-        $this->widget('bootstrap.widgets.TbButton', $options);
-        return ob_get_clean();
+        return CHtml::tag('submit', $options);
     }
 
     /**

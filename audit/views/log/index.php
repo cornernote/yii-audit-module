@@ -15,18 +15,10 @@
 Yii::app()->user->setState('index.auditLog', Yii::app()->request->requestUri);
 $this->pageTitle = Yii::t('audit', 'Logs');
 
-echo '<div class="spacer">';
-$this->widget('bootstrap.widgets.TbButton', array(
-    'label' => Yii::t('app', 'Search'),
-    'htmlOptions' => array('class' => 'auditLog-grid-search'),
-    'toggle' => true,
-));
+echo '<div>';
+echo CHtml::link(Yii::t('audit', 'search'), '#', array('class' => 'auditLog-grid-search'));
 if (Yii::app()->user->getState('index.auditLog') != $this->createUrl('index')) {
-    echo ' ';
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'label' => Yii::t('app', 'Reset Filters'),
-        'url' => array('index'),
-    ));
+    echo ' ' . CHtml::link(Yii::t('audit', 'Reset Filters'), array('index'));
 }
 echo '</div>';
 
