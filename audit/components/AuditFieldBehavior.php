@@ -321,10 +321,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      */
     protected function getFieldPrefix($model)
     {
-        if (get_class($this->owner) != get_class($model)) {
-            return get_class($this->owner) . '.';
-        }
-        return '';
+        return (get_class($this->owner) != get_class($model)) ? get_class($this->owner) . '.' : '';
     }
 
     /**
@@ -334,9 +331,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      */
     protected function getPrimaryKeyString($model)
     {
-        if (is_array($model->getPrimaryKey()))
-            return implode('-', $model->getPrimaryKey());
-        return $model->getPrimaryKey();
+        return is_array($model->getPrimaryKey()) ? implode('-', $model->getPrimaryKey()) : $model->getPrimaryKey();
     }
 
 }
