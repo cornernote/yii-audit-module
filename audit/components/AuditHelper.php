@@ -19,8 +19,7 @@ class AuditHelper
      */
     public static function pack($value)
     {
-        if (@self::unpack($value)) return; //already packed
-        return base64_encode(gzcompress(serialize($value)));
+        return gzcompress(serialize($value));
     }
 
     /**
@@ -29,7 +28,7 @@ class AuditHelper
      */
     public static function unpack($value)
     {
-        return @unserialize(gzuncompress(base64_decode($value)));
+        return unserialize(gzuncompress($value));
     }
 
 

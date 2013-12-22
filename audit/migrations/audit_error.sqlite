@@ -9,8 +9,8 @@ CREATE TABLE "audit_error" (
 "line"  TEXT,
 "trace"  TEXT,
 "traces"  TEXT,
-"source_code"  TEXT,
-"stack_trace"  TEXT,
+"source_code"  BLOB,
+"stack_trace"  BLOB,
 "created"  INTEGER
 );
 CREATE INDEX "audit_error_created" ON "audit_error" ("created");
