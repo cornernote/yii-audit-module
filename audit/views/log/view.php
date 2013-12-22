@@ -36,7 +36,7 @@ $attributes[] = array(
 );
 $attributes[] = array(
     'name' => 'message',
-    'value' => '<pre><small>' . $auditLog->getMessage() . '</small></pre>',
+    'value' => '<pre><small>' . $auditLog->formatMessage() . '</small></pre>',
     'type' => 'raw',
 );
 $attributes[] = array(

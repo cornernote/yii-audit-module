@@ -39,6 +39,7 @@ $columns[] = array(
 $columns[] = array(
     'name' => 'message',
     'value' => '$data->formatMessage()',
+    'type' => 'raw',
 );
 $columns[] = array(
     'name' => 'file',
