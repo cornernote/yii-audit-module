@@ -48,7 +48,7 @@ $columns[] = array(
 if ($this->id != 'request') {
     $columns[] = array(
         'name' => 'created',
-        'value' => 'date("Y-m-d H:i:s", $data->created)',
+        'value' => 'Yii::app()->format->formatDatetime($data->created)',
     );
 }
 

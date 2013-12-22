@@ -20,7 +20,7 @@ $cs->registerScriptFile($this->module->getAssetsUrl() . '/js/error.js');
 $this->pageTitle = Yii::t('audit', 'Error ID-:id', array(':id' => $auditError->id));
 
 $details = CHtml::tag('small', array(), Yii::t('audit', ':type on :date by :user with :auditRequest:', array(
-    ':date' => date('Y-m-d H:i:s', $auditError->created),
+    ':date' => Yii::app()->format->formatDatetime($auditError->created),
     ':type' => $auditError->type,
     ':user' => $this->module->userViewLink($auditError->auditRequest->user_id, 'User ID-'),
     ':auditRequest' => CHtml::link(Yii::t('audit', 'Request ID-') . $auditError->audit_request_id, array('request/view', 'id' => $auditError->audit_request_id)),

@@ -48,7 +48,7 @@ $attributes[] = array(
 );
 $attributes[] = array(
     'name' => 'created',
-    'value' => date('Y-m-d H:i:s', $auditField->created),
+    'value' => Yii::app()->format->formatDatetime($auditField->created),
 );
 
 $this->widget('zii.widgets.CDetailView', array(

@@ -38,6 +38,6 @@ if ($errorHandler->hasAuditRequest()) {
 }
 $output[] = number_format(microtime(true) - YII_BEGIN_TIME, 2) . 's';
 $output[] = round(memory_get_peak_usage() / 1024 / 1024, 1) . 'm';
-$output[] = date('Y-m-d H:i:s');
+$output[] = Yii::app()->format->formatDatetime(time());
 
 echo CHtml::tag($tag, $htmlOptions, implode(' | ', $output));
