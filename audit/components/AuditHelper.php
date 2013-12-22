@@ -1,6 +1,6 @@
 <?php
 /**
- * AuditDataPacker
+ * AuditHelper
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
@@ -10,7 +10,7 @@
  *
  * @package yii-audit-module
  */
-class AuditDataPacker
+class AuditHelper
 {
 
     /**
@@ -30,6 +30,25 @@ class AuditDataPacker
     public static function unpack($value)
     {
         return @unserialize(gzuncompress(base64_decode($value)));
+    }
+
+
+    /**
+     * @param $text string
+     * @return string
+     */
+    public static function replaceFileWithAlias($text)
+    {
+        $aliases = array('audit', 'zii', 'system', 'application', 'ext', 'modules', 'public');
+        foreach ($aliases as $alias) {
+            $aliasPath = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, Yii::getPathOfAlias($alias));
+            if (!$aliasPath)
+                continue;
+            if (stripos($text, $aliasPath) !== false) {
+                $text = str_ireplace($aliasPath, $alias, $text);
+            }
+        }
+        return $text;
     }
 
 }

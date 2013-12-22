@@ -109,9 +109,11 @@ class AuditLog extends AuditActiveRecord
      */
     public function formatMessage()
     {
-        $message = AuditDataPacker::unpack($this->message);
+        $message = AuditHelper::unpack($this->message);
         if ($this->level == 'profile')
             $message = $this->formatProfileMessage($message);
+        else
+            $message = $this->formatLogMessage($message);
         return $message;
     }
 
@@ -154,18 +156,18 @@ class AuditLog extends AuditActiveRecord
     /**
      * @return string
      */
+    public function formatLogMessage($message)
+    {
+        //return $message;
+        return AuditHelper::replaceFileWithAlias($message);
+    }
+
+    /**
+     * @return string
+     */
     public function getFileAlias()
     {
-        $file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $this->file);
-        $aliases = array('audit', 'zii', 'system', 'application', 'ext', 'modules');
-        foreach ($aliases as $alias) {
-            $aliasPath = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, Yii::getPathOfAlias($alias));
-            if (!$aliasPath)
-                continue;
-            if (strpos($file, $aliasPath) !== false)
-                return str_replace(DIRECTORY_SEPARATOR, '.', str_replace($aliasPath, $alias, $file));
-        }
-        return $file;
+        return AuditHelper::replaceFileWithAlias(str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $this->file));
     }
 
     /**

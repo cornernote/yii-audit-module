@@ -30,10 +30,10 @@ echo CHtml::tag('p', array('class' => 'message'), $details . Yii::app()->format-
 
 echo CHtml::tag('div', array(
     'class' => 'source',
-), CHtml::tag('p', array('class' => 'file'), htmlspecialchars($auditError->file, ENT_QUOTES, Yii::app()->charset) . '(' . $auditError->line . ')') . AuditDataPacker::unpack($auditError->source_code));
+), CHtml::tag('p', array('class' => 'file'), htmlspecialchars($auditError->file, ENT_QUOTES, Yii::app()->charset) . '(' . $auditError->line . ')') . AuditHelper::unpack($auditError->source_code));
 
 if ($auditError->stack_trace) {
     echo CHtml::tag('div', array(
         'class' => 'traces',
-    ), CHtml::tag('h2', array(), Yii::t('audit', 'Stack Trace')) . AuditDataPacker::unpack($auditError->stack_trace));
+    ), CHtml::tag('h2', array(), Yii::t('audit', 'Stack Trace')) . AuditHelper::unpack($auditError->stack_trace));
 }

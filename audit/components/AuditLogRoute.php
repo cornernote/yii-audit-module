@@ -30,7 +30,7 @@ class AuditLogRoute extends CLogRoute
             $auditLogs[] = array(
                 'level' => $log[1],
                 'category' => $log[2],
-                'message' => AuditDataPacker::pack($message),
+                'message' => AuditHelper::pack($message),
                 'file' => $file,
                 'audit_request_id' => $auditRequestId,
                 'user_id' => $userId,

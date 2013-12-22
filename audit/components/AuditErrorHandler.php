@@ -102,7 +102,7 @@ class AuditErrorHandler extends CErrorHandler
         $auditError->message = $event->message;
         $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $event->file);
         $auditError->line = $event->line;
-        $auditError->source_code = AuditDataPacker::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
+        $auditError->source_code = AuditHelper::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
 
         // get the trace info and stack_dump
         $trace = debug_backtrace();
@@ -129,7 +129,7 @@ class AuditErrorHandler extends CErrorHandler
             unset($trace[$i]['object']);
         }
         $auditError->traces = json_encode($trace);
-        $auditError->stack_trace = AuditDataPacker::pack($this->renderStackTrace($trace));
+        $auditError->stack_trace = AuditHelper::pack($this->renderStackTrace($trace));
 
         // get the type info
         switch ($event->code) {
@@ -189,7 +189,7 @@ class AuditErrorHandler extends CErrorHandler
             $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $trace['file']);
             $auditError->line = $trace['line'];
         }
-        $auditError->source_code = AuditDataPacker::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
+        $auditError->source_code = AuditHelper::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
 
         // get traces
         foreach ($trace as $i => $t) {
@@ -207,7 +207,7 @@ class AuditErrorHandler extends CErrorHandler
                 unset($trace[$i]['object']);
         }
         $auditError->traces = json_encode($trace);
-        $auditError->stack_trace = AuditDataPacker::pack($this->renderStackTrace($trace));
+        $auditError->stack_trace = AuditHelper::pack($this->renderStackTrace($trace));
 
         // get the AuditRequest
         $auditRequest = $this->getAuditRequest();
@@ -313,12 +313,12 @@ class AuditErrorHandler extends CErrorHandler
             $auditRequest->link = null;
 
         // pack all
-        $auditRequest->post = AuditDataPacker::pack($auditRequest->post);
-        $auditRequest->get = AuditDataPacker::pack($auditRequest->get);
-        $auditRequest->cookie = AuditDataPacker::pack($auditRequest->cookie);
-        $auditRequest->server = AuditDataPacker::pack($auditRequest->server);
-        $auditRequest->session = AuditDataPacker::pack($auditRequest->session);
-        $auditRequest->files = AuditDataPacker::pack($auditRequest->files);
+        $auditRequest->post = AuditHelper::pack($auditRequest->post);
+        $auditRequest->get = AuditHelper::pack($auditRequest->get);
+        $auditRequest->cookie = AuditHelper::pack($auditRequest->cookie);
+        $auditRequest->server = AuditHelper::pack($auditRequest->server);
+        $auditRequest->session = AuditHelper::pack($auditRequest->session);
+        $auditRequest->files = AuditHelper::pack($auditRequest->files);
 
         // set the closing data incase we are already in an endRequest
         $headers = headers_list();
