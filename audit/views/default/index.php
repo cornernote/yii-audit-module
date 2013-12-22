@@ -11,7 +11,8 @@
  * @package yii-audit-module
  */
 
-$this->pageTitle = false;
+$this->pageTitle = $this->module->getName();
+$this->pageHeading = false;
 ?>
 
 <div class="jumbotron">

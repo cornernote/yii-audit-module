@@ -14,13 +14,14 @@
 
 $output = array();
 $app = Yii::app();
+/** @var AuditModule $audit */
+$audit = $app->getModule('audit');
+$isAdmin = in_array($app->getUser()->name, $audit->adminUsers);
 /** @var AuditErrorHandler $errorHandler */
 $errorHandler = $app->getErrorHandler();
 if ($errorHandler->hasAuditRequest()) {
-    /** @var AuditModule $audit */
-    $audit = $app->getModule('audit');
     $auditRequest = $errorHandler->getAuditRequest();
-    if (in_array($app->getUser()->name, $audit->adminUsers))
+    if ($isAdmin)
         $output[] = CHtml::link($auditRequest->id, array('/' . $audit->id . '/request/view', 'id' => $auditRequest->id));
     else
         $output[] = $auditRequest->id;
@@ -30,5 +31,5 @@ $output[] = round(memory_get_peak_usage() / 1024 / 1024, 1) . 'm';
 $output[] = date('Y-m-d H:i:s');
 
 echo CHtml::tag('span', array(
-    'style' => 'color:' . (isset($color) ? $color : (YII_DEBUG ? 'inherit' : 'transparent')) . ';',
+    'style' => 'color:' . (isset($color) ? $color : (YII_DEBUG || $isAdmin ? 'inherit' : 'transparent')) . ';',
 ), implode(' | ', $output));

@@ -37,6 +37,14 @@ class AuditWebController extends CController
     protected $_loadModel;
 
     /**
+     *
+     */
+    public function filters()
+    {
+        return $this->module->controllerFilters;
+    }
+
+    /**
      * @return string Defaults to the controllers pageTitle.
      */
     public function getPageHeading()

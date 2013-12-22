@@ -108,7 +108,7 @@ class AuditRequest extends AuditActiveRecord
     public function rules()
     {
         return array(
-            array('id, user_id, link, ip, created, audit_field_count, total_time, memory_usage, memory_peak, model_name, model_id', 'safe', 'on' => 'search'),
+            array('id, user_id, link, ip, created, audit_field_count, referrer, redirect, total_time, memory_usage, memory_peak, model_name, model_id', 'safe', 'on' => 'search'),
         );
     }
 
