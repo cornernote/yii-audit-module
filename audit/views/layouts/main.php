@@ -73,9 +73,14 @@ $cs->registerCssFile($baseUrl . '/css/main.css');
 <?php echo $content; ?>
 
 <div id="footer" class="container small text-center">
-    <?php if (Yii::app()->hasModule('audit')) $this->renderPartial('audit.views.request.__footer'); ?>
-    <br/><?php echo AuditModule::powered(); ?>
-    <br/>A product of <a href="http://mrphp.com.au">Mr PHP</a>.
+    <?php
+    if (Yii::app()->hasModule('audit')) {
+        $this->renderPartial('audit.views.request.__footer');
+        echo '<br/>';
+    }
+    echo AuditModule::powered();
+    echo '<br/>A product of <a href="http://mrphp.com.au">Mr PHP</a>.';
+    ?>
 </div>
 
 </body>
