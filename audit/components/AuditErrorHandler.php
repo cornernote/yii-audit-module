@@ -304,9 +304,9 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 
         // remove passwords
-        $passwordRemovedFromGet = $this->removedValuesWithPasswordKeys($auditRequest->get = $auditRequest->get);
-        $passwordRemovedFromPost = $this->removedValuesWithPasswordKeys($auditRequest->post = $auditRequest->post);
-        $this->removedValuesWithPasswordKeys($auditRequest->server = $auditRequest->server);
+        $auditRequest->get = $this->removeValuesWithPasswordKeys($auditRequest->get, $passwordRemovedFromGet);
+        $auditRequest->post = $this->removeValuesWithPasswordKeys($auditRequest->post, $passwordRemovedFromPost);
+        $auditRequest->server = $this->removeValuesWithPasswordKeys($auditRequest->server);
         if ($passwordRemovedFromGet || $passwordRemovedFromPost)
             $auditRequest->server = null;
         if ($passwordRemovedFromGet)
@@ -385,34 +385,31 @@ class AuditErrorHandler extends CErrorHandler
     /**
      * Removes passwords from the given array.
      * @param $array
-     * @return bool true if passwords were removed.
+     * @param bool $passwordRemoved gets set to true if passwords were removed.
+     * @return array
      */
-    private function removedValuesWithPasswordKeys(&$array)
+    private function removeValuesWithPasswordKeys($array, &$passwordRemoved = false)
     {
-        if (!$array) {
-            return false;
-        }
-        $removed = false;
         foreach ($array as $key => $value) {
             if (stripos($key, 'password') !== false) {
                 $array[$key] = 'Possible password removed';
-                $removed = true;
+                $passwordRemoved = true;
             }
             elseif (stripos($key, 'PHP_AUTH_PW') !== false) {
                 $array[$key] = 'Possible password removed';
-                $removed = true;
+                $passwordRemoved = true;
             }
             else {
                 if (is_array($value)) {
-                    $removedChild = $this->removedValuesWithPasswordKeys($value);
+                    $value = $this->removeValuesWithPasswordKeys($value, $removedChild);
                     if ($removedChild) {
                         $array[$key] = $value;
-                        $removed = true;
+                        $passwordRemoved = true;
                     }
                 }
             }
         }
-        return $removed;
+        return $array;
     }
 
 

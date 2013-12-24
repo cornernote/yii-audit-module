@@ -18,8 +18,12 @@ return array(
         'audit.components.*',
         'audit.models.*',
     ),
+    'preload' => array('log', 'errorHandler'),
     'aliases' => array(
         'audit' => realpath(BASE_PATH . '/../audit'),
+    ),
+    'controllerMap' => array(
+        'site' => 'application._components.SiteController',
     ),
     'components' => array(
         'assetManager' => array(

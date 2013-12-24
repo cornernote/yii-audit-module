@@ -10,10 +10,13 @@
 
 class_name: WebGuy
 modules:
-    enabled:
-        - PhpBrowser
-        - WebHelper
-    config:
-        PhpBrowser:
-            url: 'http://localhost/'
-            #url: 'http://localhost/_github/yii-audit-module/tests/_public/'
+  enabled: [Db, PhpBrowser, WebHelper]
+  config:
+    Db:
+      dsn: 'sqlite:tests/_runtime/test.db'
+      dump: 'tests/_data/dump.sql'
+      populate: false
+      cleanup: false
+    PhpBrowser:
+      #url: 'http://localhost/'
+      url: 'http://localhost/_github/yii-audit-module/tests/_public/'
