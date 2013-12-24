@@ -37,7 +37,8 @@ class AuditRequestController extends AuditWebController
         if (!empty($_GET['AuditRequest']))
             $auditRequest->attributes = $_GET['AuditRequest'];
 
-        Yii::app()->getUrlManager()->setUrlFormat('get');
+		// TODO, this allows better searching
+        //Yii::app()->getUrlManager()->setUrlFormat('get');
 
         $this->render('index', array(
             'auditRequest' => $auditRequest,
