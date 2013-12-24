@@ -2,7 +2,7 @@
 
 Track and store usage information including page requests, database field changes and system errors.
 
-[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module)
+[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module)
 
 
 ### Contents
