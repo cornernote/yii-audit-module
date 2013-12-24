@@ -64,7 +64,7 @@ class AuditActiveRecord extends CActiveRecord
     public function createTable()
     {
         $db = $this->getDbConnection();
-        $file = Yii::getPathOfAlias('email.migrations') . '/' . $this->tableName() . '.' . $db->getDriverName();
+        $file = Yii::getPathOfAlias('audit.migrations') . '/' . $this->tableName() . '.' . $db->getDriverName();
         $pdo = $this->getDbConnection()->pdoInstance;
         $sql = file_get_contents($file);
         $sql = rtrim($sql);
