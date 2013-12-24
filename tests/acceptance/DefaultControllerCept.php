@@ -19,11 +19,17 @@ $I->wantTo('ensure DefaultController works');
 $I->amOnPage('audit');
 $I->see('You may use the following tools');
 
-$I->click('Spool');
-$I->see('Spools');
+$I->click('Error');
+$I->see('Errors');
 
-$I->click('Template');
-$I->see('Templates');
+$I->click('Field');
+$I->see('Fields');
+
+$I->click('Log');
+$I->see('Logs');
+
+$I->click('Request');
+$I->see('Requests');
 
 $I->click('audit');
-$I->see('You may use the following tools to help manage audit within your application.');
+$I->see('You may use the following tools');
