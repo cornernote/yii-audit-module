@@ -5,10 +5,10 @@
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
  * @copyright 2013 Mr PHP
- * @link https://github.com/cornernote/yii-email-module
- * @license BSD-3-Clause https://raw.github.com/cornernote/yii-email-module/master/LICENSE
+ * @link https://github.com/cornernote/yii-audit-module
+ * @license BSD-3-Clause https://raw.github.com/cornernote/yii-audit-module/master/LICENSE
  *
- * @package yii-email-module
+ * @package yii-audit-module
  */
 
 return array(
@@ -29,7 +29,7 @@ return array(
             'connectionString' => 'sqlite:' . realpath(BASE_PATH . '/_runtime') . '/test.db',
         ),
         'errorHandler' => array(
-            'class' => 'email.components.AuditErrorHandler',
+            'class' => 'audit.components.AuditErrorHandler',
         ),
         'urlManager' => array(
             'urlFormat' => 'path',
