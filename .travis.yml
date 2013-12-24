@@ -1,0 +1,25 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+before_script:
+  - composer install
+  - wget http://codeception.com/codecept.phar
+  - sqlite3 tests/_runtime/test.db ""
+  - chmod a+w tests/_runtime tests/_public/assets -R
+  - ls -la tests/_runtime
+  - sudo apt-get update
+  - sudo apt-get install -y apache2 php5 php5-sqlite
+  - sudo a2enmod rewrite
+  - echo "export PUBLIC_PATH=`pwd`/tests/_public/" | sudo tee -a /etc/apache2/envvars > /dev/null
+  - sudo cp tests/_apache/sites-available/default /etc/apache2/sites-available/default
+  - sudo service apache2 restart
+
+after_script:
+  - ls -la tests/_runtime
+  - cat tests/_log/*
+
+script: php codecept.phar run

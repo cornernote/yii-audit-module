@@ -1,0 +1,44 @@
+Options +FollowSymLinks
+AddDefaultCharset UTF-8
+
+<Limit GET POST PUT DELETE>
+    order deny,allow
+    allow from all
+</Limit>
+
+<IfModule mod_autoindex.c>
+    IndexIgnore */*
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    # this is only required when running as an alias
+    #RewriteBase /
+    # if a directory or a file exists, use it directly
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # otherwise forward it to index.php
+    RewriteRule . index.php
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+    <FilesMatch "\.(js|css|html|htm|php|xml)$">
+        SetOutputFilter DEFLATE
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType image/gif "access plus 1 day"
+	ExpiresByType image/jpeg "access plus 1 day"
+	ExpiresByType image/png "access plus 1 day"
+	ExpiresByType text/css "access plus 1 day"
+	ExpiresByType text/js "access plus 1 day"
+	ExpiresByType text/javascript "access plus 1 day"
+	ExpiresByType application/javascript "access plus 1 day"
+	ExpiresByType application/x-javascript "access plus 1 day"
+    <FilesMatch "\.(jpe?g|png|gif|js|css|woff)$">
+        ExpiresDefault "access plus 1 day"
+    </FilesMatch>
+</IfModule>

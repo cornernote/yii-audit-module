@@ -15,7 +15,7 @@
             "email": "zainengineer@gmail.com"
         }
     ],
-    "require": {
+    "require-dev": {
         "yiisoft/yii": "1.1.14"
     }
 }
