@@ -54,7 +54,7 @@ $attributes[] = array(
 );
 $attributes[] = array(
     'name' => 'created',
-    'value' => date('Y-m-d H:i:s', $auditRequest->created),
+    'value' => Yii::app()->format->formatDatetime($auditRequest->created),
 );
 
 $this->widget('zii.widgets.CDetailView', array(
@@ -99,17 +99,17 @@ $this->widget('zii.widgets.CDetailView', array(
     'attributes' => array(
         array(
             'label' => '$_GET',
-            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->get), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->get), true) . '</pre>',
             'type' => 'raw',
         ),
         array(
             'label' => '$_POST',
-            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->post), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->post), true) . '</pre>',
             'type' => 'raw',
         ),
         array(
             'label' => '$_FILES',
-            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->files), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->files), true) . '</pre>',
             'type' => 'raw',
         ),
     ),
@@ -123,12 +123,12 @@ $this->widget('zii.widgets.CDetailView', array(
     'attributes' => array(
         array(
             'label' => '$_SESSION',
-            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->session), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->session), true) . '</pre>',
             'type' => 'raw',
         ),
         array(
             'label' => '$_COOKIE',
-            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->cookie), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->cookie), true) . '</pre>',
             'type' => 'raw',
         ),
     ),
@@ -143,7 +143,7 @@ $this->widget('zii.widgets.CDetailView', array(
     'attributes' => array(
         array(
             'label' => '$_SERVER',
-            'value' => '<pre>' . print_r(AuditDataPacker::unpack($auditRequest->server), true) . '</pre>',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->server), true) . '</pre>',
             'type' => 'raw',
         ),
     ),

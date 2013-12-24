@@ -1,5 +1,4 @@
 <?php
-Yii::import('bootstrap.widgets.TbActiveForm');
 
 /**
  * AuditActiveForm
@@ -14,6 +13,17 @@ Yii::import('bootstrap.widgets.TbActiveForm');
  */
 class AuditActiveForm extends CActiveForm
 {
+
+    /**
+     * Initializes the widget.
+     */
+    public function init()
+    {
+        if (!isset($this->htmlOptions['class']))
+            $this->htmlOptions['class'] = '';
+        $this->htmlOptions['class'] .= 'form-horizontal';
+        parent::init();
+    }
 
     /**
      * @param $buttonId
@@ -35,7 +45,8 @@ class AuditActiveForm extends CActiveForm
 
 
     /**
-     * @param string $label
+     * @param null $label
+     * @param array $options
      * @return string
      */
     public function getSubmitButton($label = null, $options = array())
@@ -43,39 +54,81 @@ class AuditActiveForm extends CActiveForm
         if (!$label)
             $label = Yii::t('audit', 'Submit');
         $defaultOptions = array(
-            'buttonType' => 'submit',
-            'type' => 'primary',
-            //'icon' => 'ok white',
-            'label' => $label,
+            'value' => $label,
+            'type' => 'submit',
+            'class' => 'btn btn-primary',
         );
         $options = CMap::mergeArray($defaultOptions, $options);
-        ob_start();
-        $this->widget('bootstrap.widgets.TbButton', $options);
-        return ob_get_clean();
+        return CHtml::tag('input', $options);
     }
 
     /**
-     * @param string $label
+     * @param null $label
+     * @param array $options
      * @return string
      */
     public function getSubmitButtonRow($label = null, $options = array())
     {
-        echo CHtml::tag('div', array(), $this->getSubmitButton($label, $options));
+        return CHtml::tag('div', array('class' => 'form-group'), CHtml::tag('div', array('class' => 'col-sm-offset-2 col-sm-10'), $this->getSubmitButton($label, $options)));
     }
 
     /**
-     * @param $model CActiveRecord
-     * @param $attribute string
+     * @param $model
+     * @param $attribute
+     * @param array $htmlOptions
+     * @return string
      */
     public function textFieldRow($model, $attribute, $htmlOptions = array())
     {
-        $labelOptions = array();
+        // get label
         if (isset($htmlOptions['labelOptions'])) {
             $labelOptions = $htmlOptions['labelOptions'];
             unset($htmlOptions['labelOptions']);
         }
-        $contents = $this->labelEx($model, $attribute, $labelOptions) . $this->textField($model, $attribute, $htmlOptions);
-        echo CHtml::tag('div', array(), $contents);
+        if (!isset($labelOptions['class']))
+            $labelOptions['class'] = '';
+        $labelOptions['class'] .= ' col-sm-2 control-label';
+        $label = $this->labelEx($model, $attribute, $labelOptions);
+
+        // get input
+        if (!isset($htmlOptions['class']))
+            $htmlOptions['class'] = '';
+        $htmlOptions['class'] .= ' form-control';
+        $input = $this->textField($model, $attribute, $htmlOptions);
+
+        return CHtml::tag('div', array(
+            'class' => 'form-group',
+        ), $label . CHtml::tag('div', array('class' => 'col-sm-10'), $input));
+    }
+
+
+    /**
+     * @param $model
+     * @param $attribute
+     * @param array $htmlOptions
+     * @return string
+     */
+    public function textAreaRow($model, $attribute, $htmlOptions = array())
+    {
+        // get label
+        if (isset($htmlOptions['labelOptions'])) {
+            $labelOptions = $htmlOptions['labelOptions'];
+            unset($htmlOptions['labelOptions']);
+        }
+        if (!isset($labelOptions['class']))
+            $labelOptions['class'] = '';
+        $labelOptions['class'] .= ' col-sm-2 control-label';
+        $label = $this->labelEx($model, $attribute, $labelOptions);
+
+        // get input
+        if (!isset($htmlOptions['class']))
+            $htmlOptions['class'] = '';
+        $htmlOptions['class'] .= ' form-control';
+        $input = $this->textArea($model, $attribute, $htmlOptions);
+
+        return CHtml::tag('div', array(
+            'class' => 'form-group',
+        ), $label . CHtml::tag('div', array('class' => 'col-sm-10'), $input));
     }
 
 }

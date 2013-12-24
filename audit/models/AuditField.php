@@ -64,10 +64,10 @@ class AuditField extends AuditActiveRecord
             'new_value' => Yii::t('audit', 'New Value'),
             'action' => Yii::t('audit', 'Action'),
             'model_name' => Yii::t('audit', 'Model Name'),
+            'model_id' => Yii::t('email', 'Model ID'),
             'field' => Yii::t('audit', 'Field'),
             'created' => Yii::t('audit', 'Created'),
             'user_id' => Yii::t('audit', 'User'),
-            'model_id' => Yii::t('audit', 'Model'),
             'audit_request_id' => Yii::t('audit', 'Audit Request'),
         );
     }

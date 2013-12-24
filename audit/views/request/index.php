@@ -15,20 +15,16 @@
 Yii::app()->user->setState('index.auditRequest', Yii::app()->request->requestUri);
 $this->pageTitle = Yii::t('audit', 'Requests');
 
-echo '<div class="spacer">';
-$this->widget('bootstrap.widgets.TbButton', array(
-    'label' => Yii::t('audit', 'Search'),
-    'htmlOptions' => array('class' => 'auditRequest-grid-search'),
-    'toggle' => true,
-));
-if (Yii::app()->user->getState('index.auditRequest') != $this->createUrl('index')) {
-    echo ' ';
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'label' => Yii::t('audit', 'Reset Filters'),
-        'url' => array('index'),
-    ));
-}
-echo '</div>';
+// links
+$items = array();
+$items[] = array('label' => Yii::t('audit', 'Search'), 'url' => '#', 'linkOptions' => array('class' => 'auditRequest-grid-search btn btn-default'));
+if (Yii::app()->user->getState('index.auditRequest') != $this->createUrl('index'))
+    $items[] = array('label' => Yii::t('audit', 'Reset Filters'), 'url' => array('index'), 'linkOptions' => array('class' => 'btn btn-default'));
+$this->pageHeading = $this->pageTitle . $this->widget('zii.widgets.CMenu', array(
+        'items' => $items,
+        'htmlOptions' => array('class' => 'list-inline pull-right'),
+    ), true);
+
 
 // search
 $this->renderPartial('_search', array(

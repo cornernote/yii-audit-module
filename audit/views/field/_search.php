@@ -15,12 +15,10 @@
 /** @var AuditActiveForm $form */
 $form = $this->beginWidget('audit.widgets.AuditActiveForm', array(
     'method' => 'get',
-    'htmlOptions' => array('class' => 'hide'),
+    'htmlOptions' => array('style' => 'display:none;'),
 ));
 $form->searchToggle('auditField-grid-search', 'auditField-grid');
 
-echo '<fieldset>';
-echo '<legend>' . Yii::t('audit', 'Search') . '</legend>';
 echo $form->textFieldRow($auditField, 'id');
 echo $form->textFieldRow($auditField, 'audit_request_id');
 echo $form->textFieldRow($auditField, 'user_id');
@@ -31,7 +29,6 @@ echo $form->textFieldRow($auditField, 'model_name');
 echo $form->textFieldRow($auditField, 'model_id');
 echo $form->textFieldRow($auditField, 'field');
 echo $form->textFieldRow($auditField, 'created');
-echo '</fieldset>';
 
 echo $form->getSubmitButtonRow(Yii::t('audit', 'Search'));
 

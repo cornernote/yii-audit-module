@@ -37,6 +37,14 @@ class AuditWebController extends CController
     protected $_loadModel;
 
     /**
+     *
+     */
+    public function filters()
+    {
+        return $this->module->controllerFilters;
+    }
+
+    /**
      * @return string Defaults to the controllers pageTitle.
      */
     public function getPageHeading()
@@ -109,13 +117,20 @@ class AuditWebController extends CController
      */
     public function renderBreadcrumbs()
     {
-        $breadcrumbs = $this->getBreadcrumbs();
-        if (!$breadcrumbs)
+        $items = array();
+        foreach ($this->getBreadcrumbs() as $label => $url) {
+            if (!$label) {
+                $label = $url;
+                $url = null;
+            }
+            $items[] = array('label' => $label, 'url' => $url);
+        }
+        if (!$items)
             return '';
-        $this->addBreadcrumb($this->pageHeading);
-        return $this->widget('zii.widgets.CBreadcrumbs', array(
-            'links' => $this->getBreadcrumbs(),
-            'homeLink' => false,
+        $items[] = array('label' => $this->pageTitle);
+        return $this->widget('zii.widgets.CMenu', array(
+            'items' => $items,
+            'htmlOptions' => array('class' => 'breadcrumb'),
         ), true);
     }
 

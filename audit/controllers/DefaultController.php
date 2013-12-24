@@ -1,8 +1,7 @@
 <?php
+
 /**
- * @var $this AuditController
- * @var $message string
- * @var $code string
+ * Class DefaultController
  *
  * @author Brett O'Donnell <cornernote@gmail.com>
  * @author Zain Ul abidin <zainengineer@gmail.com>
@@ -12,6 +11,15 @@
  *
  * @package yii-audit-module
  */
+class DefaultController extends AuditWebController
+{
 
-$this->pageTitle = Yii::t('audit', 'Error :code', array(':code' => $code));
-echo CHtml::tag('div', array('class' => 'error'), CHtml::encode($message));
+    /**
+     *
+     */
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
+
+}

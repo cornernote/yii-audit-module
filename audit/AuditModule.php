@@ -27,11 +27,6 @@ class AuditModule extends CWebModule
     public $autoCreateTables = true;
 
     /**
-     * @var string the ID of the default controller for this module.
-     */
-    public $defaultController = 'audit';
-
-    /**
      * @var string
      */
     public $layout = 'column1';
@@ -44,6 +39,13 @@ class AuditModule extends CWebModule
         'field' => 'audit.controllers.AuditFieldController',
         'log' => 'audit.controllers.AuditLogController',
         'request' => 'audit.controllers.AuditRequestController',
+    );
+
+    /**
+     * @var array Use this to define access rules for the module.
+     */
+    public $controllerFilters = array(
+        'auditAccess' => array('audit.components.AuditAccessFilter'),
     );
 
     /**
@@ -93,7 +95,15 @@ class AuditModule extends CWebModule
      */
     public function getVersion()
     {
-        return '1.0.0';
+        return trim(file_get_contents(dirname(__FILE__) . '/version.txt'));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'Audit';
     }
 
     /**
@@ -118,31 +128,35 @@ class AuditModule extends CWebModule
 
         // setup components
         Yii::app()->setComponents(array(
-            'errorHandler' => array(
-                'class' => 'audit.components.AuditErrorHandler',
-                'errorAction' => $this->getId() . '/audit/error',
-            ),
             'widgetFactory' => array(
                 'class' => 'system.web.CWidgetFactory',
-                'widgets' => array()
+                'widgets' => array(
+                    'CListView' => array(
+                        'pagerCssClass' => 'pagination-wrap',
+                    ),
+                    'CGridView' => array(
+                        'itemsCssClass' => 'table table-condensed table-striped',
+                        'pagerCssClass' => 'pagination-wrap',
+                    ),
+                    'CDetailView' => array(
+                        'htmlOptions' => array(
+                            'class' => 'table table-condensed table-striped',
+                        ),
+                    ),
+                    'CLinkPager' => array(
+                        'header' => false,
+                        'hiddenPageCssClass' => 'disabled',
+                        'firstPageLabel' => '<i class="fa fa-fast-backward"></i>',
+                        'lastPageLabel' => '<i class="fa fa-fast-forward"></i>',
+                        'nextPageLabel' => '<i class="fa fa-forward"></i>',
+                        'prevPageLabel' => '<i class="fa fa-backward"></i>',
+                        'htmlOptions' => array(
+                            'class' => 'pagination',
+                        ),
+                    ),
+                ),
             ),
         ), false);
-    }
-
-
-    /**
-     * @param CController $controller
-     * @param CAction $action
-     * @return bool
-     */
-    public function beforeControllerAction($controller, $action)
-    {
-        if (!parent::beforeControllerAction($controller, $action))
-            return false;
-        $route = $controller->id . '/' . $action->id;
-        if (!in_array(Yii::app()->user->getName(), $this->adminUsers) && $route !== 'default/error')
-            throw new CHttpException(403, "You are not allowed to access this page.");
-        return true;
     }
 
     /**

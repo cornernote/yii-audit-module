@@ -2,7 +2,7 @@
 
 Track and store usage information including page requests, database field changes and system errors.
 
-Yii's built-in error handling is amazing... when you are in debug mode. However as soon as you set YII_DEBUG to false you stop getting those pretty error messages, which can make it tricky to find a problem in a live environment.
+[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module)
 
 
 ### Contents
