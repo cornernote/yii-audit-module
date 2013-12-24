@@ -41,4 +41,39 @@ class SiteController extends CController
         $nonObject->iAmNotAnObject();
     }
 
+    public function actionHttpError403()
+    {
+        throw new CHttpException(403, 'Unauthorized message.');
+    }
+
+    public function actionHttpError404()
+    {
+        throw new CHttpException(404, 'Page not found message.');
+    }
+
+    public function actionAuditPost()
+    {
+        Yii::import('application._components.Post');
+        // create
+        $post = new Post();
+        $post->title = 'name text';
+        $post->content = 'content text';
+        $post->save();
+
+        // update
+        $post = Post::model()->find();
+        $post->title = 'name text changed';
+        $post->content = 'name text changed';
+        $post->save();
+
+        // delete
+        $post = Post::model()->find();
+        $post->delete();
+    }
+
+    public function actionAuditLog()
+    {
+        Yii::log('Hello world!', 'audit');
+    }
+
 }

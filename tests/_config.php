@@ -31,9 +31,20 @@ return array(
         ),
         'db' => array(
             'connectionString' => 'sqlite:' . realpath(BASE_PATH . '/_runtime') . '/test.db',
+            'enableProfiling' => true,
+            'enableParamLogging' => true,
         ),
         'errorHandler' => array(
             'class' => 'audit.components.AuditErrorHandler',
+        ),
+        'log' => array(
+            'class' => 'CLogRouter',
+            'routes' => array(
+                array(
+                    'class' => 'audit.components.AuditLogRoute',
+                    'levels' => 'audit',
+                ),
+            ),
         ),
         'urlManager' => array(
             'urlFormat' => 'path',

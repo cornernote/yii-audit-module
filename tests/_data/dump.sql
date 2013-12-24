@@ -1,1 +1,5 @@
-/* Replace this file with actual dump of your database */
+CREATE TABLE "post" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"title"  TEXT,
+"content"  TEXT
+)
