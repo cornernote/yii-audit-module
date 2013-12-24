@@ -16,9 +16,9 @@ $cs->coreScriptPosition = CClientScript::POS_HEAD;
 $cs->scriptMap = array();
 $baseUrl = $this->module->assetsUrl;
 $cs->registerCoreScript('jquery');
-$cs->registerScriptFile($baseUrl . '/js/bootstrap.min.js');
-$cs->registerCssFile($baseUrl . '/css/bootstrap.min.css');
-$cs->registerCssFile($baseUrl . '/css/font-awesome.min.css');
+$cs->registerScriptFile($baseUrl . '/bootstrap/js/bootstrap.min.js');
+$cs->registerCssFile($baseUrl . '/bootstrap/css/bootstrap.min.css');
+$cs->registerCssFile($baseUrl . '/font-awesome/css/font-awesome.min.css');
 $cs->registerCssFile($baseUrl . '/css/main.css');
 ?>
 <!DOCTYPE html>
