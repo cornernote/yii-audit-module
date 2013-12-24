@@ -31,5 +31,5 @@ $I->see('Logs');
 $I->click('Request');
 $I->see('Requests');
 
-$I->click('audit');
+$I->click('Audit');
 $I->see('You may use the following tools');
