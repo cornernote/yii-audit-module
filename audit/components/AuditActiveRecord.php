@@ -57,19 +57,24 @@ class AuditActiveRecord extends CActiveRecord
         return self::$_md[$className];
     }
 
-
     /**
      * Creates the DB table.
+     * @throws CException
      */
-    protected function createTable()
+    public function createTable()
     {
         $db = $this->getDbConnection();
-        $file = Yii::getPathOfAlias('audit.migrations') . '/' . $this->tableName() . '.' . $db->getDriverName();
-        $sqls = explode(';', file_get_contents($file));
+        $file = Yii::getPathOfAlias('email.migrations') . '/' . $this->tableName() . '.' . $db->getDriverName();
+        $pdo = $this->getDbConnection()->pdoInstance;
+        $sql = file_get_contents($file);
+        $sql = rtrim($sql);
+        $sqls = preg_replace_callback("/\((.*)\)/", create_function('$matches', 'return str_replace(";"," $$$ ",$matches[0]);'), $sql);
+        $sqls = explode(";", $sqls);
         foreach ($sqls as $sql) {
-            $sql = trim($sql);
-            if ($sql)
-                $db->createCommand($sql)->execute();
+            if (!empty($sql)) {
+                $sql = str_replace(" $$$ ", ";", $sql) . ";";
+                $pdo->exec($sql);
+            }
         }
     }
 
