@@ -39,6 +39,11 @@ class AuditErrorHandler extends CErrorHandler
     public $fatalErrorTypes = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING);
 
     /**
+     * @var array Keys that we do not want to save in the tracking data
+     */
+    public $auditRequestIgnoreKeys = array('PHP_AUTH_PW', 'password');
+
+    /**
      * @var AuditRequest
      */
     private static $_auditRequest;
@@ -294,12 +299,15 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->user_id = Yii::app()->getUser()->id;
         $auditRequest->link = $this->getCurrentLink();
         $auditRequest->start_time = YII_BEGIN_TIME;
-        $auditRequest->post = $_POST;
+
         $auditRequest->get = $_GET;
+        $auditRequest->post = $_POST;
         $auditRequest->files = $_FILES;
-        $auditRequest->cookie = $_COOKIE;
         $auditRequest->session = $this->getShrinkedSession();
+        $auditRequest->cookie = $_COOKIE;
         $auditRequest->server = $_SERVER;
+        $auditRequest->config = $this->getYiiConfig();
+
         $auditRequest->ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
         $auditRequest->referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 
@@ -307,18 +315,20 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->get = $this->removeValuesWithPasswordKeys($auditRequest->get, $passwordRemovedFromGet);
         $auditRequest->post = $this->removeValuesWithPasswordKeys($auditRequest->post, $passwordRemovedFromPost);
         $auditRequest->server = $this->removeValuesWithPasswordKeys($auditRequest->server);
+        $auditRequest->config = $this->removeValuesWithPasswordKeys($auditRequest->config);
         if ($passwordRemovedFromGet || $passwordRemovedFromPost)
             $auditRequest->server = null;
         if ($passwordRemovedFromGet)
             $auditRequest->link = null;
 
         // pack all
-        $auditRequest->post = AuditHelper::pack($auditRequest->post);
         $auditRequest->get = AuditHelper::pack($auditRequest->get);
+        $auditRequest->post = AuditHelper::pack($auditRequest->post);
+        $auditRequest->files = AuditHelper::pack($auditRequest->files);
+        $auditRequest->session = AuditHelper::pack($auditRequest->session);
         $auditRequest->cookie = AuditHelper::pack($auditRequest->cookie);
         $auditRequest->server = AuditHelper::pack($auditRequest->server);
-        $auditRequest->session = AuditHelper::pack($auditRequest->session);
-        $auditRequest->files = AuditHelper::pack($auditRequest->files);
+        $auditRequest->config = AuditHelper::pack($auditRequest->config);
 
         // set the closing data incase we are already in an endRequest
         $headers = headers_list();
@@ -391,20 +401,19 @@ class AuditErrorHandler extends CErrorHandler
     private function removeValuesWithPasswordKeys($array, &$passwordRemoved = false)
     {
         foreach ($array as $key => $value) {
-            if (stripos($key, 'password') !== false) {
-                $array[$key] = 'Possible password removed';
-                $passwordRemoved = true;
-            }
-            elseif (stripos($key, 'PHP_AUTH_PW') !== false) {
-                $array[$key] = 'Possible password removed';
-                $passwordRemoved = true;
+            if (is_array($value)) {
+                $value = $this->removeValuesWithPasswordKeys($value, $removedChild);
+                if ($removedChild) {
+                    $array[$key] = $value;
+                    $passwordRemoved = true;
+                }
             }
             else {
-                if (is_array($value)) {
-                    $value = $this->removeValuesWithPasswordKeys($value, $removedChild);
-                    if ($removedChild) {
-                        $array[$key] = $value;
+                foreach ($this->auditRequestIgnoreKeys as $ignoreKey) {
+                    if (stripos($key, $ignoreKey) !== false) {
+                        $array[$key] = '*password removed*';
                         $passwordRemoved = true;
+                        continue;
                     }
                 }
             }
@@ -437,6 +446,36 @@ class AuditErrorHandler extends CErrorHandler
             $serialized = serialize($sessionCopy);
         }
         return unserialize($serialized);
+    }
+
+    /**
+     * @return array
+     */
+    private function getYiiConfig()
+    {
+        return array_merge($this->prepareConfigData(get_object_vars(Yii::app())), array(
+            'params' => $this->prepareConfigData(Yii::app()->params),
+            'modules' => $this->prepareConfigData(Yii::app()->modules),
+            'components' => $this->prepareConfigData(Yii::app()->components),
+        ));
+    }
+
+    /**
+     * @param $data
+     * @return array
+     */
+    private function prepareConfigData($data)
+    {
+        $result = array();
+        foreach ($data as $key => $value) {
+            if (is_object($value)) {
+                $value = array_merge(array(
+                    'class' => get_class($value)
+                ), get_object_vars($value));
+            }
+            $result[$key] = $value;
+        }
+        return $result;
     }
 
     /**

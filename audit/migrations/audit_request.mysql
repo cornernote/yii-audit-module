@@ -9,6 +9,7 @@ CREATE TABLE `audit_request` (
 `session` blob,
 `server` blob,
 `cookie` blob,
+`config` blob,
 `referrer` varchar(1000),
 `redirect` varchar(1000),
 `audit_field_count` int(11),

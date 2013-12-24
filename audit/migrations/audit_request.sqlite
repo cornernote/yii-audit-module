@@ -9,6 +9,7 @@ CREATE TABLE "audit_request" (
 "session"  BLOB,
 "server"  BLOB,
 "cookie"  BLOB,
+"config"  BLOB,
 "referrer"  TEXT,
 "redirect"  TEXT,
 "audit_field_count"  INTEGER,

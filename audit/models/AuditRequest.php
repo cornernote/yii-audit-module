@@ -16,6 +16,7 @@
  * @property string $session
  * @property string $server
  * @property string $cookie
+ * @property string $config
  * @property string $referrer
  * @property string $redirect
  * @property integer $audit_field_count
@@ -90,6 +91,7 @@ class AuditRequest extends AuditActiveRecord
             'session' => Yii::t('audit', 'Session'),
             'server' => Yii::t('audit', 'Server'),
             'cookie' => Yii::t('audit', 'Cookie'),
+            'config' => Yii::t('audit', 'Config'),
             'referrer' => Yii::t('audit', 'Referrer'),
             'redirect' => Yii::t('audit', 'Redirect'),
             'audit_field_count' => Yii::t('audit', 'Audit Field Count'),
@@ -148,6 +150,7 @@ class AuditRequest extends AuditActiveRecord
     }
 
     /**
+     * @param null $link
      * @return string
      */
     public function getLinkString($link = null)

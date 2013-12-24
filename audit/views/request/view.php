@@ -149,3 +149,18 @@ $this->widget('zii.widgets.CDetailView', array(
     ),
 ));
 echo '</div>';
+
+$onClick = "$('#config_detail').toggle(); $(this).html($(this).html()=='[+]' ? '[-]' : '[+]');";
+echo '<h2><small><a href="javascript:void(0)" onclick="' . $onClick . '">[+]</a></small> ' . Yii::t('audit', 'Config Data') . '</h2>';
+echo '<div id="config_detail" style="display: none;">';
+$this->widget('zii.widgets.CDetailView', array(
+    'data' => $auditRequest,
+    'attributes' => array(
+        array(
+            'label' => 'Yii::config',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->config), true) . '</pre>',
+            'type' => 'raw',
+        ),
+    ),
+));
+echo '</div>';
