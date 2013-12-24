@@ -17,7 +17,7 @@ $I = new WebGuy($scenario);
 $I->wantTo('ensure DefaultController works');
 
 $I->amOnPage('audit');
-$I->see('You may use the following tools to help manage audit within your application.');
+$I->see('You may use the following tools');
 
 $I->click('Spool');
 $I->see('Spools');
