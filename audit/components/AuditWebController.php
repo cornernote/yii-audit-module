@@ -63,7 +63,7 @@ class AuditWebController extends CController
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getBreadcrumbs()
     {
