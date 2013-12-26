@@ -16,11 +16,9 @@ Yii::app()->user->setState('index.auditRequest', Yii::app()->request->requestUri
 $this->pageTitle = Yii::t('audit', 'Requests');
 
 // links
-$items = array();
-$items[] = array('label' => Yii::t('audit', 'Search'), 'url' => '#', 'linkOptions' => array('class' => 'auditRequest-grid-search btn btn-default'));
+$this->menu[] = array('label' => Yii::t('audit', 'Search'), 'url' => '#', 'linkOptions' => array('class' => 'auditRequest-grid-search btn btn-default'));
 if (Yii::app()->user->getState('index.auditRequest') != $this->createUrl('index'))
-    $items[] = array('label' => Yii::t('audit', 'Reset Filters'), 'url' => array('index'), 'linkOptions' => array('class' => 'btn btn-default'));
-$this->pageHeading .= TbHtml::pills($items, array('class' => 'pull-right'));
+    $this->menu[] = array('label' => Yii::t('audit', 'Reset Filters'), 'url' => array('index'), 'linkOptions' => array('class' => 'btn btn-default'));
 
 // search
 $this->renderPartial('_search', array(
