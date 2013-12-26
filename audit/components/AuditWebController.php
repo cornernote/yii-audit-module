@@ -113,25 +113,16 @@ class AuditWebController extends CController
     }
 
     /**
-     * @return string
+     * @param string $view the view to be rendered
+     * @return bool
      */
-    public function renderBreadcrumbs()
+    public function beforeRender($view)
     {
-        $items = array();
-        foreach ($this->getBreadcrumbs() as $label => $url) {
-            if (!$label) {
-                $label = $url;
-                $url = null;
-            }
-            $items[] = array('label' => $label, 'url' => $url);
-        }
-        if (!$items)
-            return '';
-        $items[] = array('label' => $this->pageTitle);
-        return $this->widget('zii.widgets.CMenu', array(
-            'items' => $items,
-            'htmlOptions' => array('class' => 'breadcrumb'),
-        ), true);
-    }
+        if (!parent::beforeRender($view))
+            return false;
+        if ($this->id != 'default' || $this->action->id != 'index')
+            $this->addBreadcrumb($this->module->name, array('/' . $this->module->id));
 
+        return true;
+    }
 }

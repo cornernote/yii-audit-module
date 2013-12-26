@@ -56,7 +56,7 @@ $columns[] = array(
 );
 
 // grid
-$this->widget('zii.widgets.grid.CGridView', array(
+$this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'auditRequest-grid',
     'dataProvider' => $auditRequest->search(),
     'filter' => $auditRequest,

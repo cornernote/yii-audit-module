@@ -13,23 +13,11 @@
 
 $this->pageTitle = $this->module->getName();
 $this->pageHeading = false;
-?>
 
-<div class="jumbotron">
-    <?php
-    echo CHtml::tag('h1', array(), $this->module->getName());
-    echo CHtml::tag('p', array(), Yii::t('audit', 'You may use the following tools to help audit your application.'));
-
-    $items = array();
-    foreach (array_keys($this->module->controllerMap) as $controllerName)
-        $items[] = array(
-            'label' => Yii::t('audit', ucfirst($controllerName)),
-            'url' => array($controllerName . '/index'),
-            'linkOptions' => array('class' => 'btn btn-lg btn-primary'),
-        );
-    $this->widget('zii.widgets.CMenu', array(
-        'items' => $items,
-        'htmlOptions' => array('class' => 'list-inline'),
-    ));
-    ?>
-</div>
+$content = CHtml::tag('p', array(), Yii::t('audit', 'You may use the following tools to help audit your application.'));
+foreach (array_keys($this->module->controllerMap) as $controllerName)
+    $content .= ' ' . TbHtml::link(Yii::t('audit', ucfirst($controllerName)), array($controllerName . '/index'), array('class' => 'btn btn-large btn-primary'));
+$this->widget('bootstrap.widgets.TbHeroUnit', array(
+    'heading' => $this->module->getName(),
+    'content' => $content,
+));

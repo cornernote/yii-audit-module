@@ -15,29 +15,30 @@
 /** @var AuditActiveForm $form */
 $form = $this->beginWidget('audit.widgets.AuditActiveForm', array(
     'method' => 'get',
+    'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
     'htmlOptions' => array('style' => 'display:none;'),
 ));
 $form->searchToggle('auditRequest-grid-search', 'auditRequest-grid');
 
-echo $form->textFieldRow($auditRequest, 'id');
-echo $form->textFieldRow($auditRequest, 'link');
-echo $form->textFieldRow($auditRequest, 'user_id');
-echo $form->textFieldRow($auditRequest, 'ip');
-echo $form->textFieldRow($auditRequest, 'post');
-echo $form->textFieldRow($auditRequest, 'get');
-echo $form->textFieldRow($auditRequest, 'files');
-echo $form->textFieldRow($auditRequest, 'session');
-echo $form->textFieldRow($auditRequest, 'server');
-echo $form->textFieldRow($auditRequest, 'cookie');
-echo $form->textFieldRow($auditRequest, 'referrer');
-echo $form->textFieldRow($auditRequest, 'redirect');
-echo $form->textFieldRow($auditRequest, 'audit_field_count');
-echo $form->textFieldRow($auditRequest, 'start_time');
-echo $form->textFieldRow($auditRequest, 'end_time');
-echo $form->textFieldRow($auditRequest, 'total_time');
-echo $form->textFieldRow($auditRequest, 'memory_usage');
-echo $form->textFieldRow($auditRequest, 'memory_peak');
-echo $form->textFieldRow($auditRequest, 'created');
+echo $form->textFieldControlGroup($auditRequest, 'id');
+echo $form->textFieldControlGroup($auditRequest, 'link');
+echo $form->textFieldControlGroup($auditRequest, 'user_id');
+echo $form->textFieldControlGroup($auditRequest, 'ip');
+echo $form->textFieldControlGroup($auditRequest, 'post');
+echo $form->textFieldControlGroup($auditRequest, 'get');
+echo $form->textFieldControlGroup($auditRequest, 'files');
+echo $form->textFieldControlGroup($auditRequest, 'session');
+echo $form->textFieldControlGroup($auditRequest, 'server');
+echo $form->textFieldControlGroup($auditRequest, 'cookie');
+echo $form->textFieldControlGroup($auditRequest, 'referrer');
+echo $form->textFieldControlGroup($auditRequest, 'redirect');
+echo $form->textFieldControlGroup($auditRequest, 'audit_field_count');
+echo $form->textFieldControlGroup($auditRequest, 'start_time');
+echo $form->textFieldControlGroup($auditRequest, 'end_time');
+echo $form->textFieldControlGroup($auditRequest, 'total_time');
+echo $form->textFieldControlGroup($auditRequest, 'memory_usage');
+echo $form->textFieldControlGroup($auditRequest, 'memory_peak');
+echo $form->textFieldControlGroup($auditRequest, 'created');
 
 echo $form->getSubmitButtonRow(Yii::t('audit', 'Search'));
 

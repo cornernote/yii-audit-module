@@ -14,10 +14,12 @@
 $this->beginContent('audit.views.layouts.main');
 ?>
     <div class="container">
+        <?php
+        if ($this->pageHeading)
+            echo CHtml::tag('h1', array(), $this->pageHeading);
+        ?>
         <div id="content">
             <?php
-            echo CHtml::tag('h1', array(), $this->pageHeading);
-            echo $this->renderBreadcrumbs();
             echo $content;
             ?>
         </div>

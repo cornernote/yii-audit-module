@@ -15,20 +15,21 @@
 /** @var AuditActiveForm $form */
 $form = $this->beginWidget('audit.widgets.AuditActiveForm', array(
     'method' => 'get',
+    'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
     'htmlOptions' => array('style' => 'display:none;'),
 ));
 $form->searchToggle('auditField-grid-search', 'auditField-grid');
 
-echo $form->textFieldRow($auditField, 'id');
-echo $form->textFieldRow($auditField, 'audit_request_id');
-echo $form->textFieldRow($auditField, 'user_id');
-echo $form->textFieldRow($auditField, 'old_value');
-echo $form->textFieldRow($auditField, 'new_value');
-echo $form->textFieldRow($auditField, 'action');
-echo $form->textFieldRow($auditField, 'model_name');
-echo $form->textFieldRow($auditField, 'model_id');
-echo $form->textFieldRow($auditField, 'field');
-echo $form->textFieldRow($auditField, 'created');
+echo $form->textFieldControlGroup($auditField, 'id');
+echo $form->textFieldControlGroup($auditField, 'audit_request_id');
+echo $form->textFieldControlGroup($auditField, 'user_id');
+echo $form->textFieldControlGroup($auditField, 'old_value');
+echo $form->textFieldControlGroup($auditField, 'new_value');
+echo $form->textFieldControlGroup($auditField, 'action');
+echo $form->textFieldControlGroup($auditField, 'model_name');
+echo $form->textFieldControlGroup($auditField, 'model_id');
+echo $form->textFieldControlGroup($auditField, 'field');
+echo $form->textFieldControlGroup($auditField, 'created');
 
 echo $form->getSubmitButtonRow(Yii::t('audit', 'Search'));
 

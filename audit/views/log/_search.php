@@ -15,17 +15,18 @@
 /** @var AuditActiveForm $form */
 $form = $this->beginWidget('audit.widgets.AuditActiveForm', array(
     'method' => 'get',
+    'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
     'htmlOptions' => array('style' => 'display:none;'),
 ));
 $form->searchToggle('auditLog-grid-search', 'auditLog-grid');
 
-echo $form->textFieldRow($auditLog, 'id');
-echo $form->textFieldRow($auditLog, 'audit_request_id');
-echo $form->textFieldRow($auditLog, 'user_id');
-echo $form->textFieldRow($auditLog, 'level');
-echo $form->textFieldRow($auditLog, 'category');
-echo $form->textFieldRow($auditLog, 'message');
-echo $form->textFieldRow($auditLog, 'created');
+echo $form->textFieldControlGroup($auditLog, 'id');
+echo $form->textFieldControlGroup($auditLog, 'audit_request_id');
+echo $form->textFieldControlGroup($auditLog, 'user_id');
+echo $form->textFieldControlGroup($auditLog, 'level');
+echo $form->textFieldControlGroup($auditLog, 'category');
+echo $form->textFieldControlGroup($auditLog, 'message');
+echo $form->textFieldControlGroup($auditLog, 'created');
 
 echo $form->getSubmitButtonRow(Yii::t('audit', 'Search'));
 

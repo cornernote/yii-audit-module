@@ -16,8 +16,7 @@ $cs->coreScriptPosition = CClientScript::POS_HEAD;
 $cs->scriptMap = array();
 $baseUrl = $this->module->assetsUrl;
 $cs->registerCoreScript('jquery');
-$cs->registerScriptFile($baseUrl . '/bootstrap/js/bootstrap.min.js');
-$cs->registerCssFile($baseUrl . '/bootstrap/css/bootstrap.min.css');
+Yii::app()->bootstrap->register();
 $cs->registerCssFile($baseUrl . '/font-awesome/css/font-awesome.min.css');
 $cs->registerCssFile($baseUrl . '/css/main.css');
 ?>
@@ -31,53 +30,43 @@ $cs->registerCssFile($baseUrl . '/css/main.css');
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only"><?php echo Yii::t('audit', 'Toggle navigation'); ?></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <?php echo CHtml::link($this->module->getName(), array('/' . $this->module->id), array('class' => 'navbar-brand')); ?>
-        </div>
-        <div class="navbar-collapse collapse">
-            <?php
-            $items = array();
-            foreach (array_keys($this->module->controllerMap) as $controllerName) {
-                $items[] = array(
-                    'label' => Yii::t('audit', ucfirst($controllerName)),
-                    'url' => Yii::app()->getUser()->getState('index.audit' . ucfirst($controllerName), array($controllerName . '/index')),
-                    'active' => $this->id == $controllerName,
-                );
-            }
-            $this->widget('zii.widgets.CMenu', array(
-                'htmlOptions' => array('class' => 'nav navbar-nav'),
-                'items' => $items,
-            ));
-            $this->widget('zii.widgets.CMenu', array(
-                'htmlOptions' => array('class' => 'nav navbar-nav navbar-right'),
-                'items' => array(
-                    array(
-                        'label' => Yii::t('audit', 'Home'),
-                        'url' => Yii::app()->getHomeUrl(),
-                    ),
-                ),
-            ));
-            ?>
-        </div>
-    </div>
-</div>
+<?php
+$items = array();
+foreach (array_keys($this->module->controllerMap) as $controllerName) {
+    $items[] = array(
+        'label' => Yii::t('audit', ucfirst($controllerName)),
+        'url' => Yii::app()->getUser()->getState('index.audit' . ucfirst($controllerName), array($controllerName . '/index')),
+        'active' => $this->id == $controllerName,
+    );
+}
+$this->widget('bootstrap.widgets.TbNavbar', array(
+    'brandLabel' => $this->module->getName(),
+    'brandUrl' => array('/' . $this->module->id),
+    'items' => array(
+        array(
+            'class' => 'bootstrap.widgets.TbNav',
+            'items' => $items,
+        ),
+        array(
+            'class' => 'bootstrap.widgets.TbNav',
+            'htmlOptions' => array('class' => 'pull-right'),
+            'items' => array(array('label' => Yii::app()->name, 'url' => Yii::app()->homeUrl)),
+        ),
+    ),
+));
 
-<?php echo $content; ?>
+echo CHtml::tag('div', array('class' => 'container'), $this->widget('bootstrap.widgets.TbBreadcrumb', array(
+    'links' => array_merge($this->getBreadcrumbs(), array($this->pageTitle)),
+), true));
+
+echo $content;
+
+?>
 
 <div id="footer" class="container small text-center">
     <?php
-    if (Yii::app()->hasModule('audit')) {
-        $this->renderPartial('audit.views.request.__footer');
-        echo '<br/>';
-    }
+    $this->renderPartial('audit.views.request.__footer');
+    echo '<br/>';
     echo AuditModule::powered();
     echo '<br/>A product of <a href="http://mrphp.com.au">Mr PHP</a>.';
     ?>

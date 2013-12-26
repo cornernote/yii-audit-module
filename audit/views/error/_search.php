@@ -15,21 +15,22 @@
 /** @var AuditActiveForm $form */
 $form = $this->beginWidget('audit.widgets.AuditActiveForm', array(
     'method' => 'get',
+    'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
     'htmlOptions' => array('style' => 'display:none;'),
 ));
 $form->searchToggle('auditError-grid-search', 'auditError-grid');
 
-echo $form->textFieldRow($auditError, 'id');
-echo $form->textFieldRow($auditError, 'audit_request_id');
-echo $form->textFieldRow($auditError, 'code');
-echo $form->textFieldRow($auditError, 'type');
-echo $form->textFieldRow($auditError, 'error_code');
-echo $form->textFieldRow($auditError, 'message');
-echo $form->textFieldRow($auditError, 'file');
-echo $form->textFieldRow($auditError, 'line');
-echo $form->textFieldRow($auditError, 'trace');
-echo $form->textFieldRow($auditError, 'traces');
-echo $form->textFieldRow($auditError, 'created');
+echo $form->textFieldControlGroup($auditError, 'id');
+echo $form->textFieldControlGroup($auditError, 'audit_request_id');
+echo $form->textFieldControlGroup($auditError, 'code');
+echo $form->textFieldControlGroup($auditError, 'type');
+echo $form->textFieldControlGroup($auditError, 'error_code');
+echo $form->textFieldControlGroup($auditError, 'message');
+echo $form->textFieldControlGroup($auditError, 'file');
+echo $form->textFieldControlGroup($auditError, 'line');
+echo $form->textFieldControlGroup($auditError, 'trace');
+echo $form->textFieldControlGroup($auditError, 'traces');
+echo $form->textFieldControlGroup($auditError, 'created');
 
 echo $form->getSubmitButtonRow(Yii::t('audit', 'Search'));
 

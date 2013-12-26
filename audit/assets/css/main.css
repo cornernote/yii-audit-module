@@ -11,7 +11,13 @@
  */
 
 body {
-    padding-top: 70px;
+    padding-top: 60px;
+}
+
+@media screen and (max-width: 979px) {
+    body {
+        padding-top: 0;
+    }
 }
 
 #footer {
@@ -22,25 +28,4 @@ body {
 
 #footer a, #footer {
     color: #bbb;
-}
-
-.grid-view table.table th a:after {
-    display: inline-block;
-    float: right;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.grid-view table.table th a.asc:after,
-.grid-view table.table th a:hover:after {
-    content: "\f062";
-}
-
-.grid-view table.table th a.desc:after,
-.grid-view table.table th a.asc:hover:after {
-    content: "\f063";
 }

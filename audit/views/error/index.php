@@ -20,10 +20,7 @@ $items = array();
 $items[] = array('label' => Yii::t('audit', 'Search'), 'url' => '#', 'linkOptions' => array('class' => 'auditError-grid-search btn btn-default'));
 if (Yii::app()->user->getState('index.auditError') != $this->createUrl('index'))
     $items[] = array('label' => Yii::t('audit', 'Reset Filters'), 'url' => array('index'), 'linkOptions' => array('class' => 'btn btn-default'));
-$this->pageHeading = $this->pageTitle . $this->widget('zii.widgets.CMenu', array(
-        'items' => $items,
-        'htmlOptions' => array('class' => 'list-inline pull-right'),
-    ), true);
+$this->pageHeading .= TbHtml::pills($items, array('class' => 'pull-right'));
 
 // search
 $this->renderPartial('_search', array(

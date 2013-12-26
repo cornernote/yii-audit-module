@@ -53,7 +53,7 @@ if ($this->id != 'request') {
 }
 
 // grid
-$this->widget('zii.widgets.grid.CGridView', array(
+$this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'auditLog-grid',
     'dataProvider' => $auditLog->search(),
     'filter' => $auditLog,
