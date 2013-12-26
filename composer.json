@@ -1,5 +1,5 @@
 {
-    "name": "mrphp/yii-audit-module",
+    "name": "cornernote/yii-audit-module",
     "description": "Track and store usage information including page requests, database field changes and system errors.",
     "type": "library",
     "license": "BSD-3-Clause",

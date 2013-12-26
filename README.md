@@ -2,7 +2,9 @@
 
 Track and store usage information including page requests, database field changes and system errors.
 
-[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module)
+[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module) 
+
+[![Latest Stable Version](https://poser.pugx.org/cornernote/yii-audit-module/v/stable.png)](https://packagist.org/packages/cornernote/yii-audit-module) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module)
 
 
 ### Contents
@@ -96,7 +98,7 @@ Please download using ONE of the following methods:
 
 ```
 curl http://getcomposer.org/installer | php
-php composer.phar require mrphp/yii-audit-module
+php composer.phar require cornernote/yii-audit-module
 ```
 
 
@@ -114,7 +116,7 @@ return array(
 	'modules' => array(
 		'audit' => array(
 			// path to the AuditModule class
-			'class' => 'vendor.mrphp.yii-audit-module.audit.AuditModule',
+			'class' => 'vendor.cornernote.yii-audit-module.audit.AuditModule',
 			// if you downloaded into modules
 			//'class' => 'application.modules.audit.AuditModule',
 
@@ -256,5 +258,5 @@ $this->renderPartial('audit.views.field.__field', array('model' => $post, 'field
 ## Links
 
 - [Yii Extension](http://www.yiiframework.com/extension/yii-audit-module)
-- [Composer Package](https://packagist.org/packages/mrphp/yii-audit-module)
+- [Composer Package](https://packagist.org/packages/cornernote/yii-audit-module)
 - [MrPHP](http://mrphp.com.au)
