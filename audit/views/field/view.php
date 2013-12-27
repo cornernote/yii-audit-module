@@ -54,4 +54,7 @@ $attributes[] = array(
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $auditField,
     'attributes' => $attributes,
+    'htmlOptions' => array(
+        'class' => 'table table-condensed table-striped',
+    ),
 ));

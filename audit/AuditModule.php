@@ -126,19 +126,6 @@ class AuditModule extends CWebModule
                 if (empty($this->modelMap[$method][$name]))
                     $this->modelMap[$method][$name] = $options;
 
-        // setup components
-        Yii::app()->setComponents(array(
-            'widgetFactory' => array(
-                'class' => 'system.web.CWidgetFactory',
-                'widgets' => array(
-                    'CDetailView' => array(
-                        'htmlOptions' => array(
-                            'class' => 'table table-condensed table-striped',
-                        ),
-                    ),
-                ),
-            ),
-        ), false);
     }
 
     /**

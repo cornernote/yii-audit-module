@@ -60,6 +60,9 @@ $attributes[] = array(
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $auditRequest,
     'attributes' => $attributes,
+    'htmlOptions' => array(
+        'class' => 'table table-condensed table-striped',
+    ),
 ));
 
 
@@ -113,6 +116,9 @@ $this->widget('zii.widgets.CDetailView', array(
             'type' => 'raw',
         ),
     ),
+    'htmlOptions' => array(
+        'class' => 'table table-condensed table-striped',
+    ),
 ));
 
 $onClick = "$('#session_detail').toggle(); $(this).html($(this).html()=='[+]' ? '[-]' : '[+]');";
@@ -132,6 +138,9 @@ $this->widget('zii.widgets.CDetailView', array(
             'type' => 'raw',
         ),
     ),
+    'htmlOptions' => array(
+        'class' => 'table table-condensed table-striped',
+    ),
 ));
 echo '</div>';
 
@@ -147,6 +156,9 @@ $this->widget('zii.widgets.CDetailView', array(
             'type' => 'raw',
         ),
     ),
+    'htmlOptions' => array(
+        'class' => 'table table-condensed table-striped',
+    ),
 ));
 echo '</div>';
 
@@ -161,6 +173,9 @@ $this->widget('zii.widgets.CDetailView', array(
             'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->config), true) . '</pre>',
             'type' => 'raw',
         ),
+    ),
+    'htmlOptions' => array(
+        'class' => 'table table-condensed table-striped',
     ),
 ));
 echo '</div>';
