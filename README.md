@@ -11,6 +11,7 @@ Track and store usage information including page requests, database field change
 
 [Features](#features)  
 [Screenshots](#screenshots)  
+[Requirements](#requirements)  
 [Installation](#installation)  
 [Configuration](#configuration)  
 [Usage](#usage)  
@@ -89,6 +90,14 @@ Log View
 ![Log](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/log.png)
 
 
+## Requirements
+
+This is a Yii module, which requires the [Yii Framework](http://www.yiiframework.com).
+
+In addition the following are required:
+* [YiiStrap](http://www.getyiistrap.com) for the interface elements.  Please follow their Getting Started giude to setup the aliases and components for your application.
+
+ 
 ## Installation
 
 Please download using ONE of the following methods:
