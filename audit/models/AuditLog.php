@@ -154,6 +154,7 @@ class AuditLog extends AuditActiveRecord
     }
 
     /**
+     * @param $message
      * @return string
      */
     public function formatLogMessage($message)
