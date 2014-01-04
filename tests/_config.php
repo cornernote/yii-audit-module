@@ -29,7 +29,7 @@ return array(
     ),
     'components' => array(
         'assetManager' => array(
-            'basePath' => realpath(BASE_PATH . '/_public/assets'),
+            'basePath' => realpath(BASE_PATH . '/_www/assets'),
         ),
         'bootstrap' => array(
             'class' => 'bootstrap.components.TbApi',
