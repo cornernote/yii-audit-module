@@ -6,9 +6,15 @@ Track and store usage information including page requests, database field change
 ### Contents
 
 - [Features](#features)
+	- [Visitor Request Tracking](#visitor-request-tracking)
+	- [Model Field Tracking](#model-field-tracking)
+	- [Error Tracking](#error-tracking)
+	- [Log Tracking](#log-tracking)
 - [Screenshots](#screenshots)
 - [Requirements](#requirements)
 - [Installation](#installation)
+	- [Composer Installation](#composer-installation)
+	- [Manual Installation](#manual-installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Resources](#resources)
