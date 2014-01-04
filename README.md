@@ -2,21 +2,17 @@
 
 Track and store usage information including page requests, database field changes and system errors.
 
-[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module) 
-
-[![Latest Stable Version](https://poser.pugx.org/cornernote/yii-audit-module/v/stable.png)](https://packagist.org/packages/cornernote/yii-audit-module) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module)
-
 
 ### Contents
 
-[Features](#features)  
-[Screenshots](#screenshots)  
-[Requirements](#requirements)  
-[Installation](#installation)  
-[Configuration](#configuration)  
-[Usage](#usage)  
-[License](#license)  
-[Links](#links)  
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Resources](#resources)
+- [License](#license)
 
 
 ## Features
@@ -97,6 +93,8 @@ This is a Yii module, which requires the [Yii Framework](http://www.yiiframework
 In addition the following are required:
 * [YiiStrap](http://www.getyiistrap.com) for the interface elements.  Please follow their Getting Started giude to setup the aliases and components for your application.
 
+**Please Note**: All requirements are automatically downloaded into the correct location when using composer.  There is no need to download additional files or set paths to third party files.
+
  
 ## Installation
 
@@ -117,6 +115,16 @@ Download the [latest version](https://github.com/cornernote/yii-audit-module/arc
 
 
 ## Configuration
+
+If you installed with composer, you should set an alias to your `vendor` folder in your yii configuration:
+
+```php
+return array(
+	'aliases' => array(
+		'vendor' => '/path/to/vendor',
+	),
+);
+```
 
 Add yii-audit-module to the `modules` in your yii configuration:
 
@@ -255,17 +263,15 @@ $this->renderPartial('audit.views.field.__field', array('model' => $post, 'field
 ```
 
 
+## Resources
+
+[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Github Project](https://raw.github.com/cornernote/mrphp-assets/master/vendor/github/github-latest-sourcecode-16.png)](https://github.com/cornernote/yii-audit-module#yii-audit-module) [![Yii Extension](https://raw.github.com/cornernote/mrphp-assets/master/vendor/yii/yii-extension-16.png)](http://www.yiiframework.com/extension/yii-audit-module) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module)
+
+[![Latest Stable Version](https://poser.pugx.org/cornernote/yii-audit-module/v/stable.png)](https://packagist.org/packages/cornernote/yii-audit-module) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module) [![Dependencies Check](https://depending.in/cornernote/yii-audit-module.png)](https://depending.in/cornernote/yii-audit-module)
+
+- [YiiStrap](http://getyiistrap.com/)
+
+
 ## License
 
-- Author: Brett O'Donnell <cornernote@gmail.com>
-- Author: Zain Ul abidin <zainengineer@gmail.com>
-- Source Code: https://github.com/cornernote/yii-audit-module
-- Copyright © 2013 Mr PHP <info@mrphp.com.au>
-- License: BSD-3-Clause https://raw.github.com/cornernote/yii-audit-module/master/LICENSE
-
-
-## Links
-
-- [Yii Extension](http://www.yiiframework.com/extension/yii-audit-module)
-- [Composer Package](https://packagist.org/packages/cornernote/yii-audit-module)
-- [MrPHP](http://mrphp.com.au)
+[BSD-3-Clause](https://raw.github.com/cornernote/yii-audit-module/master/LICENSE), Copyright © 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
