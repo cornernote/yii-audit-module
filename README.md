@@ -116,16 +116,6 @@ Download the [latest version](https://github.com/cornernote/yii-audit-module/arc
 
 ## Configuration
 
-If you installed with composer, you should set an alias to your `vendor` folder in your yii configuration:
-
-```php
-return array(
-	'aliases' => array(
-		'vendor' => '/path/to/vendor',
-	),
-);
-```
-
 Add yii-audit-module to the `modules` in your yii configuration:
 
 ```php
@@ -133,9 +123,7 @@ return array(
 	'modules' => array(
 		'audit' => array(
 			// path to the AuditModule class
-			'class' => 'vendor.cornernote.yii-audit-module.audit.AuditModule',
-			// if you downloaded into modules
-			//'class' => 'application.modules.audit.AuditModule',
+			'class' => '/path/to/vendor/cornernote/yii-audit-module/audit/AuditModule',
 
 			// add a list of users who can access the audit module
 			'adminUsers' => array('admin'),
