@@ -11,7 +11,6 @@ Track and store usage information including page requests, database field change
 	- [Error Tracking](#error-tracking)
 	- [Log Tracking](#log-tracking)
 - [Screenshots](#screenshots)
-- [Requirements](#requirements)
 - [Installation](#installation)
 	- [Composer Installation](#composer-installation)
 	- [Manual Installation](#manual-installation)
@@ -92,16 +91,6 @@ Log View
 ![Log](https://raw.github.com/cornernote/yii-audit-module/master/screenshot/log.png)
 
 
-## Requirements
-
-This is a Yii module, which requires the [Yii Framework](http://www.yiiframework.com).
-
-In addition the following are required:
-* [YiiStrap](http://www.getyiistrap.com) for the interface elements.  Please follow their Getting Started giude to setup the aliases and components for your application.
-
-**Please Note**: All requirements are automatically downloaded into the correct location when using composer.  There is no need to download additional files or set paths to third party files.
-
- 
 ## Installation
 
 Please download using ONE of the following methods:
@@ -109,15 +98,38 @@ Please download using ONE of the following methods:
 
 ### Composer Installation
 
+All requirements are automatically downloaded into the correct location when using composer.  There is no need to download additional files or set paths to third party files.
+
+Get composer:
+
 ```
 curl http://getcomposer.org/installer | php
-php composer.phar require cornernote/yii-audit-module
+```
+
+Install latest release OR development version:
+
+```
+php composer.phar require cornernote/yii-audit-module:*           // latest release
+php composer.phar require cornernote/yii-audit-module:dev-master  // development version
+```
+
+Add the `vendor` folder to the `aliases` in your yii configuration:
+
+```php
+return array(
+	'aliases' => array(
+		'vendor' => '/path/to/vendor',
+	),
+);
 ```
 
 
 ### Manual Installation
 
 Download the [latest version](https://github.com/cornernote/yii-audit-module/archive/master.zip) and move the `audit` folder into your `protected/modules` folder.
+
+In addition the following are required:
+* [YiiStrap](http://www.getyiistrap.com) for the interface elements.  Please follow their Getting Started guide to setup the aliases and components for your application.
 
 
 ## Configuration
