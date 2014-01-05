@@ -154,9 +154,10 @@ return array(
 			// set this to false in production to improve performance
 			'autoCreateTables' => true,
 
-			// this is only required if you do not want YiiStrap in your app config
-			// for example, if you are running YiiBooster
-			'yiiStrapPath' => '/path/to/yiistrap',
+			// path to YiiStrap
+			// only required if you do not want YiiStrap in your app config, for example, if you are running YiiBooster
+			// only required if you did not install using composer
+			'yiiStrapPath' => '/path/to/vendor/crisu83/yiistrap',
 		),
 	),
 );
