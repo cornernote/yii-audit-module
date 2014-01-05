@@ -29,7 +29,7 @@ class AuditErrorHandler extends CErrorHandler
     public $trackAllRequests = false;
 
     /**
-     * @var bool Set to true to track fatal errors.  Defaults to true.
+     * @var bool Set to false to not handle fatal errors.  Defaults to true.
      */
     public $catchFatalErrors = true;
 
@@ -39,7 +39,7 @@ class AuditErrorHandler extends CErrorHandler
     public $fatalErrorTypes = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING);
 
     /**
-     * @var array Keys that we do not want to save in the tracking data
+     * @var array Request keys that we do not want to save in the tracking data.
      */
     public $auditRequestIgnoreKeys = array('PHP_AUTH_PW', 'password');
 

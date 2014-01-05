@@ -110,8 +110,8 @@ curl http://getcomposer.org/installer | php
 Install latest release OR development version:
 
 ```
-php composer.phar require cornernote/yii-audit-module:*           // latest release
-php composer.phar require cornernote/yii-audit-module:dev-master  // development version
+php composer.phar require cornernote/yii-audit-module:*				// latest release
+php composer.phar require cornernote/yii-audit-module:dev-master	// development version
 ```
 
 Add the `vendor` folder to the `aliases` in your yii configuration:
@@ -192,8 +192,15 @@ return array(
 			// set this as you normally would for CErrorHandler
 			'errorAction' => 'site/error',
 
-			// set this to true to track all requests
+			// Set to false to only track error requests.  Defaults to true.
 			'trackAllRequests' => true,
+
+			// Set to false to not handle fatal errors.  Defaults to true.
+			'catchFatalErrors' => true,
+
+			// Request keys that we do not want to save in the tracking data.
+			'auditRequestIgnoreKeys' => array('PHP_AUTH_PW', 'password'),
+
 		),
 	),
 );
@@ -253,7 +260,23 @@ class Post extends CActiveRecord
 	public function behaviors()
 	{
 		return array(
-			'AuditFieldBehavior' => 'audit.components.AuditFieldBehavior',
+			'AuditFieldBehavior' => array(
+				// Path to AuditFieldBehavior class.
+				'class' => 'audit.components.AuditFieldBehavior',
+
+				// Set to false if you just want to use getDbAttribute and other methods in this class.
+				// If left unset the value will come from AuditModule::enableAuditField
+				'enableAuditField' => null,
+
+				// Any additional models you want to use to write model and model_id audits to.  If this array is not empty then
+				// each field modifed will result in an AuditField being created for each additionalAuditModels.
+				'additionalAuditModels' => array(
+					'Post' => 'post_id',
+				),
+
+				// A list of values that will be treated as if they were null.
+				'ignoreValues' => array('0', '0.0', '0.00', '0.000', '0.0000', '0.00000', '0.000000', '0000-00-00', '0000-00-00 00:00:00'),
+			),
 		);
 	}
 }
