@@ -17,6 +17,7 @@ Track and store usage information including page requests, database field change
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Resources](#resources)
+- [Support](#support)
 - [License](#license)
 
 
@@ -126,7 +127,7 @@ return array(
 
 ### Manual Installation
 
-Download the [latest version](https://github.com/cornernote/yii-audit-module/archive/master.zip) and move the `audit` folder into your `protected/modules` folder.
+Download the [latest release](https://github.com/cornernote/yii-audit-module/releases/latest) or [development version](https://github.com/cornernote/yii-audit-module/archive/master.zip) and move the `audit` folder into your `protected/modules` folder.
 
 In addition the following are required:
 * [YiiStrap](http://www.getyiistrap.com) for the interface elements.  Please follow their Getting Started guide to setup the aliases and components for your application.
@@ -280,6 +281,12 @@ $this->renderPartial('audit.views.field.__field', array('model' => $post, 'field
 [![Latest Stable Version](https://poser.pugx.org/cornernote/yii-audit-module/v/stable.png)](https://packagist.org/packages/cornernote/yii-audit-module) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module) [![Dependencies Check](https://depending.in/cornernote/yii-audit-module.png)](https://depending.in/cornernote/yii-audit-module)
 
 - [YiiStrap](http://getyiistrap.com/)
+
+
+## Support
+
+- Does this README need improvement?  Go ahead and [suggest a change](https://github.com/cornernote/yii-audit-module/edit/master/README.md).
+- Found a bug, or need help using this project?  Check the [open issues](https://github.com/cornernote/yii-audit-module/issues) or [create an issue](https://github.com/cornernote/yii-audit-module/issues/new).
 
 
 ## License
