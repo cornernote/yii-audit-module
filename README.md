@@ -144,19 +144,36 @@ return array(
 			// path to the AuditModule class
 			'class' => '/path/to/vendor/cornernote/yii-audit-module/audit/AuditModule',
 
-			// add a list of users who can access the audit module
-			'adminUsers' => array('admin'),
-
-			// set this to your user view url, 
+			// set this to your user view url,
 			// AuditModule will replace --user_id-- with the actual user_id
 			'userViewUrl' => array('/user/view', 'id' => '--user_id--'),
 
-			// set this to false in production to improve performance
+			// Set to false if you do not wish to track database audits.
+			'enableAuditField' => true,
+
+			// The ID of the CDbConnection application component. If not set, a SQLite3
+			// database will be automatically created in protected/runtime/audit-AuditVersion.db.
+			'connectionID' => 'db',
+
+			// Whether the DB tables should be created automatically if they do not exist. Defaults to true.
+			// If you already have the table created, it is recommended you set this property to be false to improve performance.
 			'autoCreateTables' => true,
 
-			// path to YiiStrap
-			// only required if you do not want YiiStrap in your app config, for example, if you are running YiiBooster
-			// only required if you did not install using composer
+			// The layout used for module controllers.
+			'layout' => 'audit.views.layouts.column1',
+
+			// Defines the access filters for the module.
+			// The default is AuditAccessFilter which will allow any user listed in AuditModule::adminUsers to have access.
+			'controllerFilters' => array(
+				'auditAccess' => array('audit.components.AuditAccessFilter'),
+			),
+
+			// A list of users who can access this module.
+			'adminUsers' => array('admin'),
+
+			// The path to YiiStrap.
+			// Only required if you do not want YiiStrap in your app config, for example, if you are running YiiBooster.
+			// Only required if you did not install using composer.
 			'yiiStrapPath' => '/path/to/vendor/crisu83/yiistrap',
 		),
 	),

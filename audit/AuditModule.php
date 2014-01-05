@@ -14,25 +14,24 @@
 class AuditModule extends CWebModule
 {
     /**
-     * @var string the ID of the {@link CDbConnection} application component. If not set,
-     * a SQLite3 database will be automatically created and used. The SQLite database file
-     * is <code>protected/runtime/audit-AuditVersion.db</code>.
+     * @var string The ID of the CDbConnection application component. If not set, a SQLite3
+     * database will be automatically created in <code>protected/runtime/audit-AuditVersion.db</code>.
      */
     public $connectionID;
 
     /**
-     * @var boolean whether the DB tables should be created automatically if they do not exist. Defaults to true.
+     * @var boolean Whether the DB tables should be created automatically if they do not exist. Defaults to true.
      * If you already have the table created, it is recommended you set this property to be false to improve performance.
      */
     public $autoCreateTables = true;
 
     /**
-     * @var string
+     * @var string The layout used for module controllers.
      */
-    public $layout = 'column1';
+    public $layout = 'audit.views.layouts.column1';
 
     /**
-     * @var array
+     * @var array mapping from controller ID to controller configurations.
      */
     public $controllerMap = array(
         'error' => 'audit.controllers.AuditErrorController',
@@ -42,27 +41,28 @@ class AuditModule extends CWebModule
     );
 
     /**
-     * @var array Use this to define access rules for the module.
+     * @var array Map of model info including relations and behaviors.
+     */
+    public $modelMap = array();
+
+    /**
+     * @var array Defines the access filters for the module.
+     * The default is AuditAccessFilter which will allow any user listed in AuditModule::adminUsers to have access.
      */
     public $controllerFilters = array(
         'auditAccess' => array('audit.components.AuditAccessFilter'),
     );
 
     /**
-     * @var array Map of model info including relations and behaviors.
+     * @var array A list of users who can access this module.
      */
-    public $modelMap = array();
+    public $adminUsers = array();
 
     /**
      * Set to false if you do not wish to track database audits.
      * @var bool
      */
     public $enableAuditField = true;
-
-    /**
-     * @var array
-     */
-    public $adminUsers = array();
 
     /**
      * @var array|string The view url for users, '--user_id--' will be replaced by the actual user_id.
@@ -73,7 +73,9 @@ class AuditModule extends CWebModule
     public $userViewUrl;
 
     /**
-     * @var string
+     * @var string The path to YiiStrap.
+     * Only required if you do not want YiiStrap in your app config, for example, if you are running YiiBooster.
+     * Only required if you did not install using composer.
      */
     public $yiiStrapPath;
 
