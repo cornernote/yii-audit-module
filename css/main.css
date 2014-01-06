@@ -1,0 +1,71 @@
+/* body margin for bootstrap nav */
+
+body {
+    margin-top: 60px;
+}
+
+/* pretty h2 */
+h2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* extra 20px top padding */
+
+h2, h3, h4 {
+    padding-top: 20px;
+}
+
+/* no padding on panels */
+h4.panel-title {
+    padding-top: 0;
+}
+
+/* force the anchors to go to the right position - http://stackoverflow.com/questions/9047703/fixed-position-navbar-obscures-anchors */
+
+h2[id], h3[id], h4[id] {
+    padding-top: 80px; /* extra 20px top padding */
+    margin-top: -60px;
+}
+
+/* fix navbar disappearing - http://stackoverflow.com/questions/14493533/really-weird-redraw-behavior-with-anchor-links-twitter-bootstrap-fixed-navbar */
+.affix, .navbar-fixed-top {
+    -webkit-transform: scale3d(1, 1, 1);
+}
+
+/* fancy header */
+#header {
+    padding-top: 20px;
+}
+
+/* fancy footer */
+
+#footer {
+    border-top: 1px solid #ccc;
+    background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAO0lEQVQYV2NkIADS0tIkGbGpAUnAxGfNmvUcRRFMEiSBrBmuCKQAXRKmkHhF+EwBmQY2iTqKCJkCsgkApEUhVTyetCMAAAAASUVORK5CYII=);
+    margin-top: 80px;
+}
+
+/* project icons */
+
+#project-icons {
+    border-top: 1px solid #ccc;
+    background: #ddd;
+    margin-top: 20px;
+    padding: 20px 0;
+}
+
+/* put the margin-bottom on the caption instead of the thumbnail */
+
+.thumbnail {
+    margin-bottom: 0;
+}
+
+.caption {
+    margin-bottom: 20px;
+}
+
+/* more button margin for smaller devices */
+.jumbotron a.btn {
+    margin-bottom: 5px;
+}
