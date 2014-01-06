@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Yii-audit-module : Track and display usage information including page requests, database field changes, php errors and yii logs." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Yii-audit-module</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/cornernote/yii-audit-module">View on GitHub</a>
+
+          <h1 id="project_title">Yii-audit-module</h1>
+          <h2 id="project_tagline">Track and display usage information including page requests, database field changes, php errors and yii logs.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/cornernote/yii-audit-module/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/cornernote/yii-audit-module/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="yii-audit-module" class="anchor" href="#yii-audit-module"><span class="octicon octicon-link"></span></a>Yii Audit Module</h1>
+
+<p>Track and display usage information including page requests, database field changes, php errors and yii logs.</p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<h3>
+<a name="visitor-request-tracking" class="anchor" href="#visitor-request-tracking"><span class="octicon octicon-link"></span></a>Visitor Request Tracking</h3>
+
+<ul>
+<li>Track site activity including everything you need to know about the request.</li>
+<li>The error handler will automatically create an AuditRequest record for each visitor hit.</li>
+<li>When the application ends it will update the AuditRequest with memory and time information.</li>
+</ul><p>Tracks the following information:</p>
+
+<ul>
+<li>Links - Requested URL, referring URL, redirecting to URL (read from the headers at the end of the application)</li>
+<li>User - Visitors IP Address and logged in user's ID</li>
+<li>Superglobals - (<code>$_GET</code>/<code>$_POST</code>/<code>$_SESSION</code>/<code>$_FILES</code>/<code>$_COOKIE</code>), the arrays are serialized then compressed using gzip</li>
+<li>Timers - Start and end times of the application</li>
+<li>Memory - Memory usage and peak memory usage</li>
+</ul><h3>
+<a name="model-field-tracking" class="anchor" href="#model-field-tracking"><span class="octicon octicon-link"></span></a>Model Field Tracking</h3>
+
+<ul>
+<li>Tracks the old and new values each time your model is saved.</li>
+<li>Behavior can easily be attached to any model you want to track field changes.</li>
+<li>Each field change is related to an AuditRequest so you can see the entire state of the visitors action.</li>
+<li>Performs multiple inserts in a single query with <code>CDbCommandBuilder::createMultipleInsertCommand()</code>.</li>
+<li>Provides views that can be rendered into your application to show changed fields for your model.</li>
+</ul><h3>
+<a name="error-tracking" class="anchor" href="#error-tracking"><span class="octicon octicon-link"></span></a>Error Tracking</h3>
+
+<ul>
+<li>Full error stack dump is saved, even in live mode.</li>
+<li>Catches all errors, including fatal errors.</li>
+<li>View all the collected data from the module interface.</li>
+<li>Each error is related to an AuditRequest so you can see the entire state of the visitors action.</li>
+</ul><h3>
+<a name="log-tracking" class="anchor" href="#log-tracking"><span class="octicon octicon-link"></span></a>Log Tracking</h3>
+
+<ul>
+<li>Save logs to your database for easy real-time debugging or for checking on historical logs.</li>
+<li>Each log is related to an AuditRequest so you can see the entire state of the visitors action.</li>
+</ul><h2>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h2>
+
+<p>Yii Audit Module Homepage:
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/home.png" alt="home"></p>
+
+<p>Request List
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/requests.png" alt="Requests"></p>
+
+<p>Request View
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/request.png" alt="Request"></p>
+
+<p>Field List
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/fields.png" alt="Fields"></p>
+
+<p>Field View
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/field.png" alt="Field"></p>
+
+<p>Error List
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/errors.png" alt="Errors"></p>
+
+<p>Error View
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/error.png" alt="Error"></p>
+
+<p>Log List
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/logs.png" alt="Logs"></p>
+
+<p>Log View
+<img src="https://raw.github.com/cornernote/yii-audit-module/master/screenshot/log.png" alt="Log"></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Please download using ONE of the following methods:</p>
+
+<h3>
+<a name="composer-installation" class="anchor" href="#composer-installation"><span class="octicon octicon-link"></span></a>Composer Installation</h3>
+
+<p>All requirements are automatically downloaded into the correct location when using composer.  There is no need to download additional files or set paths to third party files.</p>
+
+<p>Get composer:</p>
+
+<pre><code>curl http://getcomposer.org/installer | php
+</code></pre>
+
+<p>Install latest release OR development version:</p>
+
+<pre><code>php composer.phar require cornernote/yii-audit-module:*             // latest release
+php composer.phar require cornernote/yii-audit-module:dev-master    // development version
+</code></pre>
+
+<p>Add the <code>vendor</code> folder to the <code>aliases</code> in your yii configuration:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'vendor'</span> <span class="o">=&gt;</span> <span class="s1">'/path/to/vendor'</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="manual-installation" class="anchor" href="#manual-installation"><span class="octicon octicon-link"></span></a>Manual Installation</h3>
+
+<p>Download the <a href="https://github.com/cornernote/yii-audit-module/releases/latest">latest release</a> or <a href="https://github.com/cornernote/yii-audit-module/archive/master.zip">development version</a> and move the <code>audit</code> folder into your <code>protected/modules</code> folder.</p>
+
+<p>In addition the following are required:</p>
+
+<ul>
+<li>
+<a href="http://www.getyiistrap.com">YiiStrap</a> for the interface elements.  Please follow their Getting Started guide to setup the aliases and components for your application.</li>
+</ul><h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>Add yii-audit-module to the <code>modules</code> in your yii configuration:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'modules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'audit'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// path to the AuditModule class</span>
+            <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'/path/to/vendor/cornernote/yii-audit-module/audit/AuditModule'</span><span class="p">,</span>
+
+            <span class="c1">// set this to your user view url,</span>
+            <span class="c1">// AuditModule will replace --user_id-- with the actual user_id</span>
+            <span class="s1">'userViewUrl'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'/user/view'</span><span class="p">,</span> <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'--user_id--'</span><span class="p">),</span>
+
+            <span class="c1">// Set to false if you do not wish to track database audits.</span>
+            <span class="s1">'enableAuditField'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+
+            <span class="c1">// The ID of the CDbConnection application component. If not set, a SQLite3</span>
+            <span class="c1">// database will be automatically created in protected/runtime/audit-AuditVersion.db.</span>
+            <span class="s1">'connectionID'</span> <span class="o">=&gt;</span> <span class="s1">'db'</span><span class="p">,</span>
+
+            <span class="c1">// Whether the DB tables should be created automatically if they do not exist. Defaults to true.</span>
+            <span class="c1">// If you already have the table created, it is recommended you set this property to be false to improve performance.</span>
+            <span class="s1">'autoCreateTables'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+
+            <span class="c1">// The layout used for module controllers.</span>
+            <span class="s1">'layout'</span> <span class="o">=&gt;</span> <span class="s1">'audit.views.layouts.column1'</span><span class="p">,</span>
+
+            <span class="c1">// Defines the access filters for the module.</span>
+            <span class="c1">// The default is AuditAccessFilter which will allow any user listed in AuditModule::adminUsers to have access.</span>
+            <span class="s1">'controllerFilters'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">'auditAccess'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'audit.components.AuditAccessFilter'</span><span class="p">),</span>
+            <span class="p">),</span>
+
+            <span class="c1">// A list of users who can access this module.</span>
+            <span class="s1">'adminUsers'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">),</span>
+
+            <span class="c1">// The path to YiiStrap.</span>
+            <span class="c1">// Only required if you do not want YiiStrap in your app config, for example, if you are running YiiBooster.</span>
+            <span class="c1">// Only required if you did not install using composer.</span>
+            <span class="s1">'yiiStrapPath'</span> <span class="o">=&gt;</span> <span class="s1">'/path/to/vendor/crisu83/yiistrap'</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+
+<p>Use <code>AuditErrorHandler</code> as your applications error handler by updating the <code>components</code> section in your yii configuration:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'components'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'errorHandler'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// path to the AuditErrorHandler class</span>
+            <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'audit.components.AuditErrorHandler'</span><span class="p">,</span>
+
+            <span class="c1">// set this as you normally would for CErrorHandler</span>
+            <span class="s1">'errorAction'</span> <span class="o">=&gt;</span> <span class="s1">'site/error'</span><span class="p">,</span>
+
+            <span class="c1">// Set to false to only track error requests.  Defaults to true.</span>
+            <span class="s1">'trackAllRequests'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+
+            <span class="c1">// Set to false to not handle fatal errors.  Defaults to true.</span>
+            <span class="s1">'catchFatalErrors'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+
+            <span class="c1">// Request keys that we do not want to save in the tracking data.</span>
+            <span class="s1">'auditRequestIgnoreKeys'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'PHP_AUTH_PW'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">),</span>
+
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+
+<p>To handle fatal errors we have add the error handler to the <code>preload</code> section in your yii configuration:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'preload'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'log'</span><span class="p">,</span> 
+        <span class="s1">'errorHandler'</span><span class="p">,</span> <span class="c1">// handle fatal errors</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+
+<p>To track logs we need to add a logroute to <code>AuditLogRoute</code> to your yii configuration:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'components'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// standard setup</span>
+            <span class="s1">'connectionString'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=localhost;dbname=test'</span><span class="p">,</span>
+            <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+            <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+
+            <span class="c1">// set to true to enable database query logging</span>
+            <span class="c1">// don't forget to put `profile` in the log route `levels` below</span>
+            <span class="s1">'enableProfiling'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+
+            <span class="c1">// set to true to replace the params with the literal values</span>
+            <span class="s1">'enableParamLogging'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s1">'log'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'CLogRouter'</span><span class="p">,</span>
+            <span class="s1">'routes'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="c1">// add a new log route</span>
+                <span class="k">array</span><span class="p">(</span>
+                    <span class="c1">// path to the AuditLogRoute class</span>
+                    <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'audit.components.AuditLogRoute'</span><span class="p">,</span>
+
+                    <span class="c1">// can be: trace, warning, error, info, profile</span>
+                    <span class="c1">// can also be anything else you want to pass as a level to `Yii::log()`</span>
+                    <span class="s1">'levels'</span> <span class="o">=&gt;</span> <span class="s1">'error, warning, profile, audit'</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+
+<p>To track field changes add <code>AuditFieldBehavior</code> to your CActiveRecord <code>behaviors()</code> functions.</p>
+
+<div class="highlight highlight-php"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">CActiveRecord</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'AuditFieldBehavior'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="c1">// Path to AuditFieldBehavior class.</span>
+                <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'audit.components.AuditFieldBehavior'</span><span class="p">,</span>
+
+                <span class="c1">// Set to false if you just want to use getDbAttribute and other methods in this class.</span>
+                <span class="c1">// If left unset the value will come from AuditModule::enableAuditField</span>
+                <span class="s1">'enableAuditField'</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+
+                <span class="c1">// Any additional models you want to use to write model and model_id audits to.  If this array is not empty then</span>
+                <span class="c1">// each field modifed will result in an AuditField being created for each additionalAuditModels.</span>
+                <span class="s1">'additionalAuditModels'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                    <span class="s1">'Post'</span> <span class="o">=&gt;</span> <span class="s1">'post_id'</span><span class="p">,</span>
+                <span class="p">),</span>
+
+                <span class="c1">// A list of values that will be treated as if they were null.</span>
+                <span class="s1">'ignoreValues'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'0'</span><span class="p">,</span> <span class="s1">'0.0'</span><span class="p">,</span> <span class="s1">'0.00'</span><span class="p">,</span> <span class="s1">'0.000'</span><span class="p">,</span> <span class="s1">'0.0000'</span><span class="p">,</span> <span class="s1">'0.00000'</span><span class="p">,</span> <span class="s1">'0.000000'</span><span class="p">,</span> <span class="s1">'0000-00-00'</span><span class="p">,</span> <span class="s1">'0000-00-00 00:00:00'</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Logging is as simple as calling <code>Yii::log()</code>.  The second argument needs to be one of the <code>AuditLogRoute::levels</code> you specified above (error, warning or audit).</p>
+
+<div class="highlight highlight-php"><pre><span class="nx">Yii</span><span class="o">::</span><span class="na">log</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">,</span> <span class="s1">'audit'</span><span class="p">);</span>
+<span class="nx">Yii</span><span class="o">::</span><span class="na">log</span><span class="p">(</span><span class="s1">'something really bad just happened'</span><span class="p">,</span> <span class="s1">'error'</span><span class="p">);</span>
+</pre></div>
+
+<p>There are several partial views that you can render into your application.  These are all optional.</p>
+
+<p>Add information to your footer:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderPartial</span><span class="p">(</span><span class="s1">'audit.views.request.__footer'</span><span class="p">);</span>
+</pre></div>
+
+<p>Show changes for a model:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$post</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findByPk</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderPartial</span><span class="p">(</span><span class="s1">'audit.views.field.__fields'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'model'</span> <span class="o">=&gt;</span> <span class="nv">$post</span><span class="p">));</span>
+<span class="c1">// or by using the model_name and model_id</span>
+<span class="c1">// $this-&gt;renderPartial('audit.views.field.__fields', array('model_name' =&gt; 'Post', 'model_id' =&gt; 123));</span>
+</pre></div>
+
+<p>Show changes for a single field in a model:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$post</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findByPk</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderPartial</span><span class="p">(</span><span class="s1">'audit.views.field.__field'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'model'</span> <span class="o">=&gt;</span> <span class="nv">$post</span><span class="p">,</span> <span class="s1">'field'</span> <span class="o">=&gt;</span> <span class="s1">'status'</span><span class="p">));</span>
+<span class="c1">// or by using the model_name and model_id</span>
+<span class="c1">// $this-&gt;renderPartial('audit.views.field.__field', array('model_name' =&gt; 'Post', 'model_id' =&gt; 123, 'field' =&gt; 'status'));</span>
+</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Yii-audit-module maintained by <a href="https://github.com/cornernote">cornernote</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-46879709-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
