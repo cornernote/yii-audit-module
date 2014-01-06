@@ -1,6 +1,6 @@
 # Yii Audit Module
 
-Track and store usage information including page requests, database field changes and system errors.
+Track and display usage information including page requests, database field changes, php errors and yii logs.
 
 
 ## Features
