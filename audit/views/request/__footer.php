@@ -13,6 +13,11 @@
  * @package yii-audit-module
  */
 
+$app = Yii::app();
+/** @var AuditModule $audit */
+$audit = $app->getModule('audit');
+$isAdmin = in_array($app->getUser()->name, $audit->adminUsers);
+
 if (!isset($tag))
     $tag = 'span';
 
@@ -21,10 +26,6 @@ if (!isset($htmlOptions))
         'style' => 'color:' . (isset($color) ? $color : (YII_DEBUG || $isAdmin ? 'inherit' : 'transparent')) . ';',
     );
 
-$app = Yii::app();
-/** @var AuditModule $audit */
-$audit = $app->getModule('audit');
-$isAdmin = in_array($app->getUser()->name, $audit->adminUsers);
 /** @var AuditErrorHandler $errorHandler */
 $errorHandler = $app->getErrorHandler();
 
