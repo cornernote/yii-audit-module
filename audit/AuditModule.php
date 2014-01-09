@@ -76,6 +76,9 @@ class AuditModule extends CWebModule
      * @var string The path to YiiStrap.
      * Only required if you do not want YiiStrap in your app config, for example, if you are running YiiBooster.
      * Only required if you did not install using composer.
+     * Please note:
+     * - You must download YiiStrap even if you are using YiiBooster in your app.
+     * - When using this setting YiiStrap will only loaded in the menu interface (eg: index.php?r=menu).
      */
     public $yiiStrapPath;
 
