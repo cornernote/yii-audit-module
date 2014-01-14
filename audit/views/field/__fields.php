@@ -26,6 +26,6 @@ else {
     $auditField->model_name = $model_name;
     $auditField->model_id = $model_id;
 }
-$this->renderPartial('_grid', array(
+$this->renderPartial('audit.views.field._grid', array(
     'auditField' => $auditField,
 ));
