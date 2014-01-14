@@ -54,6 +54,9 @@ class AuditErrorHandler extends CErrorHandler
      */
     public function init()
     {
+        // init the audit module
+        Yii::app()->getModule('audit');
+
         // catch fatal errors
         if ($this->catchFatalErrors)
             //register_shutdown_function(array($this, 'fatalErrorHandler'));
@@ -185,8 +188,9 @@ class AuditErrorHandler extends CErrorHandler
         $auditError->trace = $exception->getTraceAsString();
 
         // get file and line
-        $trace = $exception->getTrace();
-        if (($trace = $this->getExactTrace($exception)) === null) {
+        //$trace = $exception->getTrace();
+        $trace = $this->getExactTrace($exception);
+        if (!$trace) {
             $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $exception->getFile());
             $auditError->line = $exception->getLine();
         }
@@ -197,19 +201,21 @@ class AuditErrorHandler extends CErrorHandler
         $auditError->source_code = AuditHelper::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
 
         // get traces
-        foreach ($trace as $i => $t) {
-            if (!isset($t['file']))
-                $trace[$i]['file'] = 'unknown';
-            $trace[$i]['file'] = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $trace[$i]['file']);
+        if ($trace) {
+            foreach ($trace as $i => $t) {
+                if (!isset($t['file']))
+                    $trace[$i]['file'] = 'unknown';
+                $trace[$i]['file'] = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $trace[$i]['file']);
 
-            if (!isset($t['line']))
-                $trace[$i]['line'] = 0;
+                if (!isset($t['line']))
+                    $trace[$i]['line'] = 0;
 
-            if (!isset($t['function']))
-                $trace[$i]['function'] = 'unknown';
+                if (!isset($t['function']))
+                    $trace[$i]['function'] = 'unknown';
 
-            if (is_array($trace[$i]['object']))
-                unset($trace[$i]['object']);
+                if (is_array($trace[$i]['object']))
+                    unset($trace[$i]['object']);
+            }
         }
         $auditError->traces = json_encode($trace);
         $auditError->stack_trace = AuditHelper::pack($this->renderStackTrace($trace));
@@ -296,7 +302,7 @@ class AuditErrorHandler extends CErrorHandler
 
         // get info
         $auditRequest->created = time();
-        $auditRequest->user_id = Yii::app()->getUser()->id;
+        $auditRequest->user_id = Yii::app()->hasComponent('user') ? Yii::app()->user->id : 0;
         $auditRequest->link = $this->getCurrentLink();
         $auditRequest->start_time = YII_BEGIN_TIME;
 
