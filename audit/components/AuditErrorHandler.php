@@ -188,19 +188,19 @@ class AuditErrorHandler extends CErrorHandler
         $auditError->trace = $exception->getTraceAsString();
 
         // get file and line
-        //$trace = $exception->getTrace();
-        $trace = $this->getExactTrace($exception);
-        if (!$trace) {
+        $exactTrace = $this->getExactTrace($exception);
+        if (!$exactTrace) {
             $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $exception->getFile());
             $auditError->line = $exception->getLine();
         }
         else {
-            $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $trace['file']);
-            $auditError->line = $trace['line'];
+            $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $exactTrace['file']);
+            $auditError->line = $exactTrace['line'];
         }
         $auditError->source_code = AuditHelper::pack($this->renderSourceCode($auditError->file, $auditError->line, $this->maxSourceLines));
 
         // get traces
+        $trace = $exception->getTrace();
         if ($trace) {
             foreach ($trace as $i => $t) {
                 if (!isset($t['file']))
@@ -213,7 +213,7 @@ class AuditErrorHandler extends CErrorHandler
                 if (!isset($t['function']))
                     $trace[$i]['function'] = 'unknown';
 
-                if (is_array($trace[$i]['object']))
+                if (isset($t['object']))
                     unset($trace[$i]['object']);
             }
         }
