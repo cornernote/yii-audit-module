@@ -329,7 +329,7 @@ php composer.phar require cornernote/yii-audit-module:dev-master    // developme
                 // add a new log route
                 array(
                     // path to the AuditLogRoute class
-                    'class' => 'audit.components.AuditLogRoute',
+                    'class' => '/path/to/yii-audit-module/audit/components/AuditLogRoute',
 
                     // can be: trace, warning, error, info, profile
                     // can also be anything else you want to pass as a level to `Yii::log()`
