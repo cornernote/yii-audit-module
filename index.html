@@ -224,13 +224,20 @@ php composer.phar require cornernote/yii-audit-module:dev-master    // developme
 <div class="section">
     <h2 id="configuration">Configuration</h2>
 
-    <p>Add yii-audit-module to the <code>modules</code> in your yii configuration:</p>
+    <p>Add the <code>audit</code> folder to the <code>aliases</code> in your yii configuration:</p>
+    <pre class="prettyprint linenums lang-php">return array(
+    'aliases' => array(
+        'audit' => '/path/to/vendor/cornernote/yii-audit-module/audit',
+    ),
+);</pre>
+
+    <p>Add <code>audit</code> to the <code>modules</code> in your yii configuration:</p>
 
         <pre class="prettyprint linenums lang-php">return array(
     'modules' => array(
         'audit' => array(
             // path to the AuditModule class
-            'class' => '/path/to/vendor/cornernote/yii-audit-module/audit/AuditModule',
+            'class' => 'audit.AuditModule',
 
             // set this to your user view url,
             // AuditModule will replace --user_id-- with the actual user_id
@@ -329,7 +336,7 @@ php composer.phar require cornernote/yii-audit-module:dev-master    // developme
                 // add a new log route
                 array(
                     // path to the AuditLogRoute class
-                    'class' => '/path/to/yii-audit-module/audit/components/AuditLogRoute',
+                    'class' => 'audit.components.AuditLogRoute',
 
                     // can be: trace, warning, error, info, profile
                     // can also be anything else you want to pass as a level to `Yii::log()`
