@@ -4,7 +4,7 @@ CREATE TABLE `audit_log` (
 `user_id` int(11),
 `level` varchar(128),
 `category` varchar(128),
-`message` text,
+`message` blob,
 `file` varchar(255),
 `created` int(11),
 PRIMARY KEY (`id`),
