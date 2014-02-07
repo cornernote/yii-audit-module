@@ -13,7 +13,7 @@
  */
 
 /** @var AuditActiveForm $form */
-$form = $this->beginWidget('audit.widgets.AuditActiveForm', array(
+$form = $this->beginWidget('audit.components.AuditActiveForm', array(
     'method' => 'get',
     'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
     'htmlOptions' => array('style' => 'display:none;'),
