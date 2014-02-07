@@ -20,7 +20,7 @@ class AuditLogRoute extends CLogRoute
     {
         $auditLogs = array();
         $auditRequestId = $this->getAuditRequestId();
-        $userId = Yii::app()->getUser()->id;
+        $userId = Yii::app()->hasComponent('user') ? Yii::app()->user->id : 0;
         $audit = Yii::app()->getModule('audit');
         $commandBuilder = $audit->getDbConnection()->getCommandBuilder();
         foreach ($logs as $log) {
