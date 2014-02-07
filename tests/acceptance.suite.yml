@@ -19,4 +19,4 @@ modules:
       cleanup: false
     PhpBrowser:
       url: 'http://localhost/'
-      #url: 'http://localhost/_github/yii-audit-module/tests/_public/'
+      #url: 'http://localhost/_github/yii-audit-module/tests/_www/'
