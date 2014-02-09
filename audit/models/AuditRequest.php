@@ -125,6 +125,7 @@ class AuditRequest extends AuditActiveRecord
         $criteria->compare('t.id', $this->id);
         $criteria->compare('t.user_id', $this->user_id);
         $criteria->compare('t.created', $this->created);
+        $criteria->compare('t.ip', $this->ip);
         $criteria->compare('t.link', $this->link, true);
         $criteria->compare('t.audit_field_count', $this->audit_field_count);
         $criteria->compare('t.total_time', $this->total_time);
