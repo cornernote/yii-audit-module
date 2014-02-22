@@ -59,8 +59,8 @@ class AuditErrorHandler extends CErrorHandler
 
         // catch fatal errors
         if ($this->catchFatalErrors)
-            //register_shutdown_function(array($this, 'fatalErrorHandler'));
-            Yii::app()->onEndRequest[] = array($this, 'fatalErrorHandler');
+            //register_shutdown_function(array($this, 'handleFatalError'));
+            Yii::app()->onEndRequest[] = array($this, 'handleFatalError');
 
         // track the request
         if ($this->trackAllRequests)
@@ -73,7 +73,7 @@ class AuditErrorHandler extends CErrorHandler
     /**
      * Fatal error handler
      */
-    public function fatalErrorHandler()
+    public function handleFatalError()
     {
         $e = error_get_last();
         if ($e !== null && in_array($e['type'], $this->fatalErrorTypes)) {
