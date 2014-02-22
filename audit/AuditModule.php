@@ -124,7 +124,6 @@ class AuditModule extends CWebModule
         parent::init();
 
         // setup paths
-        Yii::setPathOfAlias('audit', dirname(__FILE__));
         $this->setImport(array(
             'audit.models.*',
             'audit.components.*',
