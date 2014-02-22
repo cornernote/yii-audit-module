@@ -92,7 +92,8 @@ class AuditErrorHandler extends CErrorHandler
      */
     public function handleFatalBuffer($buffer)
     {
-        return error_get_last() ? '' : $buffer;
+        $e = error_get_last();
+        return ($e !== null && in_array($e['type'], $this->fatalErrorTypes)) ? '' : $buffer;
     }
 
     /**
