@@ -86,7 +86,7 @@ class AuditErrorHandler extends CErrorHandler
     }
 
     /**
-     * Clears the output buffer that was set in init if there was an error.
+     * Clears the output buffer that was set in init if there was a fatal error.
      * @param $buffer
      * @return string
      */
