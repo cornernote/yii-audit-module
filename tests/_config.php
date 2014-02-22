@@ -17,7 +17,6 @@ return array(
     'import' => array(
         'audit.components.*',
         'audit.models.*',
-        'bootstrap.helpers.TbHtml',
     ),
     'preload' => array('log', 'errorHandler'),
     'aliases' => array(
