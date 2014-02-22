@@ -67,7 +67,7 @@ class AuditErrorHandler extends CErrorHandler
             $this->getAuditRequest();
 
         // call parent
-        return parent::init();
+        parent::init();
     }
 
     /**
