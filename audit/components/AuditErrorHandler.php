@@ -58,9 +58,11 @@ class AuditErrorHandler extends CErrorHandler
         Yii::app()->getModule('audit');
 
         // catch fatal errors
-        if ($this->catchFatalErrors)
+        if ($this->catchFatalErrors) {
             //register_shutdown_function(array($this, 'handleFatalError'));
             Yii::app()->onEndRequest[] = array($this, 'handleFatalError');
+            ob_start(array($this, 'handleFatalBuffer'));
+        }
 
         // track the request
         if ($this->trackAllRequests)
@@ -81,6 +83,16 @@ class AuditErrorHandler extends CErrorHandler
             $this->handle($event);
             //Yii::app()->end(1); // end with abnormal ending
         }
+    }
+
+    /**
+     * Clears the output buffer that was set in init if there was an error.
+     * @param $buffer
+     * @return string
+     */
+    public function handleFatalBuffer($buffer)
+    {
+        return error_get_last() ? '' : $buffer;
     }
 
     /**
