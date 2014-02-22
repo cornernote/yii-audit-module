@@ -19,6 +19,9 @@ define('YII_PATH', realpath(VENDOR_PATH . '/yiisoft/yii/framework'));
 // debug
 define('YII_DEBUG', true);
 
+// composer autoloader
+require_once(VENDOR_PATH . '/autoload.php');
+
 // create application
 require_once(YII_PATH . '/yii.php');
 Yii::createWebApplication(BASE_PATH . '/_config.php')->run();
