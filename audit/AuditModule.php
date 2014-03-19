@@ -255,7 +255,7 @@ class AuditModule extends CWebModule
         if (!(Yii::app() instanceof CWebApplication))
             return;
         // and in this module
-        $route = explode('/', Yii::app()->urlManager->parseUrl(Yii::app()->request));
+        $route = explode('/', Yii::app()->getUrlManager()->parseUrl(Yii::app()->request));
         if ($route[0] != $this->id)
             return;
         // and yiiStrap is not configured
