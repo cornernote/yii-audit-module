@@ -20,5 +20,11 @@
     },
     "require-dev": {
         "yiisoft/yii": "1.1.14"
+    },
+    "autoload": {
+        "classmap": [
+            "components/",
+            "models/"
+        ]
     }
 }
