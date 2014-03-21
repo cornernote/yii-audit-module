@@ -23,8 +23,8 @@
     },
     "autoload": {
         "classmap": [
-            "components/",
-            "models/"
+            "audit/components/",
+            "audit/models/"
         ]
     }
 }
