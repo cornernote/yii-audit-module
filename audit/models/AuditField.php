@@ -79,7 +79,7 @@ class AuditField extends AuditActiveRecord
     {
         return array(
             // search fields
-            array('id, new_value, old_value, action, model, field, created, user_id, model_id, audit_request_id', 'safe', 'on' => 'search'),
+            array('id, new_value, old_value, action, model_name, field, created, user_id, model_id, audit_request_id', 'safe', 'on' => 'search'),
         );
     }
 
