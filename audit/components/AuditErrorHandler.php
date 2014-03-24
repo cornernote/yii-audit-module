@@ -359,11 +359,6 @@ class AuditErrorHandler extends CErrorHandler
                 $auditRequest->redirect = trim(substr($header, 9));
             }
         }
-        $auditRequest->memory_usage = memory_get_usage();
-        $auditRequest->memory_peak = memory_get_peak_usage();
-        $auditRequest->audit_field_count = $auditRequest->auditFieldCount;
-        $auditRequest->end_time = microtime(true);
-        $auditRequest->total_time = $auditRequest->end_time - $auditRequest->start_time;
 
         // save
         $auditRequest->save(false);
