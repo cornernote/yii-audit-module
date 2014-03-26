@@ -60,8 +60,8 @@ class AuditErrorHandler extends CErrorHandler
 
         // catch fatal errors
         if ($this->catchFatalErrors) {
-            //register_shutdown_function(array($this, 'handleFatalError'));
-            Yii::app()->onEndRequest[] = array($this, 'handleFatalError');
+            register_shutdown_function(array($this, 'handleFatalError'));
+            //Yii::app()->onEndRequest[] = array($this, 'handleFatalError');
             if (substr(php_sapi_name(), 0, 3) != 'cli') {
                 ob_start(array($this, 'handleFatalBuffer'));
             }
