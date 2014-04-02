@@ -95,12 +95,17 @@ class AuditField extends AuditActiveRecord
         $criteria->compare('t.old_value', $this->old_value);
         $criteria->compare('t.new_value', $this->new_value);
         $criteria->compare('t.action', $this->action, true);
-        $criteria->compare('t.model_name', $this->model_name);
         $criteria->compare('t.field', $this->field);
         $criteria->compare('t.created', $this->created);
         $criteria->compare('t.user_id', $this->user_id);
         $criteria->compare('t.model_id', $this->model_id);
         $criteria->compare('t.audit_request_id', $this->audit_request_id);
+
+        if (is_array($this->model_name))
+            $criteria->addInCondition('t.model_name', $this->model_name);
+        else
+            $criteria->compare('t.model_name', $this->model_name);
+
         $criteria->mergeWith($this->getDbCriteria());
 
         return new CActiveDataProvider(get_class($this), array(
