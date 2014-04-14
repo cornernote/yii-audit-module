@@ -31,6 +31,16 @@ class AuditModule extends CWebModule
     public $layout = 'audit.views.layouts.column1';
 
     /**
+     * @var string The widget used to render grid views.
+     */
+    public $gridViewWidget = 'bootstrap.widgets.TbGridView';
+
+    /**
+     * @var string The widget used to render detail views.
+     */
+    public $detailViewWidget = 'zii.widgets.CDetailView';
+
+    /**
      * @var array mapping from controller ID to controller configurations.
      */
     public $controllerMap = array(

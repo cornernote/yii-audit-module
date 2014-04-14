@@ -51,7 +51,7 @@ $attributes[] = array(
     'value' => Yii::app()->format->formatDatetime($auditField->created),
 );
 
-$this->widget('zii.widgets.CDetailView', array(
+$this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
     'data' => $auditField,
     'attributes' => $attributes,
     'htmlOptions' => array(

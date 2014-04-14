@@ -59,7 +59,7 @@ if ($this->id != 'request') {
 }
 
 // grid
-$this->widget('bootstrap.widgets.TbGridView', array(
+$this->widget(Yii::app()->getModule('audit')->gridViewWidget, array(
     'id' => 'auditField-grid',
     'dataProvider' => $auditField->search(),
     'filter' => $auditField,

@@ -56,7 +56,7 @@ $columns[] = array(
 );
 
 // grid
-$this->widget('bootstrap.widgets.TbGridView', array(
+$this->widget(Yii::app()->getModule('audit')->gridViewWidget, array(
     'id' => 'auditRequest-grid',
     'dataProvider' => $auditRequest->search(),
     'filter' => $auditRequest,

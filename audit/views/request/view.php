@@ -57,7 +57,7 @@ $attributes[] = array(
     'value' => Yii::app()->format->formatDatetime($auditRequest->created),
 );
 
-$this->widget('zii.widgets.CDetailView', array(
+$this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
     'data' => $auditRequest,
     'attributes' => $attributes,
     'htmlOptions' => array(
@@ -97,7 +97,7 @@ $this->renderPartial('/log/_grid', array(
 ));
 
 echo '<h2>' . Yii::t('audit', 'Page Variables') . '</h2>';
-$this->widget('zii.widgets.CDetailView', array(
+$this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
     'data' => $auditRequest,
     'attributes' => array(
         array(
@@ -124,7 +124,7 @@ $this->widget('zii.widgets.CDetailView', array(
 $onClick = "$('#session_detail').toggle(); $(this).html($(this).html()=='[+]' ? '[-]' : '[+]');";
 echo '<h2><small><a href="javascript:void(0)" onclick="' . $onClick . '">[+]</a></small> ' . Yii::t('audit', 'Session and Cookies') . '</h2>';
 echo '<div id="session_detail" style="display: none;">';
-$this->widget('zii.widgets.CDetailView', array(
+$this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
     'data' => $auditRequest,
     'attributes' => array(
         array(
@@ -147,7 +147,7 @@ echo '</div>';
 $onClick = "$('#server_detail').toggle(); $(this).html($(this).html()=='[+]' ? '[-]' : '[+]');";
 echo '<h2><small><a href="javascript:void(0)" onclick="' . $onClick . '">[+]</a></small> ' . Yii::t('audit', 'Server Data') . '</h2>';
 echo '<div id="server_detail" style="display: none;">';
-$this->widget('zii.widgets.CDetailView', array(
+$this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
     'data' => $auditRequest,
     'attributes' => array(
         array(
@@ -165,7 +165,7 @@ echo '</div>';
 $onClick = "$('#config_detail').toggle(); $(this).html($(this).html()=='[+]' ? '[-]' : '[+]');";
 echo '<h2><small><a href="javascript:void(0)" onclick="' . $onClick . '">[+]</a></small> ' . Yii::t('audit', 'Config Data') . '</h2>';
 echo '<div id="config_detail" style="display: none;">';
-$this->widget('zii.widgets.CDetailView', array(
+$this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
     'data' => $auditRequest,
     'attributes' => array(
         array(
