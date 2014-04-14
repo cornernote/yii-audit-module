@@ -257,6 +257,12 @@ php composer.phar require cornernote/yii-audit-module:dev-master    // developme
             // The layout used for module controllers.
             'layout' => 'audit.views.layouts.column1',
 
+            // The widget used to render grid views.
+            'gridViewWidget' => 'bootstrap.widgets.TbGridView',
+
+            // The widget used to render detail views.
+            'detailViewWidget' => 'zii.widgets.CDetailView',
+
             // Defines the access filters for the module.
             // The default is AuditAccessFilter which will allow any user listed in AuditModule::adminUsers to have access.
             'controllerFilters' => array(
