@@ -107,7 +107,7 @@ class AuditModule extends CWebModule
      */
     public static function powered()
     {
-        return Yii::t('audit', 'Powered by {yii-audit-module}.', array('{yii-audit-module}' => '<a href="https://github.com/cornernote/yii-audit-module#yii-audit-module" rel="external">Yii Audit Module</a>'));
+        return Yii::t('audit', 'Powered by {yii-audit-module}.', array('{yii-audit-module}' => '<a href="http://cornernote.github.io/yii-audit-module" rel="external">Yii Audit Module</a>'));
     }
 
     /**
