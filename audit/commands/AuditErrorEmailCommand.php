@@ -15,6 +15,16 @@ class AuditErrorEmailCommand extends YdConsoleCommand
 {
 
     /**
+     * @var null|string|array The emails to send errors to.
+     */
+    public $email;
+
+    /**
+     * @var bool
+     */
+    public $secureUrl = false;
+
+    /**
      * Send error emails.
      * Requires yii-email-module
      */
@@ -22,9 +32,6 @@ class AuditErrorEmailCommand extends YdConsoleCommand
     {
         /** @var AuditModule $audit */
         $audit = Yii::app()->getModule('audit');
-        if (!$audit->errorEmail) {
-            return;
-        }
         $data = $audit->getDbConnection()->createCommand("SELECT id FROM " . AuditError::model()->tableName() . " WHERE status=:new_status")->query(array(
             ':new_status' => 'new',
         ));
@@ -34,9 +41,9 @@ class AuditErrorEmailCommand extends YdConsoleCommand
                 ':message' => $auditError->message,
                 ':file' => $auditError->file,
                 ':line' => $auditError->line,
-                ':link' => CHtml::link(Yii::t('audit', 'view'), Yii::app()->createAbsoluteUrl('audit/error/view', array('id' => $auditError->id))),
+                ':link' => CHtml::link(Yii::t('audit', 'view'), Yii::app()->createAbsoluteUrl('audit/error/view', array('id' => $auditError->id), $this->secureUrl ? 'https' : 'http')),
             ));
-            Yii::app()->emailManager->email($audit->errorEmail, $auditError->type, $message);
+            Yii::app()->emailManager->email($this->email, $auditError->type, $message);
             $auditError->status = 'emailed';
             $auditError->save(false, array('status'));
         }
