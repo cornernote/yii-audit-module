@@ -183,6 +183,9 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest = $this->getAuditRequest();
         $auditError->audit_request_id = $auditRequest ? $auditRequest->id : 0;
 
+        // generate a hash of the error
+        $auditError->hash = $this->hash($auditError->message . $auditError->file . $auditError->line);
+
         // save the AuditError
         $auditError->save(false);
     }
@@ -239,6 +242,9 @@ class AuditErrorHandler extends CErrorHandler
         // get the AuditRequest
         $auditRequest = $this->getAuditRequest();
         $auditError->audit_request_id = $auditRequest ? $auditRequest->id : 0;
+
+        // generate a hash of the error
+        $auditError->hash = $this->hash($auditError->message . $auditError->file . $auditError->line);
 
         // save the AuditError
         $auditError->save(false);
@@ -528,6 +534,25 @@ class AuditErrorHandler extends CErrorHandler
     public function getArgumentsToString($args)
     {
         return parent::argumentsToString($args);
+    }
+
+    /**
+     * Hash a long string to a short string.
+     * @link http://au1.php.net/crc32#111931
+     *
+     * @param $data
+     * @return string
+     */
+    function hash($data)
+    {
+        static $map = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $hash = bcadd(sprintf('%u', crc32($data)), 0x100000000);
+        $str = '';
+        do {
+            $str = $map[bcmod($hash, 62)] . $str;
+            $hash = bcdiv($hash, 62);
+        } while ($hash >= 1);
+        return $str;
     }
 
 }

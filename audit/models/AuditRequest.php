@@ -20,28 +20,33 @@
  * @property string $referrer
  * @property string $redirect
  * @property integer $audit_field_count
- * @property double $start_time
- * @property double $end_time
- * @property double $total_time
+ * @property number $start_time
+ * @property number $end_time
+ * @property number $total_time
  * @property integer $memory_usage
  * @property integer $memory_peak
  * @property integer $created
  *
  * Relations
- * @property AuditError[] $auditErrors
- * @property AuditField[] $auditFields
+ * @property \AuditError[] $auditErrors
+ * @property \AuditField[] $auditFields
  * @property integer $auditFieldCount
  *
- * @see CActiveRecord
- * @method AuditRequest find() find($condition, array $params = array())
- * @method AuditRequest findByPk() findByPk($pk, $condition = '', array $params = array())
- * @method AuditRequest findByAttributes() findByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditRequest findBySql() findBySql($sql, array $params = array())
- * @method AuditRequest[] findAll() findAll($condition = '', array $params = array())
- * @method AuditRequest[] findAllByPk() findAllByPk($pk, $condition = '', array $params = array())
- * @method AuditRequest[] findAllByAttributes() findAllByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditRequest[] findAllBySql() findAllBySql($sql, array $params = array())
- * @method AuditRequest with() with()
+ * @see \CActiveRecord
+ * @method AuditRequest find($condition = '', array $params = array())
+ * @method AuditRequest findByPk($pk, $condition = '', array $params = array())
+ * @method AuditRequest findByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method AuditRequest fndBySql($sql, array $params = array())
+ * @method AuditRequest[] findAll($condition = '', array $params = array())
+ * @method AuditRequest[] findAllByPk($pk, $condition = '', array $params = array())
+ * @method AuditRequest[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method AuditRequest[] findAllBySql($sql, array $params = array())
+ * @method AuditRequest with()
+ * @method AuditRequest together()
+ * @method AuditRequest cache($duration, $dependency = null, $queryCount = 1)
+ * @method AuditRequest resetScope($resetDefault = true)
+ * @method AuditRequest populateRecord($attributes, $callAfterFind = true)
+ * @method AuditRequest[] populateRecords($data, $callAfterFind = true, $index = null)
  *
  * --- END ModelDoc ---
  *

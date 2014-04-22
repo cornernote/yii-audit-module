@@ -11,10 +11,12 @@ CREATE TABLE "audit_error" (
 "traces"  TEXT,
 "source_code"  BLOB,
 "stack_trace"  BLOB,
+"hash"  TEXT,
 "created"  INTEGER
 );
 CREATE INDEX "audit_error_created" ON "audit_error" ("created");
 CREATE INDEX "audit_error_audit_request_id" ON "audit_error" ("audit_request_id");
 CREATE INDEX "audit_error_code" ON "audit_error" ("code");
 CREATE INDEX "audit_error_type" ON "audit_error" ("type");
+CREATE INDEX "audit_error_hash" ON "audit_error" ("hash");
 CREATE INDEX "audit_error_error_code" ON "audit_error" ("error_code");

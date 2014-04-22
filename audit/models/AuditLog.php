@@ -12,18 +12,24 @@
  * @property string $level
  * @property string $category
  * @property string $message
+ * @property string $file
  * @property integer $created
  *
- * @see CActiveRecord
- * @method AuditLog find() find($condition, array $params = array())
- * @method AuditLog findByPk() findByPk($pk, $condition = '', array $params = array())
- * @method AuditLog findByAttributes() findByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditLog findBySql() findBySql($sql, array $params = array())
- * @method AuditLog[] findAll() findAll($condition = '', array $params = array())
- * @method AuditLog[] findAllByPk() findAllByPk($pk, $condition = '', array $params = array())
- * @method AuditLog[] findAllByAttributes() findAllByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditLog[] findAllBySql() findAllBySql($sql, array $params = array())
- * @method AuditLog with() with()
+ * @see \CActiveRecord
+ * @method AuditLog find($condition = '', array $params = array())
+ * @method AuditLog findByPk($pk, $condition = '', array $params = array())
+ * @method AuditLog findByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method AuditLog fndBySql($sql, array $params = array())
+ * @method AuditLog[] findAll($condition = '', array $params = array())
+ * @method AuditLog[] findAllByPk($pk, $condition = '', array $params = array())
+ * @method AuditLog[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method AuditLog[] findAllBySql($sql, array $params = array())
+ * @method AuditLog with()
+ * @method AuditLog together()
+ * @method AuditLog cache($duration, $dependency = null, $queryCount = 1)
+ * @method AuditLog resetScope($resetDefault = true)
+ * @method AuditLog populateRecord($attributes, $callAfterFind = true)
+ * @method AuditLog[] populateRecords($data, $callAfterFind = true, $index = null)
  *
  * --- END ModelDoc ---
  *

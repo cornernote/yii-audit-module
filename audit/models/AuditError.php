@@ -18,21 +18,27 @@
  * @property string $traces
  * @property string $source_code
  * @property string $stack_trace
+ * @property string $hash
  * @property integer $created
  *
  * Relations
- * @property AuditRequest $auditRequest
+ * @property \AuditRequest $auditRequest
  *
- * @see CActiveRecord
- * @method AuditError find() find($condition, array $params = array())
- * @method AuditError findByPk() findByPk($pk, $condition = '', array $params = array())
- * @method AuditError findByAttributes() findByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditError findBySql() findBySql($sql, array $params = array())
- * @method AuditError[] findAll() findAll($condition = '', array $params = array())
- * @method AuditError[] findAllByPk() findAllByPk($pk, $condition = '', array $params = array())
- * @method AuditError[] findAllByAttributes() findAllByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditError[] findAllBySql() findAllBySql($sql, array $params = array())
- * @method AuditError with() with()
+ * @see \CActiveRecord
+ * @method AuditError find($condition = '', array $params = array())
+ * @method AuditError findByPk($pk, $condition = '', array $params = array())
+ * @method AuditError findByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method AuditError fndBySql($sql, array $params = array())
+ * @method AuditError[] findAll($condition = '', array $params = array())
+ * @method AuditError[] findAllByPk($pk, $condition = '', array $params = array())
+ * @method AuditError[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method AuditError[] findAllBySql($sql, array $params = array())
+ * @method AuditError with()
+ * @method AuditError together()
+ * @method AuditError cache($duration, $dependency = null, $queryCount = 1)
+ * @method AuditError resetScope($resetDefault = true)
+ * @method AuditError populateRecord($attributes, $callAfterFind = true)
+ * @method AuditError[] populateRecords($data, $callAfterFind = true, $index = null)
  *
  * --- END ModelDoc ---
  *
@@ -79,6 +85,7 @@ class AuditError extends AuditActiveRecord
             'traces' => Yii::t('audit', 'Traces'),
             'created' => Yii::t('audit', 'Created'),
             'user_id' => Yii::t('audit', 'User'),
+            'hash' => Yii::t('audit', 'Hash'),
         );
     }
 
@@ -89,7 +96,7 @@ class AuditError extends AuditActiveRecord
     {
         $rules = array();
         if ($this->scenario == 'search') {
-            $rules[] = array('id, audit_request_id, code, type, error_code, message, file, line, trace, traces, created, user_id', 'safe');
+            $rules[] = array('id, audit_request_id, code, type, error_code, message, file, line, trace, traces, created, user_id, hash', 'safe');
         }
         return $rules;
     }
@@ -113,6 +120,7 @@ class AuditError extends AuditActiveRecord
         $criteria->compare('t.trace', $this->trace, true);
         $criteria->compare('t.traces', $this->traces, true);
         $criteria->compare('t.created', $this->created);
+        $criteria->compare('t.hash', $this->hash);
         if ($this->user_id) {
             $criteria->with[] = 'auditRequest';
             $criteria->compare('auditRequest.user_id', $this->user_id);
