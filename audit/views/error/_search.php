@@ -22,6 +22,7 @@ $form->searchToggle('auditError-grid-search', 'auditError-grid');
 
 echo $form->textFieldControlGroup($auditError, 'id');
 echo $form->textFieldControlGroup($auditError, 'audit_request_id');
+echo $form->textFieldControlGroup($auditError, 'hash');
 echo $form->textFieldControlGroup($auditError, 'code');
 echo $form->textFieldControlGroup($auditError, 'type');
 echo $form->textFieldControlGroup($auditError, 'error_code');

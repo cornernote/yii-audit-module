@@ -41,6 +41,12 @@ class AuditModule extends CWebModule
     public $detailViewWidget = 'zii.widgets.CDetailView';
 
     /**
+     * @var null|string|array The emails to send errors to.
+     * @see AuditErrorEmailCommand
+     */
+    public $errorEmail;
+
+    /**
      * @var array mapping from controller ID to controller configurations.
      */
     public $controllerMap = array(

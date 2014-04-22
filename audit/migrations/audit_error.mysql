@@ -11,11 +11,15 @@ CREATE TABLE `audit_error` (
 `traces`  text,
 `source_code` blob,
 `stack_trace` blob,
+`hash` varchar(16),
+`status` varchar(32),
 `created`  int(11),
 PRIMARY KEY (`id`),
 KEY `created` (`created`),
 KEY `audit_request_id` (`audit_request_id`),
 KEY `code` (`code`),
 KEY `type` (`type`),
+KEY `hash` (`hash`),
+KEY `status` (`status`),
 KEY `error_code` (`error_code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;

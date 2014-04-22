@@ -31,6 +31,9 @@ if ($this->id != 'request') {
     );
 }
 $columns[] = array(
+    'name' => 'hash',
+);
+$columns[] = array(
     'name' => 'code',
 );
 $columns[] = array(
