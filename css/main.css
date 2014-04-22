@@ -69,3 +69,28 @@ h2[id], h3[id], h4[id] {
 .jumbotron a.btn {
     margin-bottom: 5px;
 }
+
+/* contributors */
+#contributors {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+#contributors h5 {
+    margin-top: 0;
+    padding-top: 0;
+}
+#contributors ul {
+    margin: 0;
+    padding: 0;
+}
+#contributors li {
+    width: 78px;
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+    font-size: 75%;
+}
+#contributors img {
+    width: 64px;
+}
