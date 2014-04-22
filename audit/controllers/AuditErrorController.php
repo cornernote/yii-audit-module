@@ -22,10 +22,12 @@ class AuditErrorController extends AuditWebController
      */
     public function beforeRender($view)
     {
+        if (!parent::beforeRender($view))
+            return false;
         if ($view != 'index')
             $this->addBreadcrumb(Yii::t('audit', 'Errors'), Yii::app()->user->getState('index.auditError', array('error/index')));
 
-        return parent::beforeRender($view);
+        return true;
     }
 
     /**

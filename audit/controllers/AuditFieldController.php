@@ -21,10 +21,12 @@ class AuditFieldController extends AuditWebController
      */
     public function beforeRender($view)
     {
+        if (!parent::beforeRender($view))
+            return false;
         if ($view != 'index')
             $this->addBreadcrumb(Yii::t('audit', 'Fields'), Yii::app()->user->getState('index.auditField', array('field/index')));
 
-        return parent::beforeRender($view);
+        return true;
     }
 
     /**
