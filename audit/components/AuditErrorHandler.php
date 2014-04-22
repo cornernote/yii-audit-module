@@ -122,6 +122,7 @@ class AuditErrorHandler extends CErrorHandler
         // create a new AuditError
         $auditError = new AuditError;
         $auditError->created = time();
+        $auditError->status = 'new';
         $auditError->code = 500;
         $auditError->message = $event->message;
         $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $event->file);
@@ -200,6 +201,7 @@ class AuditErrorHandler extends CErrorHandler
         // create a new AuditError
         $auditError = new AuditError;
         $auditError->created = time();
+        $auditError->status = 'new';
         $auditError->code = ($exception instanceof CHttpException) ? $exception->statusCode : 500;
         $auditError->error_code = $exception->getCode();
         $auditError->type = get_class($exception);

@@ -19,6 +19,7 @@
  * @property string $source_code
  * @property string $stack_trace
  * @property string $hash
+ * @property string $status
  * @property integer $created
  *
  * Relations
@@ -86,6 +87,7 @@ class AuditError extends AuditActiveRecord
             'created' => Yii::t('audit', 'Created'),
             'user_id' => Yii::t('audit', 'User'),
             'hash' => Yii::t('audit', 'Hash'),
+            'status' => Yii::t('audit', 'Status'),
         );
     }
 
@@ -96,7 +98,7 @@ class AuditError extends AuditActiveRecord
     {
         $rules = array();
         if ($this->scenario == 'search') {
-            $rules[] = array('id, audit_request_id, code, type, error_code, message, file, line, trace, traces, created, user_id, hash', 'safe');
+            $rules[] = array('id, audit_request_id, code, type, error_code, message, file, line, trace, traces, created, user_id, hash, status', 'safe');
         }
         return $rules;
     }
@@ -121,6 +123,7 @@ class AuditError extends AuditActiveRecord
         $criteria->compare('t.traces', $this->traces, true);
         $criteria->compare('t.created', $this->created);
         $criteria->compare('t.hash', $this->hash);
+        $criteria->compare('t.status', $this->status);
         if ($this->user_id) {
             $criteria->with[] = 'auditRequest';
             $criteria->compare('auditRequest.user_id', $this->user_id);
