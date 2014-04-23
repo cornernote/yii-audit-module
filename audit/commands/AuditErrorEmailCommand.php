@@ -43,7 +43,7 @@ class AuditErrorEmailCommand extends YdConsoleCommand
                 ':line' => $auditError->line,
                 ':link' => CHtml::link(Yii::t('audit', 'view'), Yii::app()->createAbsoluteUrl('audit/error/view', array('id' => $auditError->id), $this->secureUrl ? 'https' : 'http')),
             ));
-            Yii::app()->emailManager->email($this->email, $auditError->type, $message);
+            Yii::app()->emailManager->email($this->email, $auditError->type . ' (' . $auditError->hash . ')', $message);
             $auditError->status = 'emailed';
             $auditError->save(false, array('status'));
         }
