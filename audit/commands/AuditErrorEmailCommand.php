@@ -11,7 +11,7 @@
  *
  * @package yii-audit-module
  */
-class AuditErrorEmailCommand extends YdConsoleCommand
+class AuditErrorEmailCommand extends CConsoleCommand
 {
 
     /**
