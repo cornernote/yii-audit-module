@@ -221,7 +221,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
         $auditFields = array();
 
         // prepare the logs
-        $pk = $this->getPrimaryKeyString($this->auditModel);
+        $pk = $this->getModelPrimaryKeyString($this->auditModel);
         foreach ($auditModels as $auditModel) {
             $prefix = isset($auditModel['prefix']) ? $auditModel['prefix'] . '.' . $pk : '';
             $auditFields[] = array(
@@ -296,8 +296,8 @@ class AuditFieldBehavior extends CActiveRecordBehavior
         if ($this->auditModel) {
             $auditModels[] = array(
                 'model_name' => get_class($this->auditModel),
-                'model_id' => $this->getPrimaryKeyString($this->auditModel),
-                'prefix' => $this->getFieldPrefix($this->auditModel),
+                'model_id' => $this->getModelPrimaryKeyString($this->auditModel),
+                'prefix' => $this->getModelFieldPrefix($this->auditModel),
             );
         }
 
@@ -319,7 +319,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      * @param $model CActiveRecord
      * @return string
      */
-    protected function getFieldPrefix($model)
+    protected function getModelFieldPrefix($model)
     {
         return (get_class($this->owner) != get_class($model)) ? get_class($this->owner) . '.' : '';
     }
@@ -329,7 +329,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      * @param $model CActiveRecord
      * @return string
      */
-    protected function getPrimaryKeyString($model)
+    protected function getModelPrimaryKeyString($model)
     {
         return is_array($model->getPrimaryKey()) ? implode('-', $model->getPrimaryKey()) : $model->getPrimaryKey();
     }
