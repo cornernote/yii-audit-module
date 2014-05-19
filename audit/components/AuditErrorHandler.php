@@ -106,9 +106,9 @@ class AuditErrorHandler extends CErrorHandler
     public function handle($event)
     {
         if ($event instanceof CExceptionEvent)
-            $this->logException($event);
+            $this->logExceptionEvent($event);
         else
-            $this->logError($event);
+            $this->logErrorEvent($event);
         parent::handle($event);
     }
 
@@ -117,7 +117,7 @@ class AuditErrorHandler extends CErrorHandler
      * @param $event CErrorEvent
      * @return string
      */
-    public function logError($event)
+    public function logErrorEvent($event)
     {
         // create a new AuditError
         $auditError = new AuditError;
@@ -192,12 +192,20 @@ class AuditErrorHandler extends CErrorHandler
     }
 
     /**
-     * Log an exception stack dump.
+     * Log an exception event.
      * @param $event CExceptionEvent
      */
-    public function logException($event)
+    public function logExceptionEvent()
     {
-        $exception = $event->exception;
+        $this->logException($event->exception);
+    }
+
+    /**
+     * Log an exception.
+     * @param $event CException
+     */
+    public function logException($exception)
+    {
         // create a new AuditError
         $auditError = new AuditError;
         $auditError->created = time();
