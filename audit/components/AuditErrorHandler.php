@@ -195,7 +195,7 @@ class AuditErrorHandler extends CErrorHandler
      * Log an exception event.
      * @param $event CExceptionEvent
      */
-    public function logExceptionEvent()
+    public function logExceptionEvent($event)
     {
         $this->logException($event->exception);
     }
