@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AuditFieldBehavior automatically tracks changes to model data.
  *
@@ -48,14 +49,16 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      */
     private $_dbAttributes = array();
 
-
     /**
      *
      */
     public function __construct()
     {
-        if ($this->enableAuditField === null)
-            $this->enableAuditField = Yii::app()->hasComponent('auditTracker') ? Yii::app()->auditTracker->enableAuditField : true;
+        if ($this->enableAuditField === null) {
+            /** @var AuditModule $audit */
+            $audit = Yii::app()->getModule('audit');
+            $this->enableAuditField = $audit->enableAuditField;
+        }
     }
 
     /**
