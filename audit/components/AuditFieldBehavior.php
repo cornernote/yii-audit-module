@@ -26,9 +26,11 @@ class AuditFieldBehavior extends CActiveRecordBehavior
     /**
      * Set to false if you just want to use getDbAttribute and other methods in this class.
      * If left unset the value will come from AuditModule::enableAuditField
+     * @see getEnableAuditField()
+     * @see setEnableAuditField()
      * @var bool
      */
-    public $enableAuditField;
+    private $_enableAuditField;
 
     /**
      * Any additional models you want to use to write model and model_id audits to.  If this array is not empty then
@@ -48,18 +50,6 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      * @var array The attributes that are currently in the database
      */
     private $_dbAttributes = array();
-
-    /**
-     *
-     */
-    public function __construct()
-    {
-        if ($this->enableAuditField === null) {
-            /** @var AuditModule $audit */
-            $audit = Yii::app()->getModule('audit');
-            $this->enableAuditField = $audit->enableAuditField;
-        }
-    }
 
     /**
      * A list of fields to be ignored on update and delete
@@ -335,6 +325,26 @@ class AuditFieldBehavior extends CActiveRecordBehavior
     protected function getModelPrimaryKeyString($model)
     {
         return is_array($model->getPrimaryKey()) ? implode('-', $model->getPrimaryKey()) : $model->getPrimaryKey();
+    }
+
+    /**
+     *
+     */
+    public function getEnableAuditField()
+    {
+        if ($this->_enableAuditField === null) {
+            /** @var AuditModule $audit */
+            $audit = Yii::app()->getModule('audit');
+            $this->_enableAuditField = $audit->enableAuditField;
+        }
+    }
+
+    /**
+     * @param $enableAuditField
+     */
+    public function setEnableAuditField($enableAuditField)
+    {
+        $this->_enableAuditField = $enableAuditField;
     }
 
 }
