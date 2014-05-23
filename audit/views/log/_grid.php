@@ -15,13 +15,13 @@
 $columns = array();
 $columns[] = array(
     'name' => 'id',
-    'value' => 'CHtml::link($data->id, array("log/view", "id" => $data->id))',
+    'value' => 'CHtml::link($data->id, array("/audit/log/view", "id" => $data->id))',
     'type' => 'raw',
 );
 if ($this->id != 'request') {
     $columns[] = array(
         'name' => 'audit_request_id',
-        'value' => 'CHtml::link($data->audit_request_id, array("request/view", "id" => $data->audit_request_id))',
+        'value' => 'CHtml::link($data->audit_request_id, array("/audit/request/view", "id" => $data->audit_request_id))',
         'type' => 'raw',
     );
     $columns[] = array(
