@@ -21,20 +21,20 @@
  * @property \AuditRequest $auditRequest
  *
  * @see \CActiveRecord
- * @method AuditField find($condition = '', array $params = array())
- * @method AuditField findByPk($pk, $condition = '', array $params = array())
- * @method AuditField findByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditField fndBySql($sql, array $params = array())
- * @method AuditField[] findAll($condition = '', array $params = array())
- * @method AuditField[] findAllByPk($pk, $condition = '', array $params = array())
- * @method AuditField[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditField[] findAllBySql($sql, array $params = array())
- * @method AuditField with()
- * @method AuditField together()
- * @method AuditField cache($duration, $dependency = null, $queryCount = 1)
- * @method AuditField resetScope($resetDefault = true)
- * @method AuditField populateRecord($attributes, $callAfterFind = true)
- * @method AuditField[] populateRecords($data, $callAfterFind = true, $index = null)
+ * @method \AuditField find($condition = '', array $params = array())
+ * @method \AuditField findByPk($pk, $condition = '', array $params = array())
+ * @method \AuditField findByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditField findBySql($sql, array $params = array())
+ * @method \AuditField[] findAll($condition = '', array $params = array())
+ * @method \AuditField[] findAllByPk($pk, $condition = '', array $params = array())
+ * @method \AuditField[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditField[] findAllBySql($sql, array $params = array())
+ * @method \AuditField with()
+ * @method \AuditField together()
+ * @method \AuditField cache($duration, $dependency = null, $queryCount = 1)
+ * @method \AuditField resetScope($resetDefault = true)
+ * @method \AuditField populateRecord($attributes, $callAfterFind = true)
+ * @method \AuditField[] populateRecords($data, $callAfterFind = true, $index = null)
  *
  * --- END ModelDoc ---
  *
