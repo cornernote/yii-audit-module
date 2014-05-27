@@ -16,20 +16,20 @@
  * @property integer $created
  *
  * @see \CActiveRecord
- * @method AuditLog find($condition = '', array $params = array())
- * @method AuditLog findByPk($pk, $condition = '', array $params = array())
- * @method AuditLog findByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditLog fndBySql($sql, array $params = array())
- * @method AuditLog[] findAll($condition = '', array $params = array())
- * @method AuditLog[] findAllByPk($pk, $condition = '', array $params = array())
- * @method AuditLog[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditLog[] findAllBySql($sql, array $params = array())
- * @method AuditLog with()
- * @method AuditLog together()
- * @method AuditLog cache($duration, $dependency = null, $queryCount = 1)
- * @method AuditLog resetScope($resetDefault = true)
- * @method AuditLog populateRecord($attributes, $callAfterFind = true)
- * @method AuditLog[] populateRecords($data, $callAfterFind = true, $index = null)
+ * @method \AuditLog find($condition = '', array $params = array())
+ * @method \AuditLog findByPk($pk, $condition = '', array $params = array())
+ * @method \AuditLog findByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditLog findBySql($sql, array $params = array())
+ * @method \AuditLog[] findAll($condition = '', array $params = array())
+ * @method \AuditLog[] findAllByPk($pk, $condition = '', array $params = array())
+ * @method \AuditLog[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditLog[] findAllBySql($sql, array $params = array())
+ * @method \AuditLog with()
+ * @method \AuditLog together()
+ * @method \AuditLog cache($duration, $dependency = null, $queryCount = 1)
+ * @method \AuditLog resetScope($resetDefault = true)
+ * @method \AuditLog populateRecord($attributes, $callAfterFind = true)
+ * @method \AuditLog[] populateRecords($data, $callAfterFind = true, $index = null)
  *
  * --- END ModelDoc ---
  *

@@ -33,20 +33,20 @@
  * @property integer $auditFieldCount
  *
  * @see \CActiveRecord
- * @method AuditRequest find($condition = '', array $params = array())
- * @method AuditRequest findByPk($pk, $condition = '', array $params = array())
- * @method AuditRequest findByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditRequest fndBySql($sql, array $params = array())
- * @method AuditRequest[] findAll($condition = '', array $params = array())
- * @method AuditRequest[] findAllByPk($pk, $condition = '', array $params = array())
- * @method AuditRequest[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditRequest[] findAllBySql($sql, array $params = array())
- * @method AuditRequest with()
- * @method AuditRequest together()
- * @method AuditRequest cache($duration, $dependency = null, $queryCount = 1)
- * @method AuditRequest resetScope($resetDefault = true)
- * @method AuditRequest populateRecord($attributes, $callAfterFind = true)
- * @method AuditRequest[] populateRecords($data, $callAfterFind = true, $index = null)
+ * @method \AuditRequest find($condition = '', array $params = array())
+ * @method \AuditRequest findByPk($pk, $condition = '', array $params = array())
+ * @method \AuditRequest findByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditRequest findBySql($sql, array $params = array())
+ * @method \AuditRequest[] findAll($condition = '', array $params = array())
+ * @method \AuditRequest[] findAllByPk($pk, $condition = '', array $params = array())
+ * @method \AuditRequest[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditRequest[] findAllBySql($sql, array $params = array())
+ * @method \AuditRequest with()
+ * @method \AuditRequest together()
+ * @method \AuditRequest cache($duration, $dependency = null, $queryCount = 1)
+ * @method \AuditRequest resetScope($resetDefault = true)
+ * @method \AuditRequest populateRecord($attributes, $callAfterFind = true)
+ * @method \AuditRequest[] populateRecords($data, $callAfterFind = true, $index = null)
  *
  * --- END ModelDoc ---
  *

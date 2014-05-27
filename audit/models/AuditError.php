@@ -18,6 +18,7 @@
  * @property string $traces
  * @property string $source_code
  * @property string $stack_trace
+ * @property string $extra
  * @property string $hash
  * @property string $status
  * @property integer $created
@@ -26,20 +27,20 @@
  * @property \AuditRequest $auditRequest
  *
  * @see \CActiveRecord
- * @method AuditError find($condition = '', array $params = array())
- * @method AuditError findByPk($pk, $condition = '', array $params = array())
- * @method AuditError findByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditError fndBySql($sql, array $params = array())
- * @method AuditError[] findAll($condition = '', array $params = array())
- * @method AuditError[] findAllByPk($pk, $condition = '', array $params = array())
- * @method AuditError[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
- * @method AuditError[] findAllBySql($sql, array $params = array())
- * @method AuditError with()
- * @method AuditError together()
- * @method AuditError cache($duration, $dependency = null, $queryCount = 1)
- * @method AuditError resetScope($resetDefault = true)
- * @method AuditError populateRecord($attributes, $callAfterFind = true)
- * @method AuditError[] populateRecords($data, $callAfterFind = true, $index = null)
+ * @method \AuditError find($condition = '', array $params = array())
+ * @method \AuditError findByPk($pk, $condition = '', array $params = array())
+ * @method \AuditError findByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditError findBySql($sql, array $params = array())
+ * @method \AuditError[] findAll($condition = '', array $params = array())
+ * @method \AuditError[] findAllByPk($pk, $condition = '', array $params = array())
+ * @method \AuditError[] findAllByAttributes(array $attributes, $condition = '', array $params = array())
+ * @method \AuditError[] findAllBySql($sql, array $params = array())
+ * @method \AuditError with()
+ * @method \AuditError together()
+ * @method \AuditError cache($duration, $dependency = null, $queryCount = 1)
+ * @method \AuditError resetScope($resetDefault = true)
+ * @method \AuditError populateRecord($attributes, $callAfterFind = true)
+ * @method \AuditError[] populateRecords($data, $callAfterFind = true, $index = null)
  *
  * --- END ModelDoc ---
  *

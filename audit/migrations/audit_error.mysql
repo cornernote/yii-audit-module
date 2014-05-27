@@ -11,6 +11,7 @@ CREATE TABLE `audit_error` (
 `traces`  text,
 `source_code` blob,
 `stack_trace` blob,
+`extra` blob,
 `hash` varchar(16),
 `status` varchar(32),
 `created`  int(11),
