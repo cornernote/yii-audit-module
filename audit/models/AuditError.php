@@ -18,6 +18,7 @@
  * @property string $traces
  * @property string $source_code
  * @property string $stack_trace
+ * @property string $extra
  * @property string $hash
  * @property string $status
  * @property integer $created

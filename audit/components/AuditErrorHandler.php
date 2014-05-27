@@ -202,9 +202,11 @@ class AuditErrorHandler extends CErrorHandler
 
     /**
      * Log an exception.
-     * @param $event CException
+     * @param $exception Exception
+     * @param null|string $extra
+     * @return AuditError
      */
-    public function logException($exception)
+    public function logException($exception, $extra = null)
     {
         // create a new AuditError
         $auditError = new AuditError;
@@ -215,6 +217,9 @@ class AuditErrorHandler extends CErrorHandler
         $auditError->type = get_class($exception);
         $auditError->message = $exception->getMessage();
         $auditError->trace = $exception->getTraceAsString();
+        if ($extra) {
+            $auditError->extra = AuditHelper::pack($extra);
+        }
 
         // get file and line
         $exactTrace = $this->getExactTrace($exception);
@@ -258,6 +263,7 @@ class AuditErrorHandler extends CErrorHandler
 
         // save the AuditError
         $auditError->save(false);
+        return $auditError;
     }
 
     /**
