@@ -21,7 +21,7 @@ echo isset($data->new_value) ? $data->new_value : '&nbsp;';
 echo '</td>';
 
 echo '<td>';
-echo Time::ago($data->created);
+echo Yii::app()->dateFormatter->formatDatetime($data->created);
 echo '</td>';
 
 echo '<td>';
