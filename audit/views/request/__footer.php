@@ -28,7 +28,7 @@ if (!isset($contentBefore)) {
     $contentBefore = '';
 }
 if (!isset($contentAfter)) {
-    $contentBefore = '';
+    $contentAfter = '';
 }
 if (!isset($htmlOptions)) {
     $htmlOptions = array(
