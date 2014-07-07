@@ -279,7 +279,10 @@ class AuditModule extends CWebModule
             return;
         // setup yiiStrap components
         Yii::setPathOfAlias('bootstrap', realpath($this->yiiStrapPath));
-        Yii::import('bootstrap.helpers.TbHtml');
+        Yii::import('bootstrap.helpers.*');
+        Yii::import('bootstrap.widgets.*');
+        Yii::import('bootstrap.behaviors.*');
+        Yii::import('bootstrap.form.*');
         Yii::app()->setComponents(array(
             'bootstrap' => array(
                 'class' => 'bootstrap.components.TbApi',
