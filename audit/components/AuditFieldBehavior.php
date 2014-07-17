@@ -113,7 +113,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      */
     public function afterSave($event)
     {
-        if (!$this->_enableAuditField) {
+        if (!$this->enableAuditField) {
             parent::afterSave($event);
             return;
         }
@@ -200,7 +200,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
      */
     public function afterDelete($event)
     {
-        if (!$this->_enableAuditField) {
+        if (!$this->enableAuditField) {
             parent::afterDelete($event);
             return;
         }
