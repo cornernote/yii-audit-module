@@ -152,6 +152,9 @@ class AuditErrorHandler extends CErrorHandler
             $auditError->trace .= "{$trace[$i]['function']}()\n";
 
             unset($trace[$i]['object']);
+
+            if (isset($trace[$i]['args']))
+                $trace[$i]['args'] = $this->cleanTrace($trace[$i]['args']);
         }
         $auditError->traces = json_encode($trace);
         $auditError->stack_trace = AuditHelper::pack($this->renderStackTrace($trace));
@@ -189,6 +192,34 @@ class AuditErrorHandler extends CErrorHandler
 
         // save the AuditError
         $auditError->save(false);
+    }
+
+    /**
+     * @param mixed $var
+     * @return mixed
+     */
+    private function cleanTrace($var)
+    {
+        foreach ($var as $k => $v) {
+            if (is_object($v)) {
+                $var[$k] = get_class($v);
+            }
+            elseif (is_array($v)) {
+                if ($k == 'GLOBALS' && isset($var['_REQUEST']) && isset($var['_GET']) && isset($var['_POST']) && isset($var['_COOKIE']) && isset($var['_FILES']) && isset($var['_SERVER'])) {
+                    $var['GLOBALS'] = '$GLOBALS';
+                    $var['_REQUEST'] = '$_REQUEST';
+                    $var['_GET'] = '$_GET';
+                    $var['_POST'] = '$_POST';
+                    $var['_COOKIE'] = '$_COOKIE';
+                    $var['_FILES'] = '$_FILES';
+                    $var['_SERVER'] = '$_SERVER';
+                }
+                else {
+                    $var[$k] = $this->cleanTrace($v);
+                }
+            }
+        }
+        return $var;
     }
 
     /**
