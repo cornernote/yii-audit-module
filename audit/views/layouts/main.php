@@ -35,7 +35,7 @@ $items = array();
 foreach (array_keys($this->module->controllerMap) as $controllerName) {
     $items[] = array(
         'label' => Yii::t('audit', ucfirst($controllerName)),
-        'url' => Yii::app()->getUser()->getState('index.audit' . ucfirst($controllerName), array($controllerName . '/index')),
+        'url' => array($controllerName . '/index'),
         'active' => $this->id == $controllerName,
     );
 }
