@@ -8,6 +8,7 @@
  * Table audit_request
  * @property integer $id
  * @property string $link
+ * @property string $app
  * @property integer $user_id
  * @property string $ip
  * @property string $post
