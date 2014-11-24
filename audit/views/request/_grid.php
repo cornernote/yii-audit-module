@@ -19,6 +19,9 @@ $columns[] = array(
     'type' => 'raw',
 );
 $columns[] = array(
+    'name' => 'app',
+);
+$columns[] = array(
     'name' => 'link',
     'value' => '$data->getLinkString()',
     'type' => 'raw',

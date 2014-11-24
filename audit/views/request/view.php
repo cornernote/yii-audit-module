@@ -19,6 +19,9 @@ $attributes[] = array(
     'name' => 'id',
 );
 $attributes[] = array(
+    'name' => 'app',
+);
+$attributes[] = array(
     'name' => 'link',
     'value' => CHtml::link($auditRequest->link, urldecode($auditRequest->link)),
     'type' => 'raw',

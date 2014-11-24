@@ -1,5 +1,6 @@
 CREATE TABLE `audit_request` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
+`app` varchar(255),
 `link` varchar(1000),
 `user_id` int(11),
 `ip` varchar(64),
@@ -21,6 +22,7 @@ CREATE TABLE `audit_request` (
 `created` int(11),
 PRIMARY KEY (`id`),
 KEY `created` (`created`),
+KEY `app` (`app`),
 KEY `user_id` (`user_id`),
 KEY `link` (`link`(255)),
 KEY `audit_field_count` (`audit_field_count`),

@@ -375,6 +375,7 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->link = $this->getCurrentLink();
         $auditRequest->start_time = YII_BEGIN_TIME;
 
+        $auditRequest->app = Yii::app()->id;
         $auditRequest->get = $_GET;
         $auditRequest->post = $_POST;
         $auditRequest->files = $_FILES;
