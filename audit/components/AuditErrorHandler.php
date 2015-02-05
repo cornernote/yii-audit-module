@@ -383,6 +383,8 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->cookie = $_COOKIE;
         $auditRequest->server = $_SERVER;
         $auditRequest->config = $this->getYiiConfig();
+        $auditRequest->request_headers = getallheaders();
+        $auditRequest->response_headers = headers_list();
 
         $auditRequest->ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
         $auditRequest->referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
@@ -392,10 +394,19 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->post = $this->removeValuesWithPasswordKeys($auditRequest->post, $passwordRemovedFromPost);
         $auditRequest->server = $this->removeValuesWithPasswordKeys($auditRequest->server);
         $auditRequest->config = $this->removeValuesWithPasswordKeys($auditRequest->config);
+        $auditRequest->request_headers = $this->removeValuesWithPasswordKeys($auditRequest->request_headers);
+        $auditRequest->response_headers = $this->removeValuesWithPasswordKeys($auditRequest->response_headers);
         if ($passwordRemovedFromGet || $passwordRemovedFromPost)
             $auditRequest->server = null;
         if ($passwordRemovedFromGet)
             $auditRequest->link = null;
+
+        // set the closing data incase we are already in an endRequest
+        foreach ($auditRequest->response_headers as $header) {
+            if (strpos(strtolower($header), 'location:') === 0) {
+                $auditRequest->redirect = trim(substr($header, 9));
+            }
+        }
 
         // pack all
         $auditRequest->get = AuditHelper::pack($auditRequest->get);
@@ -405,14 +416,8 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->cookie = AuditHelper::pack($auditRequest->cookie);
         $auditRequest->server = AuditHelper::pack($auditRequest->server);
         $auditRequest->config = AuditHelper::pack($auditRequest->config);
-
-        // set the closing data incase we are already in an endRequest
-        $headers = headers_list();
-        foreach ($headers as $header) {
-            if (strpos(strtolower($header), 'location:') === 0) {
-                $auditRequest->redirect = trim(substr($header, 9));
-            }
-        }
+        $auditRequest->request_headers = AuditHelper::pack($auditRequest->request_headers);
+        $auditRequest->response_headers = AuditHelper::pack($auditRequest->response_headers);
 
         // save
         $auditRequest->save(false);
@@ -430,12 +435,15 @@ class AuditErrorHandler extends CErrorHandler
     public function endAuditRequest()
     {
         $auditRequest = $this->getAuditRequest();
-        $headers = headers_list();
-        foreach ($headers as $header) {
+        $auditRequest->response_headers = headers_list();
+        foreach ($auditRequest->response_headers as $header) {
             if (strpos(strtolower($header), 'location:') === 0) {
                 $auditRequest->redirect = trim(substr($header, 9));
             }
         }
+        $auditRequest->response_headers = $this->removeValuesWithPasswordKeys($auditRequest->response_headers);
+        $auditRequest->response_headers = AuditHelper::pack($auditRequest->response_headers);
+
         $auditRequest->memory_usage = memory_get_usage();
         $auditRequest->memory_peak = memory_get_peak_usage();
         $auditRequest->audit_field_count = $auditRequest->auditFieldCount;

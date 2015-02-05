@@ -124,6 +124,26 @@ $this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
     ),
 ));
 
+echo '<h2>' . Yii::t('audit', 'Headers') . '</h2>';
+$this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
+    'data' => $auditRequest,
+    'attributes' => array(
+        array(
+            'name' => 'request_headers',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->request_headers), true) . '</pre>',
+            'type' => 'raw',
+        ),
+        array(
+            'name' => 'response_headers',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->response_headers), true) . '</pre>',
+            'type' => 'raw',
+        ),
+    ),
+    'htmlOptions' => array(
+        'class' => 'table table-condensed table-striped',
+    ),
+));
+
 $onClick = "$('#session_detail').toggle(); $(this).html($(this).html()=='[+]' ? '[-]' : '[+]');";
 echo '<h2><small><a href="javascript:void(0)" onclick="' . $onClick . '">[+]</a></small> ' . Yii::t('audit', 'Session and Cookies') . '</h2>';
 echo '<div id="session_detail" style="display: none;">';
