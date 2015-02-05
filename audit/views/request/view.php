@@ -118,6 +118,11 @@ $this->widget(Yii::app()->getModule('audit')->detailViewWidget, array(
             'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->files), true) . '</pre>',
             'type' => 'raw',
         ),
+        array(
+            'label' => 'php://input',
+            'value' => '<pre>' . print_r(AuditHelper::unpack($auditRequest->php_input), true) . '</pre>',
+            'type' => 'raw',
+        ),
     ),
     'htmlOptions' => array(
         'class' => 'table table-condensed table-striped',

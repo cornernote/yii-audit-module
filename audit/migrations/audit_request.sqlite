@@ -13,6 +13,7 @@ CREATE TABLE "audit_request" (
 "config"  BLOB,
 "request_headers"  BLOB,
 "response_headers"  BLOB,
+"php_input"  BLOB,
 "referrer"  TEXT,
 "redirect"  TEXT,
 "audit_field_count"  INTEGER,
