@@ -421,6 +421,7 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->config = AuditHelper::pack($auditRequest->config);
         $auditRequest->request_headers = AuditHelper::pack($auditRequest->request_headers);
         $auditRequest->response_headers = AuditHelper::pack($auditRequest->response_headers);
+        $auditRequest->php_input = AuditHelper::pack($auditRequest->php_input);
 
         // save
         $auditRequest->save(false);
