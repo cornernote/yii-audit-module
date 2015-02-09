@@ -383,8 +383,10 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->cookie = $_COOKIE;
         $auditRequest->server = $_SERVER;
         $auditRequest->config = $this->getYiiConfig();
-        $auditRequest->request_headers = getallheaders();
-        $auditRequest->response_headers = headers_list();
+        if (function_exists('getallheaders'))
+            $auditRequest->request_headers = getallheaders();
+        if (function_exists('headers_list'))
+            $auditRequest->response_headers = headers_list();
         $auditRequest->php_input = file_get_contents('php://input');
 
         $auditRequest->ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
