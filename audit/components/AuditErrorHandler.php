@@ -397,8 +397,10 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->post = $this->removeValuesWithPasswordKeys($auditRequest->post, $passwordRemovedFromPost);
         $auditRequest->server = $this->removeValuesWithPasswordKeys($auditRequest->server);
         $auditRequest->config = $this->removeValuesWithPasswordKeys($auditRequest->config);
-        $auditRequest->request_headers = $this->removeValuesWithPasswordKeys($auditRequest->request_headers);
-        $auditRequest->response_headers = $this->removeValuesWithPasswordKeys($auditRequest->response_headers);
+        if ($auditRequest->request_headers)
+            $auditRequest->request_headers = $this->removeValuesWithPasswordKeys($auditRequest->request_headers);
+        if ($auditRequest->response_headers)
+            $auditRequest->response_headers = $this->removeValuesWithPasswordKeys($auditRequest->response_headers);
         if (($passwordRemovedFromGet || $passwordRemovedFromPost) && $auditRequest->server)
             $auditRequest->server = '*removed*';
         if ($passwordRemovedFromGet && $auditRequest->link)
@@ -407,9 +409,11 @@ class AuditErrorHandler extends CErrorHandler
             $auditRequest->php_input = '*removed*';
 
         // set the closing data incase we are already in an endRequest
-        foreach ($auditRequest->response_headers as $header) {
-            if (strpos(strtolower($header), 'location:') === 0) {
-                $auditRequest->redirect = trim(substr($header, 9));
+        if ($auditRequest->response_headers) {
+            foreach ($auditRequest->response_headers as $header) {
+                if (strpos(strtolower($header), 'location:') === 0) {
+                    $auditRequest->redirect = trim(substr($header, 9));
+                }
             }
         }
 
@@ -441,10 +445,13 @@ class AuditErrorHandler extends CErrorHandler
     public function endAuditRequest()
     {
         $auditRequest = $this->getAuditRequest();
-        $auditRequest->response_headers = headers_list();
-        foreach ($auditRequest->response_headers as $header) {
-            if (strpos(strtolower($header), 'location:') === 0) {
-                $auditRequest->redirect = trim(substr($header, 9));
+        if (function_exists('headers_list'))
+            $auditRequest->response_headers = headers_list();
+        if ($auditRequest->response_headers) {
+            foreach ($auditRequest->response_headers as $header) {
+                if (strpos(strtolower($header), 'location:') === 0) {
+                    $auditRequest->redirect = trim(substr($header, 9));
+                }
             }
         }
         $auditRequest->response_headers = $this->removeValuesWithPasswordKeys($auditRequest->response_headers);
