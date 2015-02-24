@@ -31,6 +31,12 @@ class AuditFieldBehavior extends CActiveRecordBehavior
     public $enableAuditField;
 
     /**
+     * The name to use when saving the model_name field.  Defaults to the owners class name.
+     * @var string
+     */
+    public $auditModelName;
+
+    /**
      * Any additional models you want to use to write model and model_id audits to.  If this array is not empty then
      * each field modifed will result in an AuditField being created for each additionalAuditModels.
      * @var array
@@ -286,7 +292,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
         // get log models
         if ($this->auditModel) {
             $auditModels[] = array(
-                'model_name' => get_class($this->auditModel),
+                'model_name' => $this->auditModelName ? $this->auditModelName : get_class($this->auditModel),
                 'model_id' => $this->getModelPrimaryKeyString($this->auditModel),
                 'prefix' => $this->getModelFieldPrefix($this->auditModel),
             );
