@@ -388,8 +388,10 @@ class AuditErrorHandler extends CErrorHandler
         if (function_exists('headers_list'))
             $auditRequest->response_headers = headers_list();
         $auditRequest->php_input = file_get_contents('php://input');
-
-        $auditRequest->ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $auditRequest->ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        elseif (isset($_SERVER['REMOTE_ADDR']))
+            $auditRequest->ip = $_SERVER['REMOTE_ADDR'];
         $auditRequest->referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 
         // remove passwords
