@@ -50,6 +50,11 @@ class AuditErrorHandler extends CErrorHandler
     private static $_auditRequest;
 
     /**
+     * @var string
+     */
+    private $_rawPostData;
+
+    /**
      * Init the error handler, register a shutdown function to catch fatal errors and track the request.
      * @return mixed
      */
