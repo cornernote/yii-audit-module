@@ -17,7 +17,7 @@ $I->wantTo('ensure http error 404 is caught');
 
 $I->amOnPage('site/httpError404');
 $I->see('Page Not Found');
-$I->see('The requested URL was not found on this server.');
+//$I->see('The requested URL was not found on this server.');
 $I->canSeeInDatabase('audit_error', array(
     'code' => '404',
     'type' => 'CHttpException',
