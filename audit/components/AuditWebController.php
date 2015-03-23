@@ -39,6 +39,18 @@ class AuditWebController extends CController
     /**
      *
      */
+    public function init()
+    {
+        /** @var AuditModule $audit */
+        $audit = Yii::app()->getModule('audit');
+        if ($audit->homeUrl)
+            Yii::app()->homeUrl = $audit->homeUrl;
+        parent::init();
+    }
+
+    /**
+     *
+     */
     public function filters()
     {
         return $this->module->controllerFilters;
