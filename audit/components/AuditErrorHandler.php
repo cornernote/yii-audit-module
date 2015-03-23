@@ -387,7 +387,7 @@ class AuditErrorHandler extends CErrorHandler
             $auditRequest->request_headers = getallheaders();
         if (function_exists('headers_list'))
             $auditRequest->response_headers = headers_list();
-        $auditRequest->php_input = file_get_contents('php://input');
+        $auditRequest->php_input = $this->getRawPostData();
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
             $auditRequest->ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         elseif (isset($_SERVER['REMOTE_ADDR']))
@@ -467,6 +467,17 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->save(false);
     }
 
+    /**
+     * @return string
+     */
+    public function getRawPostData()
+    {
+        if (!$this->_rawPostData) {
+            $this->_rawPostData = file_get_contents('php://input');
+        }
+        return $this->_rawPostData;
+    }
+    
     /**
      * Gets a link to the current page or yiic script that is being run.
      * @return string
