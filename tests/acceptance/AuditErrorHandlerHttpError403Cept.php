@@ -17,7 +17,7 @@ $I->wantTo('ensure http error 403 is caught');
 
 $I->amOnPage('site/httpError403');
 $I->see('Unauthorized');
-$I->see('You do not have the proper credential to access this page.');
+//$I->see('You do not have the proper credential to access this page.');
 $I->canSeeInDatabase('audit_error', array(
     'code' => '403',
     'type' => 'CHttpException',
