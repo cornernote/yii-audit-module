@@ -19,7 +19,7 @@
         "crisu83/yiistrap": ">=1.0.0"
     },
     "require-dev": {
-        "yiisoft/yii": "1.1.15"
+        "yiisoft/yii": "1.1.16"
     },
     "autoload": {
         "classmap": [
