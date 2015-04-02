@@ -377,7 +377,7 @@ php composer.phar require cornernote/yii-audit-module:dev-master    // developme
                 ),
 
                 // A list of fields to be ignored on update and delete
-                ignoreFields = array(
+                'ignoreFields' = array(
                     'insert' => array('modified', 'modified_by', 'deleted', 'deleted_by'),
                     'update' => array('created', 'created_by', 'modified'),
                 ),
