@@ -1,5 +1,3 @@
 .idea
-codecept.phar
-composer.phar
-composer.lock
+*.phar
 vendor/*
