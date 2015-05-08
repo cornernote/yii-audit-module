@@ -21,6 +21,7 @@ return array(
     'preload' => array('log', 'errorHandler'),
     'aliases' => array(
         'audit' => realpath(BASE_PATH . '/../audit'),
+        'vendor' => realpath(BASE_PATH . '/../vendor'),
         'bootstrap' => realpath(BASE_PATH . '/../vendor/crisu83/yiistrap'),
     ),
     'controllerMap' => array(
@@ -65,7 +66,6 @@ return array(
             'class' => 'system.gii.GiiModule',
             'generatorPaths' => array(
                 'vendor.cornernote.gii-modeldoc-generator',
-                'bootstrap.gii',
             ),
             'ipFilters' => array('127.0.0.1'),
             'password' => false,
