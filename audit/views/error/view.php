@@ -41,5 +41,5 @@ if ($auditError->stack_trace) {
 if ($auditError->extra) {
     echo CHtml::tag('div', array(
         'class' => 'extra',
-    ), CHtml::tag('h2', array(), Yii::t('audit', 'Extra')) . AuditHelper::unpack($auditError->extra));
+    ), CHtml::tag('h2', array(), Yii::t('audit', 'Extra')) . '<pre>' . print_r(AuditHelper::unpack($auditError->extra), true) . '</pre>');
 }
