@@ -68,6 +68,8 @@ class AuditModule extends CWebModule
      */
     public $adminUsers = array();
 
+    public $adminCheckCallBack = '';
+
     /**
      * Set to false if you do not wish to track database audits.
      * @var bool

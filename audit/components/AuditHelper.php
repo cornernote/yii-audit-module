@@ -49,5 +49,19 @@ class AuditHelper
         }
         return $text;
     }
+    public static function isAdmin()
+    {
+        $app = Yii::app();
+        /** @var AuditModule $audit */
+        $audit = $app->getModule('audit');
+        if (in_array($app->getUser()->getName(), $audit->adminUsers)){
+            return true;
+        }
+        $isAdmin = false;
+        if ($audit->adminCheckCallBack){
+            $isAdmin = call_user_func($audit->adminCheckCallBack);
+        }
+        return $isAdmin;
+    }
 
 }
