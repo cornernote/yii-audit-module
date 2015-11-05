@@ -62,7 +62,7 @@ Tracks the following information:
 [BSD-3-Clause](https://raw.github.com/cornernote/yii-audit-module/master/LICENSE), Copyright © 2013-2014 [Mr PHP](mailto:info@mrphp.com.au)
 
 
-[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au) [![Project Stats](https://www.ohloh.net/p/yii-audit-module/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/yii-audit-module)
+[![Mr PHP](https://raw.github.com/cornernote/mrphp-assets/master/img/code-banner.png)](http://mrphp.com.au)
 
 [![Latest Stable Version](https://poser.pugx.org/cornernote/yii-audit-module/v/stable.png)](https://github.com/cornernote/yii-audit-module/releases/latest) [![Total Downloads](https://poser.pugx.org/cornernote/yii-audit-module/downloads.png)](https://packagist.org/packages/cornernote/yii-audit-module) [![Monthly Downloads](https://poser.pugx.org/cornernote/yii-audit-module/d/monthly.png)](https://packagist.org/packages/cornernote/yii-audit-module) [![Latest Unstable Version](https://poser.pugx.org/cornernote/yii-audit-module/v/unstable.png)](https://github.com/cornernote/yii-audit-module) [![Build Status](https://travis-ci.org/cornernote/yii-audit-module.png?branch=master)](https://travis-ci.org/cornernote/yii-audit-module) [![License](https://poser.pugx.org/cornernote/yii-audit-module/license.png)](https://raw.github.com/cornernote/yii-audit-module/master/LICENSE)
 
