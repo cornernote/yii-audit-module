@@ -276,7 +276,7 @@ class AuditFieldBehavior extends CActiveRecordBehavior
         if ($this->_auditModel)
             return $this->_auditModel;
         if (method_exists($this->owner, 'getAuditModel'))
-            return $this->auditModel = call_user_func(array($this->owner, 'getAuditModel'));
+            return $this->_auditModel = call_user_func(array($this->owner, 'getAuditModel'));
         return $this->_auditModel = $this->owner;
     }
 
