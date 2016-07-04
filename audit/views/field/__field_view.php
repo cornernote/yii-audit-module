@@ -30,16 +30,15 @@ echo '</td>';
 
 echo '<td>';
 if (Yii::app()->user->checkAccess('admin')) {
-    echo ($data->user_id && is_numeric($data->user_id) ? User::model()->findByPk($data->user_id)->getLink() : $data->user_id);
-}
-else {
-    echo ($data->user_id && is_numeric($data->user_id) ? User::model()->findByPk($data->user_id)->name : $data->user_id);
+    echo($data->user_id && is_numeric($data->user_id) ? User::model()->findByPk($data->user_id)->getLink() : $data->user_id);
+} else {
+    echo($data->user_id && is_numeric($data->user_id) ? User::model()->findByPk($data->user_id)->name : $data->user_id);
 }
 echo '</td>';
 
 if (Yii::app()->user->checkAccess('admin')) {
     echo '<td>';
-    echo $data->audit ? $data->audit->getLink() : '';
+    echo $data->auditRequest ? CHtml::link($data->auditRequest->id, array('/audit/request/view', 'id' => $data->auditRequest->id)) : '';
     echo '</td>';
 }
 
