@@ -19,7 +19,7 @@ class AuditHelper
      */
     public static function pack($value)
     {
-        return gzcompress(serialize($value));
+        return $value ? gzcompress(serialize($value)) : null;
     }
 
     /**
@@ -28,7 +28,7 @@ class AuditHelper
      */
     public static function unpack($value)
     {
-        return unserialize(gzuncompress($value));
+        return $value ? unserialize(gzuncompress($value)) : null;
     }
 
 
