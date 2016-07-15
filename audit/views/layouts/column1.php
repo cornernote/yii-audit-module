@@ -19,9 +19,10 @@ $this->beginContent('audit.views.layouts.main');
             if ($this->menu)
                 $this->pageHeading .= $this->widget('zii.widgets.CMenu', array(
                     'items' => $this->menu,
-                    'htmlOptions' => array('class' => 'inline pull-right'),
+                    'htmlOptions' => array('class' => 'list-inline pull-right'),
                 ), true);
-            echo CHtml::tag('h1', array(), $this->pageHeading);
+            if ($this->pageHeading)
+                echo CHtml::tag('h1', array(), $this->pageHeading);
         }
         ?>
         <div id="content">
