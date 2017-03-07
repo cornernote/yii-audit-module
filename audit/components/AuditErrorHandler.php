@@ -45,6 +45,23 @@ class AuditErrorHandler extends CErrorHandler
     public $auditRequestIgnoreKeys = array('PHP_AUTH_PW', 'password');
 
     /**
+     * @var array
+     */
+    public $auditRequestIgnoreFields = array(
+        //'get',
+        //'post',
+        //'session',
+        //'cookie',
+        //'server',
+        //'config',
+        //'request_headers',
+        //'response_headers',
+        //'php_input',
+        //'ip',
+        //'referrer',
+    );
+
+    /**
      * @var AuditRequest
      */
     private static $_auditRequest;
@@ -208,8 +225,7 @@ class AuditErrorHandler extends CErrorHandler
         foreach ($var as $k => $v) {
             if (is_object($v)) {
                 $var[$k] = get_class($v);
-            }
-            elseif (is_array($v)) {
+            } elseif (is_array($v)) {
                 if ($k == 'GLOBALS' && isset($var['_REQUEST']) && isset($var['_GET']) && isset($var['_POST']) && isset($var['_COOKIE']) && isset($var['_FILES']) && isset($var['_SERVER'])) {
                     $var['GLOBALS'] = '$GLOBALS';
                     $var['_REQUEST'] = '$_REQUEST';
@@ -218,8 +234,7 @@ class AuditErrorHandler extends CErrorHandler
                     $var['_COOKIE'] = '$_COOKIE';
                     $var['_FILES'] = '$_FILES';
                     $var['_SERVER'] = '$_SERVER';
-                }
-                else {
+                } else {
                     $var[$k] = $this->cleanTrace($v);
                 }
             }
@@ -262,8 +277,7 @@ class AuditErrorHandler extends CErrorHandler
         if (!$exactTrace) {
             $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $exception->getFile());
             $auditError->line = $exception->getLine();
-        }
-        else {
+        } else {
             $auditError->file = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $exactTrace['file']);
             $auditError->line = $exactTrace['line'];
         }
@@ -381,23 +395,28 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->start_time = YII_BEGIN_TIME;
 
         $auditRequest->app = Yii::app()->id;
-        $auditRequest->get = $_GET;
-        $auditRequest->post = $_POST;
-        $auditRequest->files = $_FILES;
-        $auditRequest->session = $this->getShrinkedSession();
-        $auditRequest->cookie = $_COOKIE;
-        $auditRequest->server = $_SERVER;
-        $auditRequest->config = $this->getYiiConfig();
-        if (function_exists('getallheaders'))
+        $auditRequest->get = in_array('get', $this->auditRequestIgnoreFields) ? [] : $_GET;
+        $auditRequest->post = in_array('post', $this->auditRequestIgnoreFields) ? [] : $_POST;
+        $auditRequest->files = in_array('files', $this->auditRequestIgnoreFields) ? [] : $_FILES;
+        $auditRequest->session = in_array('session', $this->auditRequestIgnoreFields) ? [] : $this->getShrinkedSession();
+        $auditRequest->cookie = in_array('cookie', $this->auditRequestIgnoreFields) ? [] : $_COOKIE;
+        $auditRequest->server = in_array('server', $this->auditRequestIgnoreFields) ? [] : $_SERVER;
+        $auditRequest->config = in_array('config', $this->auditRequestIgnoreFields) ? [] : $this->getYiiConfig();
+
+        if (!in_array('request_headers', $this->auditRequestIgnoreFields) && function_exists('getallheaders'))
             $auditRequest->request_headers = getallheaders();
-        if (function_exists('headers_list'))
+        if (!in_array('response_headers', $this->auditRequestIgnoreFields) && function_exists('headers_list'))
             $auditRequest->response_headers = headers_list();
-        $auditRequest->php_input = $this->getRawPostData();
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-            $auditRequest->ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        elseif (isset($_SERVER['REMOTE_ADDR']))
-            $auditRequest->ip = $_SERVER['REMOTE_ADDR'];
-        $auditRequest->referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+        $auditRequest->php_input = in_array('php_input', $this->auditRequestIgnoreFields) ? '' : $this->getRawPostData();
+        if (!in_array('ip', $this->auditRequestIgnoreFields)) {
+            if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+                $auditRequest->ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            elseif (isset($_SERVER['REMOTE_ADDR']))
+                $auditRequest->ip = $_SERVER['REMOTE_ADDR'];
+        }
+        if (!in_array('referrer', $this->auditRequestIgnoreFields) && isset($_SERVER['HTTP_REFERER'])) {
+            $auditRequest->referrer = $_SERVER['HTTP_REFERER'];
+        }
 
         // remove passwords
         $auditRequest->get = $this->removeValuesWithPasswordKeys($auditRequest->get, $passwordRemovedFromGet);
@@ -463,7 +482,7 @@ class AuditErrorHandler extends CErrorHandler
         }
         $auditRequest->response_headers = $this->removeValuesWithPasswordKeys($auditRequest->response_headers);
         $auditRequest->response_headers = AuditHelper::pack($auditRequest->response_headers);
-        
+
         $auditRequest->user_id = Yii::app()->user->id;
         $auditRequest->memory_usage = memory_get_usage();
         $auditRequest->memory_peak = memory_get_peak_usage();
@@ -483,7 +502,7 @@ class AuditErrorHandler extends CErrorHandler
         }
         return $this->_rawPostData;
     }
-    
+
     /**
      * Gets a link to the current page or yiic script that is being run.
      * @return string
@@ -518,8 +537,7 @@ class AuditErrorHandler extends CErrorHandler
                     $array[$key] = $value;
                     $passwordRemoved = true;
                 }
-            }
-            else {
+            } else {
                 foreach ($this->auditRequestIgnoreKeys as $ignoreKey) {
                     if (stripos($key, $ignoreKey) !== false) {
                         $array[$key] = '*password removed*';
