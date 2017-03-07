@@ -403,10 +403,12 @@ class AuditErrorHandler extends CErrorHandler
         $auditRequest->server = in_array('server', $this->auditRequestIgnoreFields) ? [] : $_SERVER;
         $auditRequest->config = in_array('config', $this->auditRequestIgnoreFields) ? [] : $this->getYiiConfig();
 
-        if (!in_array('request_headers', $this->auditRequestIgnoreFields) && function_exists('getallheaders'))
+        if (!in_array('request_headers', $this->auditRequestIgnoreFields) && function_exists('getallheaders')) {
             $auditRequest->request_headers = getallheaders();
-        if (!in_array('response_headers', $this->auditRequestIgnoreFields) && function_exists('headers_list'))
+        }
+        if (!in_array('response_headers', $this->auditRequestIgnoreFields) && function_exists('headers_list')) {
             $auditRequest->response_headers = headers_list();
+        }
         $auditRequest->php_input = in_array('php_input', $this->auditRequestIgnoreFields) ? '' : $this->getRawPostData();
         if (!in_array('ip', $this->auditRequestIgnoreFields)) {
             if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
@@ -471,8 +473,9 @@ class AuditErrorHandler extends CErrorHandler
     public function endAuditRequest()
     {
         $auditRequest = $this->getAuditRequest();
-        if (function_exists('headers_list'))
+        if (!in_array('response_headers', $this->auditRequestIgnoreFields) && function_exists('headers_list')) {
             $auditRequest->response_headers = headers_list();
+        }
         if ($auditRequest->response_headers) {
             foreach ($auditRequest->response_headers as $header) {
                 if (strpos(strtolower($header), 'location:') === 0) {
