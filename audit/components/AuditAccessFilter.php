@@ -23,8 +23,7 @@ class AuditAccessFilter extends CFilter
     {
         $app = Yii::app();
         /** @var AuditModule $audit */
-        $audit = $app->getModule('audit');
-        if (!in_array($app->getUser()->getName(), $audit->adminUsers))
+        if (!AuditHelper::isAdmin())
             throw new CHttpException(403, 'You are not allowed to access this page.');
         return parent::preFilter($filterChain);
     }

@@ -16,7 +16,7 @@
 $app = Yii::app();
 /** @var AuditModule $audit */
 $audit = $app->getModule('audit');
-$isAdmin = in_array($app->getUser()->name, $audit->adminUsers);
+$isAdmin = AuditHelper::isAdmin();
 
 if (!isset($tag)) {
     $tag = 'span';
