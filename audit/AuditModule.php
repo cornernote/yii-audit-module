@@ -67,7 +67,12 @@ class AuditModule extends CWebModule
      * @var array A list of users who can access this module.
      */
     public $adminUsers = array();
-
+    
+    /**
+     * @var array A list of IPs who can access this module.
+     */
+    public $ipFilters = array();
+    
     /**
      * Set to false if you do not wish to track database audits.
      * @var bool
