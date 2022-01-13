@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "crisu83/yiistrap": "~1.3"
+        "crisu83/yiistrap": "*"
     },
     "require-dev": {
         "yiisoft/yii": "~1.1"
