@@ -483,8 +483,8 @@ class AuditErrorHandler extends CErrorHandler
                 }
             }
             $auditRequest->response_headers = $this->removeValuesWithPasswordKeys($auditRequest->response_headers);
-            $auditRequest->response_headers = AuditHelper::pack($auditRequest->response_headers);
         }
+        $auditRequest->response_headers = AuditHelper::pack($auditRequest->response_headers);
 
         $auditRequest->user_id = Yii::app()->user->id;
         $auditRequest->memory_usage = memory_get_usage();
